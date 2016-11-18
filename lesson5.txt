@@ -1,0 +1,16 @@
+class User{
+	final long accountId;
+	String city = "";
+	float balance;
+	byte picture [] = new byte [2048];
+	String role = "Client";
+	
+	User(){
+	this.accountid = 100500L;
+	this.city = "Dnepr";
+	}
+
+	public void setCity(String city){
+	this.city = city;
+	}
+}
