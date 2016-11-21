@@ -25,9 +25,9 @@ public class Main {
         int arr5[]= new int[20];        //5. Написать программу для заполнения 20 элементов массива чисел с шагом 3, первым элементом которого будет 5
         fillArray(20,5,0,3,arr5,true);
         System.out.println(Arrays.toString(arr5));
+        fillArrayWithProgression(arr5,10,20);
 
         int arr6[]= new int [20];        //6. Написать программу для заполнения массива чисел из 10 элементов значениями переменной а, при условии что а является членом арифметической прогрессии 2а-1, а1=4.
-        fillArrayWithProgression(arr6,4,10);
         System.out.println(Arrays.toString(arr6));
 
         int arr7[]=new int[]{-5,-20,8,7,9}; //7. Выяснить, верно ли, что сумма элементов массива есть неотрицательное число, используя тернарный оператор.
@@ -130,6 +130,7 @@ public class Main {
             x = 2*x-1;
             array[i] = x;
         }
+        System.out.println("массив заполениный по прогрессии: "+Arrays.toString(array));
     }
 
     static void displayStringArrayContent(String x[]){
