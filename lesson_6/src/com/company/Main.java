@@ -10,7 +10,7 @@ public class Main {
         doSomething(3);
         whatIsBiggest(33);
         whatIsBiggestOfTwo(120.3,120.33);
-
+//іааіаі
     }
 
     static void isEven(int a){
