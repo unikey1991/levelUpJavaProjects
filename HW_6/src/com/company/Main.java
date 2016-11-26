@@ -1,6 +1,5 @@
 package com.company;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -14,8 +13,6 @@ public class Main {
     public static void main(String[] args) {
 
         hello();
-
-
 
     }
 
@@ -43,23 +40,22 @@ public class Main {
     static void hello(){
         System.out.println("==============================================================================");
         System.out.println("Введите номер задания для инициализации либо введите 0 для остановки программы");
-        int inp = inputInt();
-        if (inp == 1) task1() ;
-        else if(inp == 2)task2();
-        else if(inp == 3)task3();
-        else if(inp == 4)task4();
-        else if(inp == 5)task5();
-        else if(inp == 6)output(task6());
-        else if(inp == 7)task7();
-        else if(inp == 8)task8();
-        else if(inp == 9)task9();
-        else if(inp == 10)task10();
-        else if(inp == 11)task11();
-        else if(inp == 12)task12();
-        else if(inp == 0);
-        else {
-            System.out.println("Неверный ввод, повторите");
-            hello();
+
+        switch (inputInt()){
+            case 0: break;
+            case 1: task1(); break;
+            case 2: task2(); break;
+            case 3: task3(); break;
+            case 4: task4(); break;
+            case 5: task5(); break;
+            case 6: task6(); break;
+            case 7: task7(); break;
+            case 8: task8(); break;
+            case 9: task9(); break;
+            case 10: task10(); break;
+            case 11: task11(); break;
+            case 12: task12(); break;
+            default:System.out.println("Неверный ввод, повторите");hello();break;
         }
     }
 
