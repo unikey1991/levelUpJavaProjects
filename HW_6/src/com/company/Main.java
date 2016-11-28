@@ -63,11 +63,9 @@ public class Main {
         System.out.println("Дано слово. Добавить к нему в начале и конце столько звездочек, сколько букв в этом слове");
         System.out.println("введите слово");
         String str = inputString();
-        int length = str.length();
         String b1 = "*";
-        String b2 = "*";
-        for(int i = 1; i < length; i++){
-            b1 += b2;
+        for(int i = 1; i < str.length(); i++){
+            b1 += "*";
         }
         str = b1+str+b1;
         System.out.println("Результат : "+str);
@@ -78,9 +76,8 @@ public class Main {
         System.out.println("Дано название футбольного клуба. Напечатать его на экране столбиком");
         System.out.println("введите название");
         String str = inputString();
-        int length = str.length();
         System.out.println("Результат : ");
-        for (int i = 0; i < length; i++){
+        for (int i = 0; i < str.length(); i++){
             System.out.println(str.charAt(i));
         }
         hello();
@@ -102,40 +99,33 @@ public class Main {
     }
 
     static void task4(){
-        double sum = 0;
-        double perc = 0;
-        int month = 0;
-        String month1;
-        int years = 0;
         int monthLeftToYear = 0;
-        int monthSum = 0;
-        double sumToLeftOfYear = 0;
-        int day;
         System.out.println("== Калькулятор вложения в банке ==");
         System.out.println("Введите начальную сумму");
-        sum = inputInt();
-        sumToLeftOfYear = sum;
+        double sum = inputInt();
+        double sumToLeftOfYear = sum;
         System.out.println("Введите размер % на который увеличивается сумма каждый месяц");
-        perc = inputDouble();
+        double perc = inputDouble()/100;
         System.out.println("Введите по очереди день и месяц (словами) вложения");
-        day = inputInt();
-        month1 = inputString();
+        int day = inputInt();
+        String month1 = inputString();
         System.out.println("Введите по очереди количество лет и месяцев для определения итоговой суммы");
-        years = inputInt();
-        month = inputInt();
-        monthSum = years *12+month;
-        for (int i = 0; i < monthSum; i++){
-            sum += sum * (perc/100);
-        }
-        for (int i = 0; i < 12; i++){
+        int totalMonth = inputInt()*12+inputInt();
+
+        for (int i = 0; i < 12; i++){   //////////////  определение сколько осталось месяцев до конца года
             if (month1.equals(MONTHS[i]))monthLeftToYear = 12-i-1;
         }
-        System.out.println(monthLeftToYear);
-        for (int i = 0; i<monthLeftToYear; i++){
-            sumToLeftOfYear += sumToLeftOfYear * (perc/100);
+
+        for (int i = 0; i < totalMonth; i++){ ////определение суммы через X лет и Y месяцев под ставку Z в месяц
+            sum += sum * perc;
         }
+
+        for (int i = 0; i<monthLeftToYear; i++){ ////////////// определение суммы что будет до конца года
+            sumToLeftOfYear += sumToLeftOfYear * perc;
+        }
+
         System.out.println("ОК. Дата вложения "+day+" "+month1);
-        System.out.println("Через "+years+" лет(года) и "+month1+ " месяца(-ев) сумма уже будет "+sum);
+        System.out.println("Через "+totalMonth/12+" лет(года) и "+month1+ " месяца(-ев) сумма уже будет "+sum);
         System.out.println("C месяца открытия ("+month1+") и до конца года сумма будет "+sumToLeftOfYear);
         hello();
     }
@@ -150,7 +140,7 @@ public class Main {
         System.out.println("Введите по очереди длину и ширину открытки в мм");
         otkrA = inputInt();
         otkrB = inputInt();
-        if ((konvA+1 > otkrA && konvB+1 > otkrB) || (konvA+1 > otkrB && konvB+1 > otkrA)) System.out.println("Открытка войдет");
+        if ((konvA+2 > otkrA && konvB+2 > otkrB) || (konvA+2 > otkrB && konvB+2 > otkrA)) System.out.println("Открытка войдет");
         else System.out.println("Открытка не войдет");
         hello();
     }
@@ -174,7 +164,7 @@ public class Main {
         System.out.println("== Введите 2 числа по очереди==");
         a = inputInt();
         b = inputInt();
-        if ((a%2 == 0 && b%2 != 0) || (b%2 == 0 && a%2 !=0)) System.out.println("только одно из чисел А и В четное ВЫПОЛНЯЕТСЯ");
+        if (a%2==0 ^ b%2==0) System.out.println("только одно из чисел А и В четное ВЫПОЛНЯЕТСЯ");
         else System.out.println("только одно из чисел А и В четное НЕ ВЫПОЛНЯЕТСЯ");
         if (a>0 || b>0) System.out.println("хотя бы одно из чисел А и В положительно ВЫПОЛНЯЕТСЯ");
         else System.out.println("хотя бы одно из чисел А и В положительно НЕ ВЫПОЛНЯЕТСЯ");
@@ -182,59 +172,32 @@ public class Main {
     }
 
     static void task8() {
-        double tabl[][] = new double[2][10];
         System.out.println("== Таблица соответствия между весом в фунтах и весом в килограммах: ==");
-
-        for (int i = 0; i < 10; i++) {
-            tabl[0][i] = i + 1;
-            tabl[1][i] = (i + 1) * KG_IN_ONE_FUNT;
+        System.out.println("FT |  KG  ");
+        for (int i = 1; i < 11; i++) {
+            for (int j = 0; j < 1; j++) {
+                System.out.print(i);
+                System.out.print("  |  ");
+                System.out.print(i*KG_IN_ONE_FUNT);
+            }
+            System.out.println();
         }
-        System.out.println("--------------------------------------------------------------------------");
-        System.out.print("FT |");
-        for (int i = 0; i < 10; i++) {
-            System.out.printf("%5.2f", tabl[0][i]);
-            System.out.print(" |");
-        }
-        System.out.println();
-        System.out.println("--------------------------------------------------------------------------");
-        System.out.print("KG |");
-        for (int i = 0; i < 10; i++) {
-            System.out.printf("%5.2f", tabl[1][i]);
-            System.out.print(" |");
-        }
-        System.out.println();
-        System.out.println("--------------------------------------------------------------------------");
         hello();
     }
 
     static void task9() {
-        double tabl[][] = new double[2][20];
         System.out.println("== Таблица перевода долл в грн: ==");
         System.out.println("Введите стоимость одного доллара");
         double kurs = inputDouble();
-
-        for (int i = 0; i < 20; i++) {
-            tabl[0][i] = i + 1;
-            tabl[1][i] = (i + 1) * kurs;
+        System.out.println("USD |  UAH  ");
+        for (int i = 1; i < 11; i++) {
+            for (int j = 0; j < 1; j++) {
+                System.out.print(i);
+                System.out.print("  |  ");
+                System.out.print(i*kurs);
+            }
+            System.out.println();
         }
-        System.out.print("------------------------------------------------------------------------------------");
-        System.out.println("------------------------------------------------------------------------------------");
-        System.out.print("USD |");
-        for (int i = 0; i < 20; i++) {
-            System.out.printf("%6.2f", tabl[0][i]);
-            System.out.print(" |");
-        }
-        System.out.println();
-        System.out.print("------------------------------------------------------------------------------------");
-        System.out.println("------------------------------------------------------------------------------------");
-        System.out.print("UAH |");
-        for (int i = 0; i < 20; i++) {
-            System.out.printf("%6.2f", tabl[1][i]);
-            System.out.print(" |");
-        }
-        System.out.println();
-        System.out.print("------------------------------------------------------------------------------------");
-        System.out.println("------------------------------------------------------------------------------------");
         hello();
     }
 
@@ -252,25 +215,20 @@ public class Main {
     }
 
     static void task11(){
-        int numOfChild = 0;
-        double sredn = 0;
         int sum = 0;
         int numOflowMark = 0;
-        int mark = 0;
         String childLowMark = "";
         System.out.println("== количество учеников, оценка которых меньше средней оценки по классу ==");
         System.out.println("Введите количество учеников");
-        numOfChild = inputInt();
-        int arr[] = new int[numOfChild];
+        double arr[] = new double[inputInt()];
         System.out.println("Введите по очереди оценки учеников");
-        for (int i = 0; i < numOfChild; i++){
-            mark = inputInt();
+        for (int i = 0; i < arr.length; i++){  //заполнение массива значениями с консоли
+            int mark = inputInt();
             arr[i] = mark;
             sum += mark;
         }
-        sredn = sum / numOfChild;
-        for (int i = 0; i < numOfChild; i++){
-            if (arr[i] < sredn){
+        for (int i = 0; i < arr.length; i++){  // поиск учеников с оценкой ниже средней и их номера
+            if (arr[i] < sum / arr.length){
                 childLowMark += " #"+(i+1);
                 numOflowMark += 1;
             }
@@ -283,17 +241,16 @@ public class Main {
     static void task12(){
         System.out.println("== количество четных элементов и количество элементов, оканчивающихся на цифру 5 в массиве ==");
         System.out.println("Введите количество цифр для записи");
-        int length = inputInt();
-        int arr[]= new int[length];
+        int arr[]= new int[inputInt()];
         int sumChetn = 0;
         int sumPastFive = 0;
         System.out.println("Введите цифры по очереди");
-        for (int i = 0; i<length; i++){
+        for (int i = 0; i<arr.length; i++){  //заполение массива
             arr[i]=inputInt();
         }
-        for (int i = 0; i<length; i++) {
+        for (int i = 0; i<arr.length; i++) {  // поиск по массиву четных элементов и заканчивающихся на 5
             if (arr[i]%2 == 0 )sumChetn += 1;
-            if (arr[i]%10 == 5);sumPastFive += 1;
+            if (arr[i]%10 == 5)sumPastFive += 1;
         }
         System.out.println("Количество четных эелементов - "+sumChetn);
         System.out.println("Количество элементов оканчивающихся на цифру 5 - "+sumPastFive);
