@@ -5,6 +5,11 @@ package com.company;
  */
 public enum Months {
 
+    /*Опишите с помощью enum тип данных для хранения месяцев.
+    У каждого месяца должны быть следующие свойства: номер месяца,
+    название на английском, название на русском, количество дней. Написать конструктор со всеми параметрами,
+    а также геттеры.
+*/
 
     January(1, 31, "January", "Январь"),
     February(2, 28, "February", "Февраль"),
@@ -23,8 +28,6 @@ public enum Months {
     int daysAmount;
     String enName;
     String ruName;
-
-
 
 
     Months(int monthOfYear, int daysAmount, String enName, String ruName) {
