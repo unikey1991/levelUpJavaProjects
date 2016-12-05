@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
 
-        int arr1[] = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int arr1[] = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12 ,13 ,14 ,15};
         int arr3[] = new int[]{1, 1, 2, 2, 3, 4, 5, 6, 6, 7, 7, 8, 9, 9, 10, 10, 11, 12, 13, 13};
         int arr4[] = new int[]{45, 64, 64, 48, 6876, 446, 64, 48, 64, 48, 64, 486, 8, 4, 6, 4, 6, 8, 1, 6879, 3, 1, 4, 6, 4, 7, 6, 9, 6877, 3, 1, 6, 6, 7, 6, 1, 6, 9, 9, 4};
         double arr6[] = new double[]{-3.5, -2.5, -1.5, -0.5, 0.5, 1.5, 2.5, 3.5};
@@ -43,11 +43,26 @@ public class Main {
     // 1.Найти среднее арифметическое элементов массива, больших числа 10. * Решить задачу при помощи циклов while и for-each
     static String task1 (int arr[]){
         double sredn = 0;
+        int count = 0;
         for (int x:arr){
-        sredn    += x;
+            if (x>10){
+                sredn += x;
+                count ++;
+            }
         }
-        return "Среднее = "+(sredn/arr.length);
+        /*
+        int i = 0;
+        while (i < arr.length){    //вариант с while
+            if (arr[i]>10){
+                sredn    += arr[i];
+                count ++;
+            }
+            i++;
+        }
+        */
+        return "Среднее = "+(sredn/count);
     }
+
 
     // 2. Найти среднее арифметическое элементов массива, меньших некоторого числа m. * Решить задачу при помощи циклов while и for-each
     static String task2 (int arr[], int lowerThan){
@@ -55,6 +70,13 @@ public class Main {
         for (int x:arr){
             if (x < lowerThan) sredn += x;
         }
+        /*
+        int i = 0;
+        while (i < arr.length){
+            if (arr[i] < lowerThan) sredn += arr[i];
+            i++;
+        }
+         */
         return "Среднее меньше числа "+lowerThan+" = "+(sredn/arr.length);
     }
 
@@ -62,10 +84,10 @@ public class Main {
     // Найти количество таких элементов. Сколько различных чисел имеется в массиве?
     static String task3 (int arr[]){
         int countEqual = 0;  // если верно понял, то подсчитал сколько всего цифр образуют такие пары в массиве
-        int i = 0, j=arr.length-1;
-        while (i < arr.length-1){
-            if (arr[i] ==  arr[i+1]) countEqual++;
-            i+=1;
+        int num = 0;
+        for (int x:arr) {
+            if (x == num) countEqual++;
+            num = x;
         }
         return "Количество элементов, идущих подряд, равны между собои = "+countEqual*2+". Различных же чисел в массиве = "+(arr.length-countEqual);
     }
@@ -131,13 +153,11 @@ public class Main {
     // 8. Дано число. Написать программу, которая возвращает его зеркальное отражение в виде числа.
     static String task8 (int num){
         String mirorredNumString = "";
-        int mirorredNum = 0;
         do {
             mirorredNumString += Integer.toString(num%10);
             num /= 10;
         }while (num > 0);
-        mirorredNum = Integer.parseInt(mirorredNumString);
-        return "Pеркальное отражение в виде числа "+mirorredNum;
+        return "Pеркальное отражение в виде числа "+Integer.parseInt(mirorredNumString);
     }
 
 
