@@ -22,6 +22,7 @@ public class Main {
         System.out.println("Сумма цифр числа " + num5 + " = " + task5(num5));
         System.out.println("Cумма элементов массива с нечетными индексами = " + task6(num6));
         System.out.println(task7(str7));
+        System.out.println(task3(1,2,3));
        // System.out.println(str7.charAt(4) == ' ');
 
     }
@@ -118,8 +119,8 @@ public class Main {
     }
 
     //3.Посчитать выражение макс(а*б*с, а+б+с)+3
-    static int task3() {
-        return 0;
+    static int task3(int a, int b, int c) {
+        return (a*b*c > a+b+c)?a*b*c+3:a+b+c+3;
     }
 
     //4.Вычислить факториал числа n. n! = 1*2*...*n-1*n;
