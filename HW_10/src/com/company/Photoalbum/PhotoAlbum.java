@@ -6,11 +6,18 @@ package com.company.Photoalbum;
 public class PhotoAlbum {
     int numOfPages;
     int photosOnPage;
-    Page pages[] = new Page[numOfPages];
+    public Page pages[];
+
 
     public PhotoAlbum(int numOfPages, int photosOnPage) {
         this.numOfPages = numOfPages;
-        this.photosOnPage = photosOnPage;
+        pages = new Page[numOfPages];
+        for (int i = 0; i < numOfPages; i++){
+            pages[i] = new Page(i, photosOnPage);
+        }
+    }
+
+    protected PhotoAlbum() {
     }
 
 
@@ -18,13 +25,7 @@ public class PhotoAlbum {
         return numOfPages;
     }
 
-    public int getPhotosOnPage() {
-        return photosOnPage;
-    }
 
-    public int getNumOfPhotos(){
-        return numOfPages*photosOnPage;
-    }
 
 //    public void addPage(int pageNumber, String name) {
 //        pages[pageNumber] =  ;
@@ -36,7 +37,7 @@ public class PhotoAlbum {
     }
 
     public void addPhotoOnAlbum(int pageNumber, String name, int photoNumber){
-        pages[pageNumber].photoOnPage[photoNumber] = new Photo(this.numOfPages, this.photosOnPage, pageNumber, name);
+        pages[pageNumber].photoOnPage[photoNumber] = new Photo(name);
     }
 
 

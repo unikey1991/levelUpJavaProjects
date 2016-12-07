@@ -3,15 +3,15 @@ package com.company.Photoalbum;
 /**
  * Created by unike on 07.12.2016.
  */
-public class Page extends PhotoAlbum {
+public class Page {
 
     int pageNumber;
+    int photosOnPage;
+    public Photo photoOnPage[];
 
-    Photo photoOnPage[] = new Photo[super.photosOnPage];
-
-
-    public Page(int numOfPages, int photosOnPage, int pageNumber) {
-        super(numOfPages, photosOnPage);
+    public Page(int pageNumber, int photosOnPage) {
         this.pageNumber = pageNumber;
+        this.photosOnPage = photosOnPage;
+        photoOnPage = new Photo[photosOnPage];
     }
 }

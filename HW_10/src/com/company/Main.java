@@ -22,11 +22,12 @@ public class Main {
 
 
 
-        PhotoAlbum photoAlbum1 = new PhotoAlbum(5, 4);
+        PhotoAlbum photoAlbum1 = new PhotoAlbum(5,4);
         photoAlbum1.addPhotoOnAlbum(0,"photo1",0);
 
 
-        System.out.println(photoAlbum1.getNumOfPhotos());
+        System.out.println(photoAlbum1.pages.length);
+        System.out.println(photoAlbum1.pages[0].photoOnPage.length);
 
 
 
