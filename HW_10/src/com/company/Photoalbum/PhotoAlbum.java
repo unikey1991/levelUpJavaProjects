@@ -40,5 +40,15 @@ public class PhotoAlbum {
         pages[pageNumber].photoOnPage[photoNumber] = new Photo(name);
     }
 
+    public void getSumOfPfotos(){
+        int count = 0;
+        for (int i = 0; i < pages.length; i++){
+            for (int j = 0; j < pages[i].photoOnPage.length; j++){
+                if (pages[i].photoOnPage[j] != null) count++;
+            }
+        }
+        System.out.println("Количество фото - "+count);
+    }
+
 
 }

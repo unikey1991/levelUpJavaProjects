@@ -1,8 +1,6 @@
 package com.company;
 
 import com.company.Animal.Puppy;
-import com.company.Photoalbum.Page;
-import com.company.Photoalbum.Photo;
 import com.company.Photoalbum.PhotoAlbum;
 
 public class Main {
@@ -28,6 +26,8 @@ public class Main {
 
         System.out.println(photoAlbum1.pages.length);
         System.out.println(photoAlbum1.pages[0].photoOnPage.length);
+
+        photoAlbum1.getSumOfPfotos();
 
 
 
