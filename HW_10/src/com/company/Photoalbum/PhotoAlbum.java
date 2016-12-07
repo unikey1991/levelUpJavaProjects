@@ -1,5 +1,7 @@
 package com.company.Photoalbum;
 
+import java.util.Arrays;
+
 /**
  * Created by unike on 07.12.2016.
  */
@@ -11,29 +13,11 @@ public class PhotoAlbum {
 
     public PhotoAlbum(int numOfPages, int photosOnPage) {
         this.numOfPages = numOfPages;
+        this.photosOnPage = photosOnPage;
         pages = new Page[numOfPages];
         for (int i = 0; i < numOfPages; i++){
             pages[i] = new Page(i, photosOnPage);
         }
-    }
-
-    protected PhotoAlbum() {
-    }
-
-
-    public int getNumOfPages() {
-        return numOfPages;
-    }
-
-
-
-//    public void addPage(int pageNumber, String name) {
-//        pages[pageNumber] =  ;
-//    }
-
-
-    public void setPages(Page[] pages) {
-        this.pages = pages;
     }
 
     public void addPhotoOnAlbum(int pageNumber, String name, int photoNumber){
@@ -50,5 +34,11 @@ public class PhotoAlbum {
         System.out.println("Количество фото - "+count);
     }
 
-
+    @Override
+    public String toString() {
+        return "PhotoAlbum{" +
+                "numOfPages=" + numOfPages +
+                ", photosOnPage=" + photosOnPage +
+                '}';
+    }
 }

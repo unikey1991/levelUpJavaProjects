@@ -28,6 +28,7 @@ public class Main {
         System.out.println(photoAlbum1.pages[0].photoOnPage.length);
 
         photoAlbum1.getSumOfPfotos();
+        System.out.println(photoAlbum1.toString());
 
 
 
