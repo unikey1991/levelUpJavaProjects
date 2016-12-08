@@ -5,10 +5,10 @@ package com.company.Photoalbum;
  */
 public class Page {
 
-    int pageNumber;
+    private int pageNumber;
     public Photo photoOnPage[];
 
-    public Page(int pageNumber, int photosOnPage) {
+    Page(int pageNumber, int photosOnPage) {
         this.pageNumber = pageNumber;
         photoOnPage = new Photo[photosOnPage];
     }

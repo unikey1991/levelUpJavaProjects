@@ -7,7 +7,7 @@ public class Photo{
     String name;
 
 
-    public Photo(String name) {
+    Photo(String name) {
         this.name = name;
     }
 
