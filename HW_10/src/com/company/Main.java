@@ -37,6 +37,7 @@ public class Main {
 
 
         //Square square = new Square("Black", 5, 5);
+        Square square = new Square("black", 5, 5);
 
 
 
