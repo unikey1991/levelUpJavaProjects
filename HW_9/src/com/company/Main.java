@@ -11,32 +11,40 @@ public class Main {
     public static void main(String[] args) {
 
 
-
         menu(); // главное меню
 
 
     }
 
-    static void menu(){
+    static void menu() {
         System.out.println();
         System.out.print("Какую программу хотите запустить?\n" +
                 "1 - Калькулятор  \n2 - Запись абитуриентов в Хогвардс \n3 - Отобразить заполненый список студентов\n0 - Выход : ");
-        switch (inputInt()){
-            case 0:break;
-            case 1:calc();break;
-            case 2:fillStudensListAndRandomFaculty(studentsList);break;
-            case 3:showStudentList(studentsList);break;
-            default:System.out.println("Повторите выбор");menu();break;
+        switch (inputInt()) {
+            case 0:
+                break;
+            case 1:
+                calc();
+                break;
+            case 2:
+                fillStudensListAndRandomFaculty(studentsList);
+                break;
+            case 3:
+                showStudentList(studentsList);
+                break;
+            default:
+                System.out.println("Повторите выбор");
+                menu();
+                break;
         }
     }
 
-    static void showStudentList(Student arr[]){  //вывод всего массива студентов на экран
+    static void showStudentList(Student arr[]) {  //вывод всего массива студентов на экран
         if (notEmpty) {
             for (int i = 0; i < arr.length; i++) {
                 System.out.println(arr[i].toString());
             }
-        }
-        else System.out.println("Сперва список необходимо заполнить программой №2");
+        } else System.out.println("Сперва список необходимо заполнить программой №2");
         menu();
     }
 
@@ -45,6 +53,7 @@ public class Main {
         int z = x.nextInt();
         return z;
     }
+
     static String inputString() {
         Scanner x = new Scanner(System.in);
         String z = x.nextLine();
@@ -55,10 +64,12 @@ public class Main {
         System.out.print("Введите имя : ");
         return inputString();
     }
+
     static String surNameInput() {
         System.out.print("Введите фамилию :");
         return inputString();
     }
+
     static int ageInput() {
         System.out.print("Введите возвраст :");
         return inputInt();
@@ -126,7 +137,6 @@ public class Main {
     }
 
 
-
     //////////                                      1) Доделать консольный калькулятор :
     static void calc() {
         Scanner scanner = new Scanner(System.in);
@@ -140,11 +150,10 @@ public class Main {
 
         System.out.print("Enter second operand: ");
         Object b = scanner.next();
-        if (b.toString().contains(".") || a.toString().contains(".")){
+        if (b.toString().contains(".") || a.toString().contains(".")) {
             b = Double.parseDouble(b.toString());
             a = Double.parseDouble(a.toString());
-        }
-        else {
+        } else {
             b = Integer.parseInt(b.toString());
             a = Integer.parseInt(a.toString());
         }

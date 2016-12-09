@@ -27,11 +27,14 @@ public class Student {
      */
 
     @Override
-    public String toString(){
-        switch (lang){
-            case EN:return name+" "+surName+" is "+age+" old and studying at "+faculty.getNameEn()+" faculty";
-            case RU:return name+" "+surName+" "+age+" лет, студент факультета "+faculty.getNameRu();
-            default:return "error";
+    public String toString() {
+        switch (lang) {
+            case EN:
+                return name + " " + surName + " is " + age + " old and studying at " + faculty.getNameEn() + " faculty";
+            case RU:
+                return name + " " + surName + " " + age + " лет, студент факультета " + faculty.getNameRu();
+            default:
+                return "error";
         }
     }
 }

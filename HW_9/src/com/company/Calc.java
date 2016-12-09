@@ -5,7 +5,6 @@ import java.util.IdentityHashMap;
 public class Calc {
 
 
-
     /////////////////
 
     public static int sum(int a, int b) {
@@ -45,7 +44,6 @@ public class Calc {
     public static double vichetanie(double a, double b) {
         return a - b;
     }
-
 
 
 }

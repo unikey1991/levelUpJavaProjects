@@ -21,14 +21,14 @@ public class PhotoAlbum {
     }
 
     public void addPhotoOnAlbum(int pageNumber, String name, int photoNumber){
-        pages[pageNumber].photoOnPage[photoNumber] = new Photo(name);
+        pages[pageNumber].addPhoto(photoNumber, name);
     }
 
     public void getSumOfPfotos(){
         int count = 0;
         for (int i = 0; i < pages.length; i++){
-            for (int j = 0; j < pages[i].photoOnPage.length; j++){
-                if (pages[i].photoOnPage[j] != null) count++;
+            for (int j = 0; j < pages[i].photos.length; j++){
+                if (pages[i].photos[j] != null) count++;
             }
         }
         System.out.println("Количество фото - "+count);
@@ -38,8 +38,8 @@ public class PhotoAlbum {
     public String toString() {
         for (int i = 0; i < pages.length; i++){
             System.out.println("Сраница альбома №"+(i+1));
-            for (int j = 0; j < pages[i].photoOnPage.length; j++){
-                if (pages[i].photoOnPage[j] != null) System.out.print(pages[i].photoOnPage[j].name);
+            for (int j = 0; j < pages[i].photos.length; j++){
+                if (pages[i].photos[j] != null) System.out.print(pages[i].photos[j].name);
             }
             System.out.println();
         }

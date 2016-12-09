@@ -6,7 +6,7 @@ package com.company;
 
  */
 public enum Faculty {
-    GRYFFINDOR("Gryffindor","Гриффиндор"), SLYTHERIN("Slytherin","Слизерин"), HUFFLEPUFF("Hufflepuff","Хаффлпуф"), RAVENCLAW("Ravenclav","Равэнклав");
+    GRYFFINDOR("Gryffindor", "Гриффиндор"), SLYTHERIN("Slytherin", "Слизерин"), HUFFLEPUFF("Hufflepuff", "Хаффлпуф"), RAVENCLAW("Ravenclav", "Равэнклав");
 
 
     String nameEn;
