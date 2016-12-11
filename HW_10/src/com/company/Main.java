@@ -4,6 +4,8 @@ import com.company.Animal.Puppy;
 import com.company.Figures.Square;
 import com.company.Photoalbum.PhotoAlbum;
 import com.company.StarSystem.StarSystem;
+import com.company.Vegetables.Salad;
+import com.company.Vegetables.Vinegret;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -36,8 +38,18 @@ public class Main {
         System.out.println(starSys1.getStarName());
 
 
-        //Square square = new Square("Black", 5, 5);
-        Square square = new Square("black", 5, 5);
+        Square square = new Square("Black", 5, 5);
+
+        Vinegret vinegret = new Vinegret();
+        System.out.println(vinegret.calSum());
+        vinegret.sortByCalories();
+        Salad salad1 = (Salad) vinegret.clone();
+        System.out.println(salad1.getName());
+
+
+
+
+
 
 
 

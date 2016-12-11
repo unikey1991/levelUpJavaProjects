@@ -19,4 +19,23 @@ public class LineSegment {
         endPoint.setCoordX(coordOfEndX);
         endPoint.setCoordY(coordOfEndY);
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LineSegment that = (LineSegment) o;
+
+        if (stratPoint != null ? !stratPoint.equals(that.stratPoint) : that.stratPoint != null) return false;
+        return endPoint != null ? endPoint.equals(that.endPoint) : that.endPoint == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = stratPoint != null ? stratPoint.hashCode() : 0;
+        result = 31 * result + (endPoint != null ? endPoint.hashCode() : 0);
+        return result;
+    }
 }

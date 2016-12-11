@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Main {
 
+    static String args1[];
+
     final static String CARD_SUITE[] = new String[]{null, "пик", "треф", "бубен", "червей"};
     final static String QUALITY_OF_CARD[] = new String[]{null, null, "двойка", "тройка", "черверка", "пятерка", "шестерка", "семерка",
             "восьмерка", "девятка,", "десятка", "валет", "дама", "король", "туз"};  //присвоил пустые значения просто чтоб индексы совпали с условиями в задаче, чтоб меньше путаться
@@ -13,6 +15,8 @@ public class Main {
 
 
     public static void main(String[] args) {
+
+        args1 = args;
 
 
         Book b1 = new Book("one", 1990, "alex", BookType.DETEKTIV);
@@ -24,14 +28,13 @@ public class Main {
 
         String arr[] = new String[]{"preved","medved","kaG","dela","m?"};
 
-
-        task1(args, 7);
+        System.out.println(task1(args, 7));
 
         task2(2,12);
 
         task3(20, "вторник");
 
-        task4(7);
+        System.out.println(task4(7));
 
         System.out.println(task5("say hello"));
 
@@ -69,13 +72,13 @@ public class Main {
     1) год не является високосным;
     2) год может быть високосным (информация об этом вводится в аргументы при запуске программы).*/
 
-    static void task1(String[] args, int monthNumber) {  //программа учитывает сразу высокосный ли (можно в аргументах программы ввести "высокосный")
-        if (monthNumber == 2) System.out.println(isLeapYear(args));
+    static int task1(String[] args, int monthNumber) {  //программа учитывает сразу высокосный ли (можно в аргументах программы ввести "высокосный")
+        if (monthNumber == 2) return isLeapYear(args);
         else if (monthNumber == 1 || (monthNumber > 2 && monthNumber <= 12)) {
             Months[] months = Months.values();
-            int x = months[monthNumber - 1].getDaysAmount();
-            System.out.println(x);
-        } else System.out.println("неверный месяц");
+            return months[monthNumber - 1].getDaysAmount();
+        }
+        else return 0;
     }
 
 
@@ -116,8 +119,9 @@ public class Main {
 
 
     /*Напишите программу для перевода чисел от 1 до 10 в строковое значение. Например, для числа 1 результатом будет строка “one”.*/
-    static void task4(int digit) {
-        System.out.println(digit+" это "+DIGITS[digit-1]);
+    static String task4(int digit) {
+        if (digit > 0 && digit <= 10) return DIGITS[digit-1];
+        else return "Число должно быть от 1 до 10";
     }
 
 
@@ -163,6 +167,7 @@ public class Main {
         }
         System.out.println();
     }
+
 
 
 }
