@@ -88,14 +88,14 @@ public class Main {
      названиям: "шестерка", "девятка" и т. п.). По заданным номеру масти m (1 <= m <=  4) и номеру достоинства карты k (6 <= k <= 14)
      определить полное название (масть и достоинство) соответствующей карты в виде "Дама пик", "Шестерка бубен" и т. п.*/
 
-    static void task2(int numOfCard, int numOfQuality) {
+    static String task2(int numOfCard, int numOfQuality) {
         if (numOfCard > 4 || numOfCard < 1) {
-            System.out.println("неверный номер!");
+            return "неверный номер!";
         }
         if (numOfQuality > 14 || numOfQuality < 6) {
-            System.out.println("неверный номер!");
+            return "неверный номер!";
         }
-        System.out.println("Это " + QUALITY_OF_CARD[numOfQuality] + " " + CARD_SUITE[numOfCard]);
+        return QUALITY_OF_CARD[numOfQuality] + " " + CARD_SUITE[numOfCard];
     }
 
 
@@ -103,18 +103,19 @@ public class Main {
 а) понедельник;
 б) i-й день недели (если 1 января — понедельник, то d=1 , если вторник — d=2, ..., если воскресенье —  d= 7).*/
 
-    static void task3(int enterDay, String dayName) {
+    static String task3(int enterDay, String dayName) {
         int startDay = -1;
         int target;
-        if (enterDay < 1 || enterDay > DAYS_IN_THE_YEAR) {
-            System.out.println("wrong number");
-        }
+        if (enterDay < 1 || enterDay > DAYS_IN_THE_YEAR) return "wrong number";
         for (int i = 0; i < DAYS_OF_WEEK.length; i++) {
-            if (DAYS_OF_WEEK[i].equals(dayName)) startDay = i + 1;
+            if (DAYS_OF_WEEK[i].equals(dayName)) {
+                startDay = i + 1;
+                break;
+            }
+            if (i == DAYS_OF_WEEK.length-1 && !DAYS_OF_WEEK[i].equals(dayName)) return "wrong start day name";
         }
-
         target = (enterDay % 7 - 1 + startDay - 1) % 7;
-        System.out.println("Если 1 января это "+dayName+", то "+enterDay + " день в году это " + DAYS_OF_WEEK[target] + " (" + (target + 1) + "й день недели)");
+        return DAYS_OF_WEEK[target];
     }
 
 
@@ -131,7 +132,7 @@ public class Main {
         for (int i = in.length() - 1; i >= 0; i--) {
             char1[in.length() - 1 - i] = in.charAt(i);
         }
-        return in+" = "+new String(char1);
+        return new String(char1);
     }
 
     /* Дан email в виде строки. Написать программу для проверки email на валидность. email должен соответствовать условию (пример - emailaddr@domain.zone)
@@ -155,17 +156,21 @@ public class Main {
 а) выводит на экран значение всех строк через запятую, длина которых больше n.
 б) выводит на экран значение всех неповторяющихся строк через запятую.
 */
-    static void task7(String arr[], int minLengthOfString) {
+    static String task7(String arr[], int minLengthOfString) {
         int test;
-        if (arr[0].length() >= minLengthOfString) System.out.print(arr[0] + ", ");  //сделал универсальный метод сочетающий оба условия
+        String out = "";
+        if (minLengthOfString < 1) return "min length may be > 0";
+        if (arr[0].length() >= minLengthOfString) out += arr[0] + ", ";  //сделал универсальный метод сочетающий оба условия
         for (int i = 1; i < arr.length; i++) {
             test = 0;
             for (int j = 0; j < i; j++) {
                 if (arr[i].equals(arr[j])) test = 1;
             }
-            if (test == 0 && arr[i].length() >= minLengthOfString) System.out.print(arr[i] + ", ");
+            if (test == 0 && arr[i].length() >= minLengthOfString && !out.equals("")) out += ", " + arr[i];
+            else if (test == 0 && arr[i].length() >= minLengthOfString && out.equals("")) out += arr[i];
         }
-        System.out.println();
+        out += ".";
+        return out;
     }
 
 
