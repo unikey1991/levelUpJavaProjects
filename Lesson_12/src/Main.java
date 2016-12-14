@@ -57,6 +57,11 @@ public class Main {
         System.out.println(alist.outAllElementsThroughtSeparator(","));
 
 
+        int arr1[] = new int[] {5,9,4,0,6,4,6,1};
+        Alist alist1 = new Alist(arr1);
+        System.out.println(alist1.outAllElementsThroughtSeparator(","));
+
+
     }
 
 

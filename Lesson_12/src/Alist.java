@@ -16,7 +16,13 @@ public class Alist {
         this.array = new int [initialSize];
     }
 
-
+    public Alist(int arr[]) {
+        this.initialSize = arr.length;
+        this.array = new int[initialSize];
+        for (int x:arr) {
+            add(x);
+        }
+    }
 
     public Alist(int initialSize) {
         this.initialSize = initialSize;
