@@ -23,6 +23,19 @@ public class Alist {
         this.array = new int [initialSize];
     }
 
+    public void insertionSort(){
+        if (size < 2) System.out.println("Array elements number < 2");
+        else {
+            for (int i = 1; i < size; i++){
+                    for (int j = i; j <= i && array[j-1] > array[j]; j-- ){
+                        int buffer = array[j-1];
+                        array[j-1]= array[j];
+                        array[j]=buffer;
+                }
+            }
+        }
+    }
+
     public String outAllElementsThroughtSeparator(String separator){
         if (size > 0){
             String out = "";

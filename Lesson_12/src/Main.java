@@ -47,6 +47,15 @@ public class Main {
 
         System.out.println(alist.outAllElementsThroughtSeparator("©"));
 
+        alist.add(55);
+        alist.add(51);
+        alist.add(5);
+        alist.add(40);
+        alist.add(23);
+        alist.add(15);
+        alist.insertionSort();
+        System.out.println(alist.outAllElementsThroughtSeparator(","));
+
 
     }
 
