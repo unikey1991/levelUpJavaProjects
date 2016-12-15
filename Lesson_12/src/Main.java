@@ -53,7 +53,9 @@ public class Main {
         alist.add(40);
         alist.add(23);
         alist.add(15);
-        alist.insertionSort();
+        alist.insertionSortFromMinToMax();
+        System.out.println(alist.outAllElementsThroughtSeparator(","));
+        alist.insertionSortFromMaxToMin();
         System.out.println(alist.outAllElementsThroughtSeparator(","));
 
 

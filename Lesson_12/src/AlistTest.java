@@ -208,4 +208,9 @@ public class AlistTest {
         //then
         assertEquals("ERROR!!!111 ACHTUNG PADLO!!!!1", expected, actual);
     }
+
+    /////////////////////////////////////////////////////////////////////////////////////
+
+
+
 }

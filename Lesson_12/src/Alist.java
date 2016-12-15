@@ -29,11 +29,27 @@ public class Alist {
         this.array = new int [initialSize];
     }
 
-    public void insertionSort(){
+    //сортировка по возрастанию и убыванию используя алгоритм сортировки вставками (Insertion)
+    public void insertionSortFromMaxToMin(){
+        if (size < 2) System.out.println("Array elements number < 2");
+        else {
+            for (int i = size-1; i > 0; i--){
+                for (int j = i; j < size && array[j] > array[j-1]; j++ ){
+                    int buffer = array[j];
+                    array[j]= array[j-1];
+                    array[j-1]=buffer;
+                }
+            }
+        }
+    }
+
+
+    //сортировка по возрастанию и убыванию используя алгоритм сортировки вставками (Insertion)
+    public void insertionSortFromMinToMax(){
         if (size < 2) System.out.println("Array elements number < 2");
         else {
             for (int i = 1; i < size; i++){
-                    for (int j = i; j <= i && array[j-1] > array[j]; j-- ){
+                    for (int j = i; j > 0 && array[j] < array[j-1]; j-- ){
                         int buffer = array[j-1];
                         array[j-1]= array[j];
                         array[j]=buffer;
@@ -42,6 +58,7 @@ public class Alist {
         }
     }
 
+    //метод, который принимает разделитель и возвращает все элементы списка через разделитель в виде строки
     public String outAllElementsThroughtSeparator(String separator){
         if (size > 0){
             String out = "";
@@ -54,6 +71,7 @@ public class Alist {
         else return "not have elements";
     }
 
+    //получение индекса элемента по значению (indexOf)
     public int indexOf(int n){
         for (int i = 0; i < size; i++){
             if (array[i] == n) return i;
@@ -61,6 +79,7 @@ public class Alist {
         return -1;
     }
 
+    //добавления/удаления элемента из середины списка (по индексу)
     public void addToArrayIndex (int n, int index){
         int buffer;
         if (index >= size) throw new ArrayIndexOutOfBoundsException(index);
@@ -73,7 +92,7 @@ public class Alist {
             array[index] = buffer;
         }
     }
-
+//добавления/удаления элемента из середины списка (по индексу)
     public void removeFromArrayIndex (int index){
         int buffer = 0;
         if (index >= size) throw new ArrayIndexOutOfBoundsException(index);
@@ -87,6 +106,7 @@ public class Alist {
         }
     }
 
+    //добавления/удаления элемента из начала списка
     public void addToArrayStarting(int n){
         add(n);
         int buffer = array[size-1];
@@ -96,6 +116,7 @@ public class Alist {
         array[0] = buffer;
     }
 
+    //добавления/удаления элемента из начала списка
     public void removeFromArrayStarting(){
         int buffer = array[0];
         for (int i = 0; i < size; i++){
