@@ -9,42 +9,14 @@ public class Main {
 	// write your code here
 
 
-        //System.out.println(convertToString(999999));
+        System.out.println(convertToString(999999));
 
-        Alist alist = new Alist(10);
+        /*Alist alist = new Alist(10);
         alist.add(1);
         alist.add(2);
         alist.add(3);
         alist.add(4);
-        for (int i = 0; i < alist.array.length; i++){
-            System.out.print(alist.array[i]);
-        }
-        System.out.println();
-        alist.addToArrayStarting(5);
-        for (int i = 0; i < alist.array.length; i++){
-            System.out.print(alist.array[i]);
-        }
-        System.out.println();
-        alist.removeFromArrayStarting();
-        for (int i = 0; i < alist.array.length; i++){
-            System.out.print(alist.array[i]);
-        }
-        System.out.println();
-
-        alist.addToArrayIndex(5,2);
-        for (int i = 0; i < alist.array.length; i++){
-            System.out.print(alist.array[i]);
-        }
-        System.out.println();
-
-        alist.removeFromArrayIndex(2);
-        for (int i = 0; i < alist.array.length; i++){
-            System.out.print(alist.array[i]);
-        }
-        System.out.println();
-
         System.out.println(alist.indexOf(1));
-
         System.out.println(alist.outAllElementsThroughtSeparator("©"));
 
         alist.add(55);
@@ -61,7 +33,7 @@ public class Main {
 
         int arr1[] = new int[] {5,9,4,0,6,4,6,1};
         Alist alist1 = new Alist(arr1);
-        System.out.println(alist1.outAllElementsThroughtSeparator(","));
+        System.out.println(alist1.outAllElementsThroughtSeparator(","));*/
 
 
     }

@@ -7,7 +7,7 @@ public class Alist {
     private int size = 0;
     private float maxLoad = 0.8f;
     private float minLoad = 0.6f;
-    public int[] array;
+    private int[] array;
     private static final int MIN_SIZE = 10;
 
 
