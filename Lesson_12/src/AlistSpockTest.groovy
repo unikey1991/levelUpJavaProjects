@@ -13,7 +13,7 @@ class AlistSpockTest extends spock.lang.Specification {
         list.add(num);
 
         then: "check list size"
-        list.size() == 0;
+        list.size() == 1;
 
         where:
         num << [0, 5, 7, 256]
