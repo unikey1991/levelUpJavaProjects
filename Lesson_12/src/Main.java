@@ -9,6 +9,8 @@ public class Main {
 	// write your code here
 
 
+        //nine hundred ninety ninenine thousand(s) ninety nine
+        //Nine hundred ninety nine thousand nine hundred ninety nin
         System.out.println(convertToString(999999));
 
         /*Alist alist = new Alist(10);
@@ -43,7 +45,7 @@ public class Main {
         String res = null;
         int x1 = 0, x2 = 0;
         if (n / 1000 > 0) {x1 = n%1000;
-           res =  intNumToStringNum(n / 1000, 2) + intNumToStringNum(x1, 1);
+           res =  intNumToStringNum(n / 1000, 1) + intNumToStringNum(x1, 2);
         }
 
 
