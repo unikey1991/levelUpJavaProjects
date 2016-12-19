@@ -35,6 +35,7 @@ public class Bar {
 
     public void shareTip() {
         System.out.println(tips + " чаевых поделено на " + curentBarmansNumber + " барменов");
+        setTips(0);
     }
 
     public void takeTips(int amount, int waiterId) {
@@ -50,7 +51,7 @@ public class Bar {
                         if (this.barman[i] == null) {
                             this.barman[i] = new Barman(name, age, exclusiveCoctail, bar);
                             System.out.println("Grac, " + name + " стал барменом под ид " + i);
-                            curentBarmansNumber++;
+                            this.curentBarmansNumber++;
                             break;
                         }
                     }
@@ -61,8 +62,8 @@ public class Bar {
                     for (int i = 0; i < this.waiter.length; i++) {
                         if (this.waiter[i] == null) {
                             this.waiter[i] = new Waiter(name, age, bar);
-                            System.out.println("Grac, " + name + " стал ошициантом под ид " + i);
-                            curentWaitersNumber++;
+                            System.out.println("Grac, " + name + " стал официантом под ид " + i);
+                            this.curentWaitersNumber++;
                             break;
                         }
                     }
@@ -70,41 +71,48 @@ public class Bar {
                 break;
             default:
                 System.out.println("неверная должность");
+                break;
         }
     }
 
-    public String delPersonal(String name, String position) {
+    public void delPersonal(String name, String position) {
         switch (position) {
             case "бармен":
                 if (curentBarmansNumber > 0) {
-                    for (int i = 0; i < barman.length && barman[i] != null; i++) {
-                        if (barman[i].getName().equals(name)) {
+                    for (int i = 0; i < barman.length ; i++) {
+                        if (barman[i] != null && barman[i].getName().equals(name)) {
                             this.barman[i] = null;
-                            return name + " уволен(а)";
+                            this.curentBarmansNumber--;
+                            System.out.println(name + " уволен(а)");
+                            break;
                         }
                     }
-                    return "бармен с таким именем не найден";
-                }
-                return "алло, у нас и так нет барменов!";
+                    break;
+                } else System.out.println("алло, у нас и так нет барменов!");
+                break;
             case "официант":
                 if (curentWaitersNumber > 0) {
-                    for (int i = 0; i < waiter.length && waiter[i] != null; i++) {
-                        if (waiter[i].getName().equals(name)) {
+                    for (int i = 0; i < waiter.length ; i++) {
+                        if (waiter[i] != null && waiter[i].getName().equals(name)) {
                             this.waiter[i] = null;
-                            return name + " уволен(а)";
+                            this.curentWaitersNumber--;
+                            System.out.println(name + " уволен(а)");
+                            break;
                         }
                     }
-                    return "официант с таким именем не найден";
-                }
-                return "алло, у нас и так нет барменов!";
+                    break;
+                } else System.out.println("алло, у нас и так нет барменов!");
+                break;
             default:
-                return "неверная должность";
+                System.out.println("неверная должность");
+                break;
         }
     }
 
 
     public void performeOrder(int barmanId, Bar bar) {
-        barman[barmanId].performOrder();
+        if(barman[barmanId] != null) barman[barmanId].performOrder();
+        else System.out.println("нет барменов под ид "+barmanId);
     }
 
 
@@ -112,7 +120,7 @@ public class Bar {
     Если такой напиток существует в баре, то его количество обновляется. Если нет, то добавляется новый объект.*/
 
     public void fillWarehouse(String alcoholName, int amount) {
-        for (int i = 0; i < curentAlcoholNumber; i++) {
+        for (int i = 0; i < curentAlcoholNumber && curentAlcoholNumber != alcohol.length; i++) {
             if (alcohol[i] != null && alcohol[i].getName().equals(alcoholName)) {
                 alcohol[i].setAmount(alcohol[i].getAmount() + amount);
                 System.out.println("добавлено " + amount + " бутылок " + alcoholName);
@@ -165,7 +173,8 @@ public class Bar {
     }
 
     public void addOrder(int waiterID, String nameOfAlcohol, int amount) {
-        waiter[waiterID].addOrder(nameOfAlcohol, amount);
+        if (waiter[waiterID] != null) waiter[waiterID].addOrder(nameOfAlcohol, amount);
+        else System.out.println("нет официантов под ИД "+waiterID);
     }
 
 
@@ -204,6 +213,14 @@ public class Bar {
 
     public int getCurentAlcoholNumber() {
         return curentAlcoholNumber;
+    }
+
+    public int getCurentWaitersNumber() {
+        return curentWaitersNumber;
+    }
+
+    public int getCurentBarmansNumber() {
+        return curentBarmansNumber;
     }
 
     public void setSize(int size) {

@@ -21,7 +21,7 @@ public class Main {
         System.out.println(bar.getAlcohol()[1].getAmount());
         System.out.println(bar.getAlcohol()[2].getAmount());
 
-        System.out.println(bar.delPersonal("Julia","бармен"));
+        bar.delPersonal("Julia","бармен");
 
 
         bar.addOrder(0, "pivo", 5);
