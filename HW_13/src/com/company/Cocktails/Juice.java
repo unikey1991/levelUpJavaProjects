@@ -6,6 +6,6 @@ package com.company.Cocktails;
 public class Juice extends Alcohol {
 
     public Juice(int amount) {
-        super("juice", amount, 1, 18);
+        super("Juice", amount, 1, 18);
     }
 }

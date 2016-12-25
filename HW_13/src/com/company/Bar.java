@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.Cocktails.Alcohol;
+import com.company.Cocktails.*;
 import com.company.Exceptions.DrinkNotFoundException;
 import com.company.Exceptions.NegativeTipsException;
 import com.company.Exceptions.NotExistBarException;
@@ -18,7 +18,7 @@ public class Bar {
     private Barman barman[] = new Barman[5];
     private int curentBarmansNumber;
     private String barName;
-    private static Alcohol alcohol[] = new Alcohol[10];
+    private Alcohol alcohol[] = new Alcohol[10];
     private int curentAlcoholNumber;
     private int tips;
     ///////////////
@@ -34,6 +34,11 @@ public class Bar {
         this.initialSize = 10;
         this.barName = barName;
         this.orders = new Orders[initialSize];
+        alcohol[0] = new Beer(10);
+        alcohol[1] = new CocaCola(10);
+        alcohol[2] = new Juice(10);
+        alcohol[3] = new Vodka(10);
+        curentAlcoholNumber = 4;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -217,6 +222,7 @@ public class Bar {
                         alcohol[j] = alcohol[j+1];
                     }
                     alcohol[curentAlcoholNumber-1] = null;
+                    curentAlcoholNumber--;
                 }
             }
         }

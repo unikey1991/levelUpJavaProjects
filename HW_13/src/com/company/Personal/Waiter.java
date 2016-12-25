@@ -22,7 +22,7 @@ public class Waiter extends Personal {
         for (int i = 0; i < bar.getCurentAlcoholNumber(); i++) {
             if (bar.getAlcohol()[i].getName().equals(nameOfAlcohol)) {
                 if (bar.getAlcohol()[i].getAmount() < amount) throw new OrderDrinkOverException("Not correct value for order: "+amount+". Requested drink: "+nameOfAlcohol+" is over");
-                    else {
+                else {
                     float curentLoad = (float) bar.getSize() / (float) bar.getInitialSize();
                     if (curentLoad >= bar.getMaxLoad()) {
                         bar.setInitialSize((int) (bar.getSize() * 1.5));
@@ -35,6 +35,7 @@ public class Waiter extends Personal {
                     bar.setOrderByID(new Orders(nameOfAlcohol, amount), bar.getSize());
                     bar.setSize(bar.getSize() + 1);
                     bar.decreaseAlcoholAmount(nameOfAlcohol, amount);
+                    break;
                 }
             }
             if (i == bar.getCurentAlcoholNumber()-1 && !bar.getAlcohol()[i].getName().equals(nameOfAlcohol)) throw new DrinkNotFoundException("Requested drink: "+nameOfAlcohol+" is not found");
