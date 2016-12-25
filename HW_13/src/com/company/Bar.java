@@ -1,6 +1,10 @@
 package com.company;
 
 import com.company.Cocktails.Alcohol;
+import com.company.Exceptions.DrinkNotFoundException;
+import com.company.Exceptions.NegativeTipsException;
+import com.company.Exceptions.NotExistBarException;
+import com.company.Exceptions.OrderDrinkOverException;
 import com.company.Personal.Barman;
 import com.company.Personal.Waiter;
 
@@ -31,19 +35,34 @@ public class Bar {
         this.barName = barName;
         this.orders = new Orders[initialSize];
     }
-    //////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void shareTip() {
-        System.out.println(tips + " чаевых поделено на " + curentBarmansNumber + " барменов");
-        setTips(0);
+    /*1) У бара должен быть метод getDrinkCount, который возвращает кол-во запасов по заданному названию напитка,
+    в случае если напиток закончился или не существует необходимо возвращать значение -1.*/
+
+    public int getDrinkCount(String alcoholName){
+        for (int i =0; i< curentAlcoholNumber; i++){
+            if (alcoholName.equals(alcohol[i].getName())) return alcohol[i].getAmount();
+        }
+        return -1;
     }
 
-    public void takeTips(int amount, int waiterId) {
-        waiter[waiterId].takeTips(amount);
+    /*2) У бара необходимо объявить метод getDrinkByName, который вернет объект напитка.
+    В случае если напиток неьбыл найден, необходимо возрващать null. Bar*/
+
+    public Alcohol getDrinkByName(String alcoholName){
+        for (int i =0; i< curentAlcoholNumber; i++){
+            if (alcoholName.equals(alcohol[i].getName())) return alcohol[i];
+        }
+        return null;
     }
 
+    /*3) При создании нового сотрудника бара необходимо проверять у него принадлежность к бару.
+    Тоесть, если объект бара переданный в конструкторе сотрудника окажется null необходимо выбросить исключение NotExistBarException.
+    При этом исключение должно информировать о некорректно заданом значении бара. Пример : For creating new employee was passed not.*/
 
-    public void addPersonal(String name, int age, String exclusiveCoctail, String position, Bar bar) {
+    public void addPersonal(String name, int age, String exclusiveCoctail, String position, Bar bar) throws NotExistBarException {
+        if (null == bar) throw new NotExistBarException("For creating new employee was passed not");
         switch (position) {
             case "бармен":
                 if (curentBarmansNumber < this.barman.length) {
@@ -75,11 +94,33 @@ public class Bar {
         }
     }
 
+
+    public void shareTip() {
+        System.out.println(tips + " чаевых поделено на " + curentBarmansNumber + " барменов");
+        setTips(0);
+    }
+
+
+
+    /*6) Добавить в метод получения чаевых, официантом, проверку на положительное значение.
+    В случае если значение чаевых было переданно не корректно нужно сгенерировать исключение NegativeTipsException.
+    При этом исключение должно информировать о некорректно заданом значении чаевых.
+    Пример: Tips couldn't be negative. Passed value is: -25.*/
+
+    public void takeTips(int amount, int waiterId) throws NegativeTipsException {
+        if (amount < 0) throw new NegativeTipsException("Tips couldn't negative. Passed value is: "+amount);
+        if (null != waiter[waiterId]) waiter[waiterId].takeTips(amount);
+        else System.out.println("Not found waiter with id "+waiterId);
+    }
+
+
+
+
     public void delPersonal(String name, String position) {
         switch (position) {
             case "бармен":
                 if (curentBarmansNumber > 0) {
-                    for (int i = 0; i < barman.length ; i++) {
+                    for (int i = 0; i < barman.length; i++) {
                         if (barman[i] != null && barman[i].getName().equals(name)) {
                             this.barman[i] = null;
                             this.curentBarmansNumber--;
@@ -92,7 +133,7 @@ public class Bar {
                 break;
             case "официант":
                 if (curentWaitersNumber > 0) {
-                    for (int i = 0; i < waiter.length ; i++) {
+                    for (int i = 0; i < waiter.length; i++) {
                         if (waiter[i] != null && waiter[i].getName().equals(name)) {
                             this.waiter[i] = null;
                             this.curentWaitersNumber--;
@@ -111,15 +152,15 @@ public class Bar {
 
 
     public void performeOrder(int barmanId, Bar bar) {
-        if(barman[barmanId] != null) barman[barmanId].performOrder();
-        else System.out.println("нет барменов под ид "+barmanId);
+        if (barman[barmanId] != null) barman[barmanId].performOrder();
+        else System.out.println("нет барменов под ид " + barmanId);
     }
 
 
     /*Метод “пополнить склад” принимает объект с названием напитка и его количеством.
     Если такой напиток существует в баре, то его количество обновляется. Если нет, то добавляется новый объект.*/
 
-    public void fillWarehouse(String alcoholName, int amount) {
+    public void fillWarehouse(String alcoholName, int amount, double volume, int cost) {
         for (int i = 0; i < curentAlcoholNumber && curentAlcoholNumber != alcohol.length; i++) {
             if (alcohol[i] != null && alcohol[i].getName().equals(alcoholName)) {
                 alcohol[i].setAmount(alcohol[i].getAmount() + amount);
@@ -127,13 +168,13 @@ public class Bar {
                 break;
             }
             if (i == curentAlcoholNumber - 1) {
-                alcohol[curentAlcoholNumber++] = new Alcohol(alcoholName, amount);
+                alcohol[curentAlcoholNumber++] = new Alcohol(alcoholName, amount, volume, cost);
                 System.out.println(alcoholName + " добавлен в бар. " + amount + " бутылок");
                 break;
             }
         }
         if (curentAlcoholNumber == 0) {
-            alcohol[curentAlcoholNumber++] = new Alcohol(alcoholName, amount);
+            alcohol[curentAlcoholNumber++] = new Alcohol(alcoholName, amount, volume, cost);
             System.out.println(alcoholName + " добавлен в бар. " + amount + " бутылок");
         }
         if (curentAlcoholNumber == alcohol.length)
@@ -166,15 +207,24 @@ public class Bar {
     }
 
 
+/*После того как бармен выполнил заказ необходимо вычесть заданное кол-во напитков из запаса бара. В случае если запасы закончились нужно удалить напиток из бара.*/
     public void decreaseAlcoholAmount(String name, int amount) {
         for (int i = 0; i < curentAlcoholNumber; i++) {
-            if (alcohol[i].getName().equals(name)) alcohol[i].setAmount(alcohol[i].getAmount() - amount);
+            if (alcohol[i].getName().equals(name)) {
+                alcohol[i].setAmount(alcohol[i].getAmount() - amount);
+                if (alcohol[i].getAmount() == 0) {
+                    for (int j = i; j < curentAlcoholNumber-1; j++){
+                        alcohol[j] = alcohol[j+1];
+                    }
+                    alcohol[curentAlcoholNumber-1] = null;
+                }
+            }
         }
     }
 
-    public void addOrder(int waiterID, String nameOfAlcohol, int amount) {
+    public void addOrder(int waiterID, String nameOfAlcohol, int amount) throws DrinkNotFoundException, OrderDrinkOverException {
         if (waiter[waiterID] != null) waiter[waiterID].addOrder(nameOfAlcohol, amount);
-        else System.out.println("нет официантов под ИД "+waiterID);
+        else System.out.println("нет официантов под ИД " + waiterID);
     }
 
 
