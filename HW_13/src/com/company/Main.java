@@ -1,8 +1,13 @@
 package com.company;
 
+import com.company.Exceptions.DrinkNotFoundException;
+import com.company.Exceptions.NegativeTipsException;
+import com.company.Exceptions.NotExistBarException;
+import com.company.Exceptions.OrderDrinkOverException;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NotExistBarException, NegativeTipsException, DrinkNotFoundException, OrderDrinkOverException {
         // write your code here
 
 
@@ -12,10 +17,6 @@ public class Main {
         bar.addPersonal("Julia", 18, "b52","бармен" , bar);
         bar.addPersonal("Sergio", 23,"sd","официант", bar);
 
-        bar.fillWarehouse("pivo", 50);
-        bar.fillWarehouse("vodka", 30);
-        bar.fillWarehouse("vino", 20);
-        bar.fillWarehouse("vino", 20);
 
         System.out.println(bar.getAlcohol()[0].getAmount());
         System.out.println(bar.getAlcohol()[1].getAmount());
@@ -24,9 +25,9 @@ public class Main {
         bar.delPersonal("Julia","бармен");
 
 
-        bar.addOrder(0, "pivo", 5);
-        bar.addOrder(0, "vodka", 6);
-        bar.addOrder(0, "vino", 7);
+        bar.addOrder(0, "Beer", 10);
+        bar.addOrder(0, "Vodka", 6);
+        bar.addOrder(0, "Juice", 7);
 
         System.out.println(bar.getAlcohol()[0].getAmount());
         System.out.println(bar.getAlcohol()[1].getAmount());

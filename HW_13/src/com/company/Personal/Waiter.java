@@ -1,6 +1,8 @@
 package com.company.Personal;
 
 import com.company.Bar;
+import com.company.Exceptions.DrinkNotFoundException;
+import com.company.Exceptions.OrderDrinkOverException;
 import com.company.Orders;
 
 /**
@@ -16,12 +18,11 @@ public class Waiter extends Personal {
     }
 
 
-    public void addOrder(String nameOfAlcohol, int amount) {
+    public void addOrder(String nameOfAlcohol, int amount) throws DrinkNotFoundException, OrderDrinkOverException {
         for (int i = 0; i < bar.getCurentAlcoholNumber(); i++) {
             if (bar.getAlcohol()[i].getName().equals(nameOfAlcohol)) {
-                if (bar.getAlcohol()[i].getAmount() < amount) {
-                    System.out.println("Есть только " + bar.getAlcohol()[i].getAmount());
-                } else {
+                if (bar.getAlcohol()[i].getAmount() < amount) throw new OrderDrinkOverException("Not correct value for order: "+amount+". Requested drink: "+nameOfAlcohol+" is over");
+                else {
                     float curentLoad = (float) bar.getSize() / (float) bar.getInitialSize();
                     if (curentLoad >= bar.getMaxLoad()) {
                         bar.setInitialSize((int) (bar.getSize() * 1.5));
@@ -34,8 +35,10 @@ public class Waiter extends Personal {
                     bar.setOrderByID(new Orders(nameOfAlcohol, amount), bar.getSize());
                     bar.setSize(bar.getSize() + 1);
                     bar.decreaseAlcoholAmount(nameOfAlcohol, amount);
+                    break;
                 }
             }
+            if (i == bar.getCurentAlcoholNumber()-1 && !bar.getAlcohol()[i].getName().equals(nameOfAlcohol)) throw new DrinkNotFoundException("Requested drink: "+nameOfAlcohol+" is not found");
         }
     }
 

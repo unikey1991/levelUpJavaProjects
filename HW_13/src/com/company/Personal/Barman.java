@@ -20,7 +20,7 @@ public class Barman extends Personal {
 
     public void performOrder() {
         if (bar.getOrdersAmount() > 0) {
-            System.out.println("Заказ на " + bar.getOrders()[0].getAmount() + " бутылок " + " напитка " + bar.getOrders()[0].getTitle() + " выполнен");
+            System.out.println("Заказ на " + bar.getOrders()[0].getAmount() + " бутылок напитка " + bar.getOrders()[0].getTitle() + " выполнен");
             bar.removeFromArrayStarting();
         } else System.out.println("Нет заказов");
     }
