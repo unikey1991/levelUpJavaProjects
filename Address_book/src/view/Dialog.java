@@ -57,9 +57,7 @@ public abstract class Dialog extends JDialog {
 
     private ActionListener getButtonListener() {
         return e -> {
-            if (e.getActionCommand().equals("ok")){
-                isOkPressed = true;
-            }
+            if (e.getActionCommand().equals("ok"))isOkPressed = true;
             dispose();
         };
     }

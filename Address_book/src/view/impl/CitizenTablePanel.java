@@ -2,7 +2,6 @@ package view.impl;
 
 import entity.Citizen;
 import view.Action;
-import view.CitizenTableModelContainer;
 
 import javax.swing.*;
 import java.awt.*;
