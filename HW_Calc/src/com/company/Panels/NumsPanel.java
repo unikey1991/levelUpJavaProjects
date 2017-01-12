@@ -1,5 +1,7 @@
 package com.company.Panels;
 
+import com.company.Main;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -32,11 +34,14 @@ public class NumsPanel extends JPanel {
             if (e.getSource() instanceof JButton) {
                 String nameButton = (((JButton) e.getSource()).getText());
                 System.out.println(nameButton);
-                if (nameButton.equals(".") && OperationPanel.operator.equals("")) {
-                    if (!MainPanel.getTextFromTextArea().contains(".")) MainPanel.setTextInTextArea(MainPanel.getTextFromTextArea() + nameButton);
+                if (nameButton.equals(".")) {
+                    if (!MainPanel.getTextFromTextArea().contains(".") && !MainPanel.getTextFromTextArea().equals(""))
+                        MainPanel.setTextInTextArea(MainPanel.getTextFromTextArea() + nameButton);
                 }
-                else if (nameButton.equals(".") && !OperationPanel.operator.equals("")){
-                    if (!MainPanel.getTextFromTextArea().substring(MainPanel.getTextFromTextArea().indexOf(OperationPanel.operator.charAt(0))+1).contains("."))MainPanel.setTextInTextArea(MainPanel.getTextFromTextArea() + nameButton);
+                else if (OperationPanel.operator.equals("")) MainPanel.setTextInTextArea(MainPanel.getTextFromTextArea() + nameButton);
+                else if (Main.bufer1.equals("")) {
+                    Main.bufer1 = MainPanel.getTextFromTextArea();
+                    MainPanel.setTextInTextArea(Main.bufer2 + nameButton);
                 }
                 else MainPanel.setTextInTextArea(MainPanel.getTextFromTextArea() + nameButton);
             }
