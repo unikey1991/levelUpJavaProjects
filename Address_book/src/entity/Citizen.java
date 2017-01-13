@@ -3,9 +3,8 @@ package entity;
 /**
  * Created by java on 10.01.2017.
  */
-public class Citizen {
+public class Citizen extends Entity{
 
-    private Long id;
     private String firstName;
     private String lastName;
     private int age;
@@ -21,20 +20,13 @@ public class Citizen {
 
 
     public Citizen(String firstName, Long id, String lastName, int age, Long streetId) {
+        super(id);
         this.firstName = firstName;
-        this.id = id;
         this.lastName = lastName;
         this.age = age;
         this.streetId = streetId;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -71,7 +63,7 @@ public class Citizen {
     @Override
     public String toString() {
         return "Citizen{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
