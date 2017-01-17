@@ -38,7 +38,7 @@ public abstract class Dialog extends JDialog {
 
     public boolean isOkPressed() {
         boolean res = isOkPressed;
-        isOkPressed= false;
+        isOkPressed = false;
         return res;
     }
 

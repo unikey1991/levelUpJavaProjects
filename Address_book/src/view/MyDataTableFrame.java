@@ -1,5 +1,8 @@
 package view;
 
+import entity.Citizen;
+import view.impl.CitizenTablePanel;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,11 +20,14 @@ public class MyDataTableFrame extends JFrame {
 
         TabbedPane tabbedPane = new TabbedPane();
 
+        CitizenTablePanel citizenTablePanel = new CitizenTablePanel();
+        tabbedPane.add(citizenTablePanel);
+
         container.add(tabbedPane, BorderLayout.CENTER);
         container.add(new ToolPanel(tabbedPane), BorderLayout.PAGE_END);
 
-        setVisible(true);
         setBounds(0,0,800,600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 }
