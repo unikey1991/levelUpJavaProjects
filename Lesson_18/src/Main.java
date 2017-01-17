@@ -27,6 +27,12 @@ public class Main {
                 new Mercedes(180, 18, Configuration.BASIC)
         };
 
+        for (Action car:cars) {
+            car.stop();
+            car.beep();
+            car.drive();
+        }
+
         AutoSalon autoSalon = new AutoSalon(cars);
 
         System.out.println("Total price: "+autoSalon.calculateCarsPrice());
