@@ -80,7 +80,8 @@ public class OperationPanel extends JPanel {
 
     public void clear() {
         Main.bufer1 = "";
-        Main.bufer2 = "";
+        Main.bufer2 = "" +
+                ;
         operator = "";
     }
 
