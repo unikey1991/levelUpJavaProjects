@@ -32,7 +32,7 @@ public class Main {
         loading.add(progressBar);
         frameLoading.setVisible(true);
         for (int i = progressBar.getMinimum(); i <= progressBar.getMaximum(); i++ ){
-            Thread.sleep(100);
+            Thread.sleep(1000);
             progressBar.setValue(i);
         }
 
