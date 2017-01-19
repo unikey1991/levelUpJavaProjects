@@ -3,12 +3,13 @@ package autosalon;
 /**
  * Created by java on 13.01.2017.
  */
-public abstract class Car {
+public abstract class Car implements Action {
 
 
     private int maxSpeed;
     private double fuelConsumption;
     private Configuration configuration;
+    private int speed;
 
     public Car(int maxSpeed, double fuelConsumption, Configuration configuration) {
         this.fuelConsumption = fuelConsumption;
@@ -20,9 +21,24 @@ public abstract class Car {
 
     public abstract double getPrice();
 
+    @Override
+    public void stop() {
+        speed = 0;
+        System.out.println("Car is stopped. Current speed is "+speed);
+    }
 
+    @Override
+    public void drive() {
+        speed = maxSpeed;
+        System.out.println("Car is moving. Current speed is "+speed);
 
+    }
 
+    @Override
+    public void beep() {
+
+        System.out.println("FA-FA MOTHER FUCKER!");
+    }
 
     public double getFuelConsumption() {
         return fuelConsumption;
@@ -56,4 +72,6 @@ public abstract class Car {
                 ", configuration=" + configuration +
                 '}';
     }
+
+
 }
