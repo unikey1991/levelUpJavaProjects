@@ -34,5 +34,22 @@ public class Main {
         list.swap(1,4);
 
         list.get(4);
+
+
+        System.out.println(rec1(122));
+
+
+    }
+
+    public static int rec(int n){
+        if (n == 1) return 1;
+
+        return rec(n-1)+n;
+    }
+
+    public static int rec1(int n){
+        if(n < 10) return n;
+
+        return rec1(n/10)+n%10;
     }
 }
