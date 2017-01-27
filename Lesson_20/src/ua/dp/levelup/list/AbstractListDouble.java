@@ -1,14 +1,13 @@
 package ua.dp.levelup.list;
 
 import ua.dp.levelup.list.doubleLinkedList.NodeD;
-import ua.dp.levelup.list.singleLinkedList.Node;
 
 import java.util.Optional;
 
 /**
- * Created by java on 24.01.2017.
+ * Created by unike on 27.01.2017.
  */
-public abstract class AbstractList {
+public abstract class AbstractListDouble {
 
     protected int size = 0;
 
@@ -16,29 +15,28 @@ public abstract class AbstractList {
         return size;
     }
 
-    public abstract void addNode(Node node, int index);
+    public abstract void addNode(NodeD node, int index);
 
     public abstract void remove(int index);
 
     public abstract void swap(int nodeA, int nodeB);
 
-    public abstract void addFirst(Node node);
+    public abstract void addFirst(NodeD node);
 
-    public abstract void addLast(Node node);
+    public abstract void addLast(NodeD node);
 
     public abstract void removeFirst();
 
     public abstract void removeLast();
 
-    public abstract Optional<Node> getFirst();
+    public abstract Optional<NodeD> getFirst();
 
-    public abstract Optional<Node> getLast();
+    public abstract Optional<NodeD> getLast();
 
-    public abstract Optional<Node> get(int index);
+    public abstract Optional<NodeD> get(int index);
 
     public abstract boolean isEmpty();
 
     public abstract boolean isNotEmpty();
-
 
 }

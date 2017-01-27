@@ -1,4 +1,6 @@
-package ua.dp.levelup.list;
+package ua.dp.levelup.list.singleLinkedList;
+
+import ua.dp.levelup.list.AbstractList;
 
 import java.util.Optional;
 
@@ -9,8 +11,72 @@ public class SingleLinkedList extends AbstractList {
 
     private Node root = null;
 
-    public void addNode(Node n) {
 
+
+    @Override
+    public void addNode(Node node, int index) {
+        if (index < 0 || index > size) return;
+        if (index == size) {
+            addLast(node);
+            return;
+        }
+        if (null == node) return;
+        if (null == root) {
+            root = node;
+        } else {
+            Node prev = root;
+            Node tmp = prev.next();
+            for (int currentIndex = 0; currentIndex< size; currentIndex++){
+                if (currentIndex == index-1) break;
+                prev = prev.next();
+                tmp = prev.next();
+            }
+            prev.setNext(node);
+            node.setNext(tmp);
+        }
+        size++;
+    }
+
+    @Override
+    public void remove(int index) {
+        if (index < 0 || index >= size) return;
+        if (index == 0 && null == root) return;
+        Node prev = root;
+        Node tmp = prev.next();
+        for (int currentIndex = 0; currentIndex< size; currentIndex++){
+            if (currentIndex == index-1) break;
+            prev = prev.next();
+            tmp = prev.next();
+        }
+        prev.setNext(tmp.next());
+        tmp.setNext(null);
+        tmp = null;
+        size--;
+    }
+
+    @Override
+    public void swap(int nodeA, int nodeB) {
+        if (nodeA < 0|| nodeA >= size || nodeB < 0 || nodeB >= size || size < 2) return;
+        Node prevA = root;
+        Node tmpA = prevA.next();
+        Node prevB = root;
+        Node tmpB = prevB.next();
+        Node nextB;
+        for (int currentIndex = 0; currentIndex< size; currentIndex++){
+            if (currentIndex == nodeA-1) break;
+            prevA = prevA.next();
+            tmpA = prevA.next();
+        }
+        for (int currentIndex = 0; currentIndex< size; currentIndex++){
+            if (currentIndex == nodeB-1) break;
+            prevB = prevB.next();
+            tmpB = prevB.next();
+        }
+        nextB = tmpB.next();
+        prevA.setNext(tmpB);
+        prevB.setNext(tmpA);
+        tmpB.setNext(tmpA.next());
+        tmpA.setNext(nextB);
     }
 
     @Override
