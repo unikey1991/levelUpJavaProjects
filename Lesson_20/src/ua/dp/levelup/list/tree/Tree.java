@@ -9,4 +9,5 @@ public interface Tree<T> {
     void addAll(T[] value);
     void remove(T value);
     void print();
+    Object search(T value);
 }

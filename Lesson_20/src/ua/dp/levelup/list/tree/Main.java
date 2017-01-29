@@ -1,5 +1,7 @@
 package ua.dp.levelup.list.tree;
 
+import java.util.Comparator;
+
 /**
  * Created by java on 27.01.2017.
  */
@@ -20,6 +22,14 @@ public class Main {
         tree.add(1); //none
 
         tree.add(14); //left
+
+        tree.print();
+
+        tree.remove(58);
+
+        tree.print();
+
+
 
     }
 }
