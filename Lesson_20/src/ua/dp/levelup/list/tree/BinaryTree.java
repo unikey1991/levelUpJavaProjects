@@ -59,7 +59,7 @@ public class BinaryTree<T> implements Tree<T> {
     @Override
     public void add(T value) {
         if (null == root) {
-            root = new Node<>(value);
+            root = new Node<T>(value);
         } else {
             add(value, root);
         }
@@ -67,7 +67,7 @@ public class BinaryTree<T> implements Tree<T> {
     }
 
     private void add(T val, Node<T> parent) {
-        Node<T> node = new Node<>(val);
+        Node<T> node = new Node<T>(val);
         node.setParent(parent);
 
         if (comparator.compare(val, parent.getValue()) < 0) {
@@ -92,7 +92,63 @@ public class BinaryTree<T> implements Tree<T> {
 
     }
 
-    @Override
+    public void remove(T value) {
+        Node<T> removed = search(value);
+        if (null == removed) return;
+        Node<T> removedParent = removed.getParent();
+
+        //- if node that should be removed has two child nodes, remove it and put child with greater value on removed position, then link another child node;
+        if (null != removed.getLeft() && null != removed.getRight()) {
+            if (removedParent.getRight() == removed) {
+                removedParent.setRight(removed.getRight());
+                removed.getRight().setParent(removedParent);
+            }
+            else {
+                removedParent.setLeft(removed.getRight());
+                removedParent.getLeft().setParent(removedParent);
+            }
+            removed.getLeft().setParent(findNullChildNode(removed.getRight(), removed.getLeft().getValue())); // установить беспризорнику родителя
+            findNullChildNode(removed.getRight(), removed.getLeft().getValue()).setLeft(removed.getLeft()); //найти родителя для оставшегося беспризорника и установить ему родителя :D
+        }
+
+        // - if node that should be removed has only one child, remove it and set parent left/right link to this child;
+        else if ((null == removed.getLeft()) ^ (null == removed.getRight())) {
+            if (null != removed.getLeft()) {
+                removed.getLeft().setParent(removedParent);
+                removedParent.setLeft(removed.getLeft());
+            } else {
+                removed.getRight().setParent(removedParent);
+                removedParent.setRight(removed.getRight());
+            }
+        }
+
+        // - if node that should be removed doesn't have any child - just remove it, and set null to parent left/right link;
+        else {
+            if (null != removedParent.getLeft() && comparator.compare(value, removedParent.getLeft().getValue()) == 0)
+                removedParent.setLeft(null);
+            else if (null != removedParent.getRight() && comparator.compare(value, removedParent.getRight().getValue()) == 0)
+                removedParent.setRight(null);
+        }
+        size--;
+    }
+
+    private Node<T> findNullChildNode(Node<T> node, T value) {
+        Node<T> tmp = node;
+        if (comparator.compare(value, node.getValue()) > 0) {
+            if (node.getRight() != null) {
+                tmp = node.getRight();
+                return findNullChildNode(tmp, value);
+            } else return tmp;
+        } else {
+            if (node.getLeft() != null) {
+                tmp = node.getLeft();
+                return findNullChildNode(tmp, value);
+            } else return tmp;
+        }
+    }
+
+
+    /*@Override
     public void remove(T value) {
         Node<T> tmp = search(value);
         if (null == tmp) return;
@@ -138,6 +194,7 @@ public class BinaryTree<T> implements Tree<T> {
                     tmpParent.setRight(tmp.getRight());
                 else tmpParent.setLeft(tmp.getRight());
             }
+
         } else {
             if (null != tmpParent.getLeft() && comparator.compare(value, tmpParent.getLeft().getValue()) == 0)
                 tmpParent.setLeft(null);
@@ -145,22 +202,7 @@ public class BinaryTree<T> implements Tree<T> {
                 tmpParent.setRight(null);
         }
         size--;
-    }
-
-    private Node<T> findNullChildNode(Node<T> node, T value) {
-        Node<T> tmp = node;
-        if (comparator.compare(value, node.getValue()) > 0) {
-            if (node.getRight() != null) {
-                tmp = node.getRight();
-                return findNullChildNode(tmp, value);
-            } else return tmp;
-        } else {
-            if (node.getLeft() != null) {
-                tmp = node.getLeft();
-                return findNullChildNode(tmp, value);
-            } else return tmp;
-        }
-    }
+    }*/
 
     @Override
     public void print() {
@@ -173,11 +215,12 @@ public class BinaryTree<T> implements Tree<T> {
     public Node<T> search(T value) {
         Node<T> tmp = root;
         while (true) {
-            if (null == tmp) return tmp;
+            if (null == tmp) return null;
             else if (comparator.compare(value, tmp.getValue()) == -1) tmp = tmp.getLeft();
             else if (comparator.compare(value, tmp.getValue()) == 1) tmp = tmp.getRight();
             else if (comparator.compare(value, tmp.getValue()) == 0) return tmp;
         }
+
     }
 
     private void printChild(Node<T> parent) {

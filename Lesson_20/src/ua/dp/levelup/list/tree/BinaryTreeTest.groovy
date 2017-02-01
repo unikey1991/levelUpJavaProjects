@@ -186,35 +186,36 @@ class BinaryTreeTest extends Specification {
         });
 
         when: "add elements"
-        tree.add(50); //root
+        tree.add(26); //root
 
-        tree.add(40); //left
+        tree.add(17); //left
+        tree.add(32); //right
 
-        tree.add(60); //right
+        tree.add(22); //left-right
+        tree.add(11); //left-left
 
-        tree.add(45); //left-right
+        tree.add(45); //right-right
+        tree.add(28); //right-left
 
-        tree.add(35); //left-left
+        tree.add(19); //left-right-left
+        tree.add(24); //left-right-right
 
-        tree.add(65); //right-right
-
-        tree.add(55); //right-left
-
-        tree.remove(60)
+        tree.remove(32)
 
 
         then: "check structure & size"
-        tree.size == 6;
-        tree.root.value == 50;
+        tree.size == 8;
+        tree.root.value == 26;
 
-        tree.root.getLeft().value == 40;
-        tree.root.getRight().value == 65;
+        tree.root.getLeft().value == 17;
+        tree.root.getRight().value == 45;
 
-        tree.root.getLeft().getRight().value == 45;
-        tree.root.getLeft().getLeft().value == 35;
+        tree.root.getLeft().getRight().value == 22;
+        tree.root.getLeft().getRight().getLeft().value == 19;
+        tree.root.getLeft().getLeft().value == 11;
 
         tree.root.getRight().getRight() == null;
-        tree.root.getRight().getLeft() == null;
+        tree.root.getRight().getLeft().value == 28;
     }
 
     def "add elements & check structure after remove of a non-existent element"() {
