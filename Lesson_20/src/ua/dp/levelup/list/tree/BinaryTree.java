@@ -102,8 +102,7 @@ public class BinaryTree<T> implements Tree<T> {
             if (removedParent.getRight() == removed) {
                 removedParent.setRight(removed.getRight());
                 removed.getRight().setParent(removedParent);
-            }
-            else {
+            } else {
                 removedParent.setLeft(removed.getRight());
                 removedParent.getLeft().setParent(removedParent);
             }
@@ -213,15 +212,15 @@ public class BinaryTree<T> implements Tree<T> {
 
     @Override
     public Node<T> search(T value) {
-        Node<T> tmp = root;
-        while (true) {
-            if (null == tmp) return null;
-            else if (comparator.compare(value, tmp.getValue()) == -1) tmp = tmp.getLeft();
-            else if (comparator.compare(value, tmp.getValue()) == 1) tmp = tmp.getRight();
-            else if (comparator.compare(value, tmp.getValue()) == 0) return tmp;
-        }
-
+        return searcRecurcy(value, root);
     }
+
+    public Node<T> searcRecurcy(T value, Node<T> result) {
+        if (null == result || comparator.compare(value, result.getValue()) == 0) return result;
+        else if (comparator.compare(value, result.getValue()) == -1) return searcRecurcy(value, result.getLeft());
+        else return searcRecurcy(value, result.getRight());
+    }
+
 
     private void printChild(Node<T> parent) {
         if (parent.getLeft() != null) {
