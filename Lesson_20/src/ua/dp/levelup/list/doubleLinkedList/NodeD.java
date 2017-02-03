@@ -3,39 +3,39 @@ package ua.dp.levelup.list.doubleLinkedList;
 /**
  * Created by unike on 27.01.2017.
  */
-public class NodeD {
+public class NodeD<V> {
 
-    private NodeD prev = null;
-    private NodeD next = null;
-    private Object value;
+    private NodeD<V> next = null;
+    private NodeD<V> prev = null;
+    private V value;
 
 
-    public NodeD(Object value) {
+    public NodeD(V value) {
         this.value = value;
     }
 
-
-    public NodeD next() {
+//
+    public NodeD<V> next() {
         return next;
     }
 
-    public void setNext(NodeD next) {
+    public void setNext(NodeD<V> next) {
         this.next = next;
     }
 
-    public NodeD Prev() {
+    public NodeD<V> Prev() {
         return prev;
     }
 
-    public void setPrev(NodeD prev) {
+    public void setPrev(NodeD<V> prev) {
         this.prev = prev;
     }
 
-    public Object getValue() {
+    public V getValue() {
         return value;
     }
 
-    public void setValue(Object value) {
+    public void setValue(V value) {
         this.value = value;
     }
 }

@@ -36,12 +36,12 @@ public class Main {
         list.get(4);
 
 
-        System.out.println(rec1(122));
+        //System.out.println(rec1(122));
 
 
     }
 
-    public static int rec(int n){
+    /*public static int rec(int n){
         if (n == 1) return 1;
 
         return rec(n-1)+n;
@@ -51,5 +51,5 @@ public class Main {
         if(n < 10) return n;
 
         return rec1(n/10)+n%10;
-    }
+    }*/
 }

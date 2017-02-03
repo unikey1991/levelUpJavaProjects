@@ -1,30 +1,32 @@
 package ua.dp.levelup.list.doubleLinkedList;
 
-import ua.dp.levelup.list.AbstractList;
-import ua.dp.levelup.list.AbstractListDouble;
 
 
+import ua.dp.levelup.list.singleLinkedList.Node;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /**
  * Created by unike on 26.01.2017.
  */
-public class DoubleLinkedList extends AbstractListDouble {
+public class DoubleLinkedList <T> extends AbstractListDouble<NodeD<T>> implements Iterable<NodeD<T>> {
 
-    private NodeD head = null;
-    private NodeD tail = null;
+    private NodeD<T> head = null;
+    private NodeD<T> tail = null;
 
-    public NodeD getTail() {
+    public NodeD<T> getTail() {
         return tail;
     }
 
-    public NodeD getHead() {
+    public NodeD<T> getHead() {
 
         return head;
     }
 
     @Override
-    public void addNode(NodeD node, int index) {
+    public void addNode(NodeD<T> node, int index) {
         if (index < 0 || index > size) return;
         if (index == size) {
             addLast(node);
@@ -36,8 +38,8 @@ public class DoubleLinkedList extends AbstractListDouble {
             head.setPrev(null);
             head.setNext(null);
         } else {
-            NodeD prev = head;
-            NodeD tmp = prev.next();
+            NodeD<T>  prev = head;
+            NodeD<T>  tmp = prev.next();
             for (int currentIndex = 0; currentIndex < size; currentIndex++) {
                 if (currentIndex == index - 1) break;
                 prev = prev.next();
@@ -55,8 +57,8 @@ public class DoubleLinkedList extends AbstractListDouble {
     public void remove(int index) {
         if (index < 0 || index >= size) return;
         if (index == 0 && null == head) return;
-        NodeD prev = head;
-        NodeD tmp = prev.next();
+        NodeD<T>  prev = head;
+        NodeD<T>  tmp = prev.next();
         for (int currentIndex = 0; currentIndex < size; currentIndex++) {
             if (currentIndex == index - 1) break;
             prev = prev.next();
@@ -73,21 +75,11 @@ public class DoubleLinkedList extends AbstractListDouble {
 
     @Override
     public void swap(int nodeA, int nodeB) {
-        if (nodeA < 0|| nodeA >= size || nodeB < 0 || nodeB >= size || size < 2) return;
-        NodeD tmpA = head;
-        NodeD tmpB = head;
-        NodeD prevB;
-        NodeD nextB;
-        for (int currentIndex = 0; currentIndex< size; currentIndex++){
-            if (currentIndex == nodeA) break;
-            tmpA = tmpA.next();
-        }
-        for (int currentIndex = 0; currentIndex< size; currentIndex++){
-            if (currentIndex == nodeB) break;
-            tmpB = tmpB.next();
-        }
-        prevB = tmpB.Prev();
-        nextB = tmpB.next();
+        if (nodeA < 0|| nodeA >= size || nodeB < 0 || nodeB >= size || size < 2 || nodeA == nodeB) return;
+        NodeD<T>  tmpA = get(nodeA).get();
+        NodeD<T>  tmpB = get(nodeB).get();
+        NodeD<T>  prevB = tmpB.Prev();
+        NodeD<T>  nextB = tmpB.next();
 
         tmpB.setNext(tmpA.next());
         tmpB.next().setPrev(tmpB);
@@ -102,7 +94,7 @@ public class DoubleLinkedList extends AbstractListDouble {
     }
 
     @Override
-    public void addFirst(NodeD node) {
+    public void addFirst(NodeD<T> node) {
         if (null == node) return;
         if (null == head) {
             head = node;
@@ -118,14 +110,14 @@ public class DoubleLinkedList extends AbstractListDouble {
     }
 
     @Override
-    public void addLast(NodeD node) {
+    public void addLast(NodeD<T> node) {
         if (null == node) return;
         if (null == head) {
             head = node;
             head.setPrev(null);
             head.setNext(null);
         } else {
-            NodeD tmp = head;
+            NodeD<T> tmp = head;
             while (tmp.next() != null) {
                 tmp = tmp.next();
             }
@@ -139,7 +131,7 @@ public class DoubleLinkedList extends AbstractListDouble {
 
     @Override
     public void removeFirst() {
-        NodeD first = head;
+        NodeD<T> first = head;
         if (null == first) return;
         if (first.next() != null) {
             head = first.next();
@@ -149,21 +141,21 @@ public class DoubleLinkedList extends AbstractListDouble {
         } else {
             head = null;
         }
-        if (null == head.next()) tail = head;
+        if (null == first.next()) tail = head;
         size--;
 
     }
 
     @Override
     public void removeLast() {
-        NodeD first = head;
+        NodeD<T> first = head;
         if (null == first) return;
         if (null == first.next()) {
             head = null;
             tail = null;
         } else {
-            NodeD tmp = first.next();
-            NodeD prev = tmp;
+            NodeD<T> tmp = first.next();
+            NodeD<T> prev = tmp;
             while (null != tmp.next()) {
                 prev = tmp;
                 tmp = tmp.next();
@@ -177,22 +169,31 @@ public class DoubleLinkedList extends AbstractListDouble {
     }
 
     @Override
-    public Optional<NodeD> getFirst() {
+    public Optional<NodeD<T>> getFirst() {
         return Optional.ofNullable(head);
     }
 
     @Override
-    public Optional<NodeD> getLast() { return Optional.ofNullable(tail); }
+    public Optional<NodeD<T>> getLast() { return Optional.ofNullable(tail); }
 
     @Override
-    public Optional<NodeD> get(int index) {
+    public Optional<NodeD<T>> get(int index) {
         if (index < 0 || index >= size) return Optional.empty();
-        NodeD result = head;
+
+        /*NodeD<T> result = head;
         for (int currentIndex = 0; currentIndex < size; currentIndex++) {
             if (currentIndex == index) break;
             result = result.next();
+        }*/
+
+        NodeD<T> res = null;
+        Iterator<NodeD<T>> iterator = iterator();
+        int currentIndex = 0;
+        while (iterator.hasNext() && currentIndex <= index){
+            res = iterator.next();
+            currentIndex++;
         }
-        return Optional.of(result);
+        return Optional.ofNullable(res);
     }
 
     @Override
@@ -203,5 +204,26 @@ public class DoubleLinkedList extends AbstractListDouble {
     @Override
     public boolean isNotEmpty() {
         return !isEmpty();
+    }
+
+    @Override
+    public Iterator<NodeD<T>> iterator() {
+        return new Iterator<NodeD<T>>() {
+
+            private NodeD<T> cursor = head;
+
+            @Override
+            public boolean hasNext() {
+                return null != cursor;
+            }
+
+            @Override
+            public NodeD<T> next() {
+                if (!hasNext()) throw new NoSuchElementException();
+                NodeD<T> tmp = cursor;
+                cursor = tmp.next();
+                return tmp;
+            }
+        };
     }
 }
