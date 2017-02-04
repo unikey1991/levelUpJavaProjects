@@ -157,4 +157,66 @@ class DoubleLinkedListTest extends Specification {
         list.get(5).get().value == 5;
         list.get(6).get().value == 6;
     }
+
+
+    def "get nodes with descendingGet & check"() {
+
+        DoubleLinkedList list = new DoubleLinkedList();
+
+        when: "add one more node element"
+        list.addLast(new NodeD(0))
+        list.addLast(new NodeD(1))
+        list.addLast(new NodeD(2))
+        list.addLast(new NodeD(3))
+        list.addLast(new NodeD(4))
+
+
+        then: "get & check"
+        list.descendingGet(4).get() == list.tail;
+        list.descendingGet(3).get() == list.tail.prev;
+        list.descendingGet(2).get() == list.head.next.next;
+        list.descendingGet(1).get() == list.head.next;
+        list.descendingGet(0).get() == list.head;
+    }
+
+    def "get nodes with Get & check"() {
+
+        DoubleLinkedList list = new DoubleLinkedList();
+
+        when: "add one more node element"
+        list.addLast(new NodeD(0))
+        list.addLast(new NodeD(1))
+        list.addLast(new NodeD(2))
+        list.addLast(new NodeD(3))
+        list.addLast(new NodeD(4))
+
+
+        then: "get & check"
+        list.get(4).get() == list.tail;
+        list.get(3).get() == list.tail.prev;
+        list.get(2).get() == list.head.next.next;
+        list.get(1).get() == list.head.next;
+        list.get(0).get() == list.head;
+    }
+
+    def "get nodes with get & descendingGet at non-existent index"() {
+
+        DoubleLinkedList list = new DoubleLinkedList();
+
+
+        when: "add one more elements"
+        list.addLast(new NodeD(0))
+        list.addLast(new NodeD(1))
+        list.addLast(new NodeD(2))
+        list.addLast(new NodeD(3))
+        list.addLast(new NodeD(4))
+
+
+        then: "get & check"
+        list.get(5) == Optional.empty();
+        list.get(-1) == Optional.empty();
+        list.descendingGet(-1) == Optional.empty();
+        list.descendingGet(-1) == Optional.empty();
+    }
+
 }

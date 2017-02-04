@@ -226,4 +226,37 @@ public class DoubleLinkedList <T> extends AbstractListDouble<NodeD<T>> implement
             }
         };
     }
+
+    public Iterator<NodeD<T>> descendingIterator(){
+        return new Iterator<NodeD<T>>() {
+
+            private NodeD<T> cursor = tail;
+
+            @Override
+            public boolean hasNext() {
+                return null != cursor;
+            }
+
+            @Override
+            public NodeD<T> next() {
+                if (!hasNext()) throw new NoSuchElementException();
+                NodeD<T> tmp = cursor;
+                cursor = tmp.Prev();
+                return tmp;
+            }
+        };
+    }
+
+    public Optional<NodeD<T>> descendingGet(int index) {
+        if (index < 0 || index >= size) return Optional.empty();
+
+        NodeD<T> res = null;
+        Iterator<NodeD<T>> descendingIterator = descendingIterator();
+        int currentIndex = size-1;
+        while (descendingIterator.hasNext() && currentIndex >= index){
+            res = descendingIterator.next();
+            currentIndex--;
+        }
+        return Optional.ofNullable(res);
+    }
 }
