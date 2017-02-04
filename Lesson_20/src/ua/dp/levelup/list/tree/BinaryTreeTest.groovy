@@ -302,4 +302,49 @@ class BinaryTreeTest extends Specification {
 
         tree.root.getLeft().getLeft().getLeft().value == 11;
     }
+
+    def "add elements and remove root node than check structure"() {
+        BinaryTree<Integer> tree = new BinaryTree<>(new Comparator<Integer>() {
+            @Override
+            int compare(Integer o1, Integer o2) {
+                if (o1 > o2) return 1;
+                if (o1 == o2) return 0;
+                if (o1 < o2) return -1;
+            }
+        });
+
+        when: "add elements & remove root node"
+        tree.add(26); //root
+
+        tree.add(17); //left
+        tree.add(32); //right
+
+        tree.add(22); //left-right
+        tree.add(11); //left-left
+
+        tree.add(45); //right-right
+        tree.add(28); //right-left
+
+        tree.add(19); //left-right-left
+        tree.add(24); //left-right-right
+
+        tree.remove(26)
+
+
+        then: "check structure"
+        tree.root.value == 32;
+
+        //left
+        tree.root.getLeft().value == 28;
+        tree.root.getLeft().getLeft().value == 17;
+        tree.root.getLeft().getLeft().getLeft().value == 11;
+        tree.root.getLeft().getLeft().getRight().getValue() == 22;
+        tree.root.getLeft().getLeft().getRight().getLeft().getValue() == 19;
+        tree.root.getLeft().getLeft().getRight().getRight().getValue() == 24;
+
+
+        //right
+        tree.root.getRight().value == 45;
+
+    }
 }
