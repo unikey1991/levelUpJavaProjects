@@ -12,27 +12,33 @@ class CollectionsTest extends Specification {
         ArrayList <Integer> arrayList1 = new ArrayList<>()
         arrayList1.add(0)
 
-        ArrayList <Integer> arrayList2 = new ArrayList <>(100)
+        ArrayList <Integer> arrayList2 = new ArrayList <>()
         arrayList2.add(1)
         arrayList2.add(2)
         ArrayList <Integer> arrayList3 = new ArrayList <>()
+        arrayList3.add(1)
+        arrayList3.add(2)
+        arrayList3.add(3)
         ArrayList <Integer> arrayList4 = new ArrayList <>()
+        arrayList4.add(1)
+        arrayList4.add(1)
+        arrayList4.add(1)
+        arrayList4.add(1)
+        arrayList4.add(1)
 
 
         when: "use copy()"
         Collections.copy(arrayList2,arrayList1)
         Collections.copy(arrayList3,arrayList2)
-        arrayList3.add(4)
-        arrayList3.add(5)
         Collections.copy(arrayList4, arrayList3)
 
 
 
         then: "check"
-        arrayList1.toString() == "[0, 1, 2, 3]"
-        arrayList2.toString() == "[0, 1, 2, 3]"
-        arrayList3.toString() == "[0, 1, 2, 3, 4, 5]"
-        arrayList4.toString() == "[0, 1, 2, 3 4, 5]"
+        arrayList1.toString() == "[0]"
+        arrayList2.toString() == "[0, 2]"
+        arrayList3.toString() == "[0, 2, 3]"
+        arrayList4.toString() == "[0, 2, 3, 1, 1]"
 
 
     }
