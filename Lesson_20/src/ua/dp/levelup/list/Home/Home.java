@@ -2,23 +2,25 @@ package ua.dp.levelup.list.Home;
 
 import ua.dp.levelup.list.List.Student;
 
+import java.util.Comparator;
+
 /**
  * Created by unike on 09.02.2017.
  */
-public class Home implements Comparable<Home> {
+public class Home {
 
     private int homeNumber;
     private String city;
     private String street;
     private int numberOfFloors;
-    private int intnumberOfResidents;
+    private int numberOfResidents;
 
-    public Home(int homeNumber, String city, String street, int numberOfFloors, int intnumberOfResidents) {
+    public Home(int homeNumber, String city, String street, int numberOfFloors, int numberOfResidents) {
         this.homeNumber = homeNumber;
         this.city = city;
         this.street = street;
         this.numberOfFloors = numberOfFloors;
-        this.intnumberOfResidents = intnumberOfResidents;
+        this.numberOfResidents = numberOfResidents;
     }
 
     @Override
@@ -28,20 +30,14 @@ public class Home implements Comparable<Home> {
 
         Home home = (Home) o;
 
-        if (homeNumber != home.homeNumber) return false;
-        if (numberOfFloors != home.numberOfFloors) return false;
-        if (intnumberOfResidents != home.intnumberOfResidents) return false;
-        if (city != null ? !city.equals(home.city) : home.city != null) return false;
-        return street != null ? street.equals(home.street) : home.street == null;
+        return homeNumber == home.homeNumber && city.equals(home.city);
+
     }
 
     @Override
     public int hashCode() {
         int result = homeNumber;
-        result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + (street != null ? street.hashCode() : 0);
-        result = 31 * result + numberOfFloors;
-        result = 31 * result + intnumberOfResidents;
+        result = 31 * result + city.hashCode();
         return result;
     }
 
@@ -52,7 +48,7 @@ public class Home implements Comparable<Home> {
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
                 ", numberOfFloors=" + numberOfFloors +
-                ", intnumberOfResidents=" + intnumberOfResidents +
+                ", numberOfResidents=" + numberOfResidents +
                 '}';
     }
 
@@ -73,30 +69,15 @@ public class Home implements Comparable<Home> {
     //который будет сортировать дома по количеству жильцов
 //    @Override
 //    public int compareTo(Home o) {
-//        if (this.intnumberOfResidents == o.getIntnumberOfResidents()){
+//        if (this.numberOfResidents == o.getIntnumberOfResidents()){
 //            if (this.city.equals(o.getCity())){
 //                if (this.street.equals(o.getStreet())){
 //                    return 0;
 //                }return this.street.compareTo(o.getStreet());
 //            }return this.city.compareTo(o.getCity());
-//        }return Integer.compare(this.intnumberOfResidents, o.getIntnumberOfResidents());
+//        }return Integer.compare(this.numberOfResidents, o.getIntnumberOfResidents());
 //    }
 
-    //который будет сортировать дома по названию города/улицы
-    @Override
-    public int compareTo(Home o) {
-        if (this.city.equals(o.getCity())) {
-            if (this.street.equals(o.getStreet())) {
-                if (this.homeNumber == o.getHomeNumber()) {
-                    return 0;
-                }
-                return Integer.compare(this.homeNumber, o.getHomeNumber());
-            }
-
-            return this.street.compareTo(o.getStreet());
-        }
-        return this.city.compareTo(o.getCity());
-    }
 
     public int getHomeNumber() {
         return homeNumber;
@@ -130,11 +111,11 @@ public class Home implements Comparable<Home> {
         this.numberOfFloors = numberOfFloors;
     }
 
-    public int getIntnumberOfResidents() {
-        return intnumberOfResidents;
+    public int getNumberOfResidents() {
+        return numberOfResidents;
     }
 
-    public void setIntnumberOfResidents(int intnumberOfResidents) {
-        this.intnumberOfResidents = intnumberOfResidents;
+    public void setNumberOfResidents(int numberOfResidents) {
+        this.numberOfResidents = numberOfResidents;
     }
 }

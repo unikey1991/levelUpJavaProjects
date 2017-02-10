@@ -8,6 +8,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import static org.junit.Assert.*;
+import static ua.dp.levelup.list.Home.HomeFilters.residentsComparator;
+import static ua.dp.levelup.list.Home.HomeFilters.streetComparator;
 
 /**
  * Created by unike on 09.02.2017.
@@ -46,7 +48,7 @@ public class HomeTest {
         homes1.add(new Home(27, "qwe","asdfg",8,90));
 
 
-        Set<Home> homes2 = new TreeSet<>();
+        Set<Home> homes2 = new TreeSet<>(residentsComparator());
         homes2.add(new Home(27, "Harkov","Glinki",3,100));
         homes2.add(new Home(27, "Kiev","Harkovska",2,60));
 
@@ -64,8 +66,9 @@ public class HomeTest {
         //System.out.println(homes2);
 
         for (Home h : homes2){
-            System.out.println(h.getHomeNumber()+" "+h.getCity()+" "+h.getStreet()+" "+h.getNumberOfFloors()+" "+h.getIntnumberOfResidents());
+            System.out.println(h.getHomeNumber()+" "+h.getCity()+" "+h.getStreet()+" "+h.getNumberOfFloors()+" "+h.getNumberOfResidents());
         }
+
 
 
 
