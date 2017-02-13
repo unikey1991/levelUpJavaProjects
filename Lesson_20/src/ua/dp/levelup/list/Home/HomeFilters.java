@@ -8,7 +8,7 @@ import java.util.Comparator;
 public class HomeFilters {
 
 
-    public static Comparator<Home> streetComparator(){
+    public static Comparator<Home> cityComparator(){
         return new Comparator<Home>() {
             @Override
             public int compare(Home h1, Home h2) {
@@ -18,6 +18,20 @@ public class HomeFilters {
                 if (homeNumbers ==0 && cityNames == 0) return 0;
                 else if (homeNumbers == 0) return cityNames;
                 else return cityNames == 0 ? homeNumbers : cityNames;
+            }
+        };
+    }
+
+    public static Comparator<Home> homeNumberComparator(){
+        return new Comparator<Home>() {
+            @Override
+            public int compare(Home h1, Home h2) {
+                int homeNumbers = Integer.compare(h1.getHomeNumber(), h2.getHomeNumber());
+                int cityNames =  h1.getCity().compareToIgnoreCase(h2.getCity());
+
+                if (homeNumbers ==0 && cityNames == 0) return 0;
+                else if (cityNames == 0) return homeNumbers;
+                else return homeNumbers == 0 ? cityNames : homeNumbers;
             }
         };
     }

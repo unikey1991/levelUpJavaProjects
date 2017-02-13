@@ -7,7 +7,7 @@ import java.util.Comparator;
 /**
  * Created by unike on 09.02.2017.
  */
-public class Home {
+public class Home extends HomeFilters {
 
     private int homeNumber;
     private String city;
@@ -49,7 +49,7 @@ public class Home {
                 ", street='" + street + '\'' +
                 ", numberOfFloors=" + numberOfFloors +
                 ", numberOfResidents=" + numberOfResidents +
-                '}';
+                '}'+"\n";
     }
 
 
