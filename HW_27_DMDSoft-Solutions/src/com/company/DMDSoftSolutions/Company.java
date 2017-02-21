@@ -6,6 +6,7 @@ import com.company.DMDSoftSolutions.Employee.Employee;
 import com.company.DMDSoftSolutions.Employee.Manager;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by unike on 18.02.2017.
@@ -49,28 +50,28 @@ public class Company {
         System.out.println(departments.get(departmentName).getEmployees().get(employeeId).toString());
     }
 
-    public void add(String departmentName, int employeeId, String firstName, String lastName, int salary){
-        if (!departments.containsKey(departmentName)) {
+    public void add(String... params){
+        if (!departments.containsKey(params[1])) {
             System.out.println("Department is not exist");
             return;
         }
-        if (departments.get(departmentName).getCurentEmployeeNum() >= departments.get(departmentName).getMaxEmployeeNum()){
-            System.out.println("Department '"+departmentName+"' staff enough");
+        if (departments.get(params[1]).getCurentEmployeeNum() >= departments.get(params[1]).getMaxEmployeeNum()){
+            System.out.println("Department '"+params[1]+"' staff enough");
             return;
         }
         Employee employee;
-        switch (departmentName){
-            case "design": employee = new Designer(employeeId,firstName,lastName,salary);break;
-            case "management": employee = new Manager(employeeId,firstName,lastName,salary);break;
-            case "development": employee = new Developer(employeeId,firstName,lastName,salary);break;
+        switch (params[1]){
+            case "design": employee = new Designer(Integer.parseInt(params[2]),params[3],params[4],Integer.parseInt(params[5]));break;
+            case "management": employee = new Developer(Integer.parseInt(params[2]),params[3],params[4],Integer.parseInt(params[5]));break;
+            case "development": employee = new Developer(Integer.parseInt(params[2]),params[3],params[4],Integer.parseInt(params[5]));break;
             default:employee = null;
         }
         if (null == employee){
             System.out.println("error 1");
             return;
         }
-        if (departments.get(departmentName).add(employeeId, employee)) System.out.println("New employee "+employee.getName()+" added to "+departmentName+" department");
-        else System.out.println("Employee "+employee.getName()+" NOT added to "+departmentName+" department");
+        if (departments.get(params[1]).add(Integer.parseInt(params[2]), employee)) System.out.println("New employee "+employee.getName()+" added to "+params[1]+" department");
+        else System.out.println("Employee "+employee.getName()+" NOT added to "+params[1]+" department");
     }
 
     public String getCompanyName() {
