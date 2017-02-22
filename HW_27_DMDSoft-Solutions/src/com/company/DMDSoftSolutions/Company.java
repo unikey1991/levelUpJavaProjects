@@ -30,24 +30,24 @@ public class Company {
     }
 
 
-    public void getIs(String departmentName){
-        if (!departments.containsKey(departmentName)) {
+    public void getIs(String... params){
+        if (!departments.containsKey(params[1])) {
             System.out.println("Department is not exist");
             return;
         }
-        System.out.println(departments.get(departmentName).toString());
+        System.out.println(departments.get(params[1]).toString());
     }
 
-    public void get(String departmentName, int employeeId){
-        if (!departments.containsKey(departmentName)) {
+    public void get(String... params){
+        if (!departments.containsKey(params[1])) {
             System.out.println("Department is not exist");
             return;
         }
-        if (!departments.get(departmentName).getEmployees().containsKey(employeeId)){
+        if (!departments.get(params[1]).getEmployees().containsKey(Integer.parseInt(params[2]))){
             System.out.println("Employee is not exist");
             return;
         }
-        System.out.println(departments.get(departmentName).getEmployees().get(employeeId).toString());
+        System.out.println(departments.get(params[1]).getEmployees().get(Integer.parseInt(params[2])).toString());
     }
 
     public void add(String... params){
