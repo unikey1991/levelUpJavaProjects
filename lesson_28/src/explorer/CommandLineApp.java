@@ -3,6 +3,8 @@ package explorer;
 
 import java.io.*;
 import java.security.KeyStore;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static java.lang.System.in;
@@ -22,6 +24,9 @@ public class CommandLineApp {
 
         Scanner scanner = new Scanner(in);
         System.out.println("Use Help to view commands");
+
+        List<Citizen> list = readCSV("citizen.csv");
+        System.out.println(list);
 
         while (true) {
 
@@ -45,7 +50,7 @@ public class CommandLineApp {
             } else if (line.split(" ")[0].equalsIgnoreCase("edit")) {  //mkDir newFolderName
                 editTextFile(line, currentDir);
             } else if (line.split(" ")[0].equalsIgnoreCase("help")) {  //mkDir newFolderName
-                    help();
+                help();
             } else System.out.println("Wrong command. Use Help to view commands");
         }
 
@@ -68,26 +73,27 @@ public class CommandLineApp {
             System.out.println("Wrong file type to edit");
             return;
         }
-            File file = new File(parent, fileName);
-            if (!file.exists()){
-                System.out.println("File not exists");
-                return;
-            }
-            PrintWriter out = new PrintWriter(file);
-            Scanner scanner = new Scanner(System.in);
-            String s = "";
-            System.out.println("Write your text and use Save to save change and exit");
-            String text;
-            while (true) {
-                text = scanner.nextLine();
-                if (text.equals("save")) break;
-                s += (text+"\n");
-            }
-            out.print(s);
-            save(out, line, parent);
+        File file = new File(parent, fileName);
+        if (!file.exists()) {
+            System.out.println("File not exists");
+            return;
+        }
+        PrintWriter out = new PrintWriter(file);
+        Writer writer = new FileWriter(file);
+        Scanner scanner = new Scanner(System.in);
+        String s = "";
+        System.out.println("Write your text and use Save to save change and exit");
+        String text;
+        while (true) {
+            text = scanner.nextLine();
+            if (text.equals("save")) break;
+            s += (text + "\n");
+        }
+        writer.append(s);
+        save(writer, line, parent);
     }
 
-    private static void save(PrintWriter text ,String line, File parent) throws IOException {
+    private static void save(Writer text, String line, File parent) throws IOException {
         text.close();
         System.out.println("File text edit to:");
         openTextFile(line, parent);
@@ -113,12 +119,12 @@ public class CommandLineApp {
         String fileName = line.split("\\s+")[1];
 
         File file = new File(parent, fileName);
-        if (!file.exists()){
+        if (!file.exists()) {
             System.out.println("File or directory not exists");
             return;
         }
-        if (file.isFile()) System.out.println("File "+fileName+" deleted");
-        if (file.isDirectory()) System.out.println("Directory "+fileName+" deleted");
+        if (file.isFile()) System.out.println("File " + fileName + " deleted");
+        if (file.isDirectory()) System.out.println("Directory " + fileName + " deleted");
         file.delete();
     }
 
@@ -152,7 +158,7 @@ public class CommandLineApp {
 
         File file = new File(parent, fileName);
         file.createNewFile();
-        System.out.println("file "+fileName+ " created");
+        System.out.println("file " + fileName + " created");
     }
 
     private static void createNewFolder(String line, File parent) {
@@ -169,5 +175,28 @@ public class CommandLineApp {
                 System.out.println(f.getName());
             }
         }
+    }
+
+    public static List<Citizen> readCSV(String fileName){
+        List<Citizen> list = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName));){
+            String line;
+            while ((line = reader.readLine()) != null){
+                if (line.startsWith("id")) continue;
+                Scanner scanner = new Scanner(line);
+                scanner.useDelimiter(";");
+
+                long id = scanner.nextLong();
+                String fName = scanner.next();
+                String lName = scanner.next();
+                int age = scanner.nextInt();
+
+                list.add(new Citizen(id, fName, lName, age));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }
