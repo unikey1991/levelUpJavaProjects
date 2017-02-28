@@ -1,8 +1,6 @@
-package dao.impl;
+package dao;
 
-/**
- * Created by java on 24.02.2017.
- */
+
 public interface DataProvider {
 
     enum ConnectionType {

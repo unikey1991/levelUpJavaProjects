@@ -1,15 +1,14 @@
 package dao;
 
-import dao.impl.DAO;
 
-import java.io.FileNotFoundException;
+import dao.DAO;
+import dao.impl.FileDataProviderImpl;
+
+import java.io.IOException;
 import java.io.RandomAccessFile;
 
-/**
- * Created by unike on 27.02.2017.
- */
-public abstract class AbstractFileDAO implements DAO {
 
+public abstract class AbstractFileDAO<T> implements DAO<T> {
 
     private Long id;
     protected final FileDataProviderImpl fileDataProvider;
@@ -21,7 +20,12 @@ public abstract class AbstractFileDAO implements DAO {
         fileDataProvider.appendFile(fileName);
     }
 
-    public RandomAccessFile getDataFile() throws FileNotFoundException {
+    public RandomAccessFile getDataFile() throws IOException {
         return fileDataProvider.getDataFile(fileName);
+    }
+
+
+    public String getFileName() {
+        return fileName;
     }
 }
