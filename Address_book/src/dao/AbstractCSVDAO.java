@@ -1,6 +1,8 @@
 package dao;
 
 import dao.impl.FileDataProviderImpl;
+import entity.Entity;
+import entity.Street;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by java on 28.02.2017.
  */
-public abstract class AbstractCSVDAO<T> extends AbstractFileDAO<T> {
+public abstract class AbstractCSVDAO<T extends Entity> extends AbstractFileDAO<T> {
 
 
     private final String HEADER_CSV;
@@ -21,6 +23,30 @@ public abstract class AbstractCSVDAO<T> extends AbstractFileDAO<T> {
 
     protected abstract T parseEntity(final String str);
     public abstract String viewEntity(T entity);
+
+    public long[] getStartAndEndOfStr(RandomAccessFile file, T entity){
+        long[] arr = new long[2];
+
+        String line;
+
+
+        try {
+            file.seek(HEADER_CSV.length());
+            while ((line = file.readLine()) != null){
+                if (line.startsWith(entity.getId() + ";")){
+                    arr[1] = file.getFilePointer();
+                    arr[0] = file.getFilePointer() - line.length();
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        entity.getId();
+
+        return arr;
+    }
 
     @Override
     public ArrayList<T> read(){
@@ -56,12 +82,12 @@ public abstract class AbstractCSVDAO<T> extends AbstractFileDAO<T> {
 
     @Override
     public void delete(T entity) { // FIXME: 28.02.2017
-        RandomAccessFile file = getDataFile();
+        /*RandomAccessFile file = getDataFile();
 
         String[] line;
         while ((line = file.readLine().split(";")) != null){
             if (file.readLine().contains(HEADER_CSV)) continue;
             if (line[0] == viewEntity(entity))
-        }
+        }*/
     }
 }
