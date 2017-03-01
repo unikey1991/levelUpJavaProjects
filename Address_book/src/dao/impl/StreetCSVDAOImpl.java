@@ -31,16 +31,5 @@ public class StreetCSVDAOImpl extends AbstractCSVDAO<Street> {
     }
 
 
-    @Override
-    public void update(Street street) {
-        //изменить название улицы
 
-    }
-
-    @Override
-    public void delete(Street street) {
-
-        //удалить значение из файла
-
-    }
 }

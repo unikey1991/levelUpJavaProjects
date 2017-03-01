@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-//        new MyDataTableFrame();
+        //new MyDataTableFrame();
 
         FileDataProviderImpl provider = new FileDataProviderImpl("");
 
@@ -27,5 +27,8 @@ public class Main {
         System.out.println(streets);
 
         streetDAO.create(new Street(5L, "Artema"));
+        //streetDAO.delete(new Street(5L, "Artema"));
+        //streetDAO.update(new Street(3L, "Glinki2356"));
+
     }
 }

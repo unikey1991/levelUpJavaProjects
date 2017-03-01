@@ -15,6 +15,7 @@ public abstract class AbstractCSVDAO<T extends Entity> extends AbstractFileDAO<T
 
 
     private final String HEADER_CSV;
+    long maxId = -1L;
 
     public AbstractCSVDAO(FileDataProviderImpl fileDataProvider, String fileName, String header_csv) {
         super(fileDataProvider, fileName);
@@ -43,8 +44,6 @@ public abstract class AbstractCSVDAO<T extends Entity> extends AbstractFileDAO<T
             e.printStackTrace();
         }
 
-        entity.getId();
-
         return arr;
     }
 
@@ -71,10 +70,12 @@ public abstract class AbstractCSVDAO<T extends Entity> extends AbstractFileDAO<T
     @Override
     public void create(T entity) {
         try{
+            if (maxId == -1L) maxId = getMaxId();
             RandomAccessFile file = getDataFile();
+            file.seek((HEADER_CSV + "\r").length());
             file.seek(file.length());
-
-            file.write(viewEntity(entity).getBytes());
+            String write = ((++maxId) +";"+ viewEntity(entity).split(";")[1]);
+            file.write(write.getBytes());
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -82,12 +83,53 @@ public abstract class AbstractCSVDAO<T extends Entity> extends AbstractFileDAO<T
 
     @Override
     public void delete(T entity) { // FIXME: 28.02.2017
-        /*RandomAccessFile file = getDataFile();
+        try {
+            RandomAccessFile file = null;
+            ArrayList<T> list = read();
+            file = getDataFile();
+            long [] startAndEnd = getStartAndEndOfStr(file, entity);
+            file.seek(startAndEnd[1]);
 
-        String[] line;
-        while ((line = file.readLine().split(";")) != null){
-            if (file.readLine().contains(HEADER_CSV)) continue;
-            if (line[0] == viewEntity(entity))
-        }*/
+            file.setLength(startAndEnd[0]-1L);
+            for (T e:list) {
+                create(e);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void update(T entity) {
+        RandomAccessFile file = null;
+        ArrayList<T> list = read();
+
+        try {
+            file = getDataFile();
+            long [] startAndEnd = getStartAndEndOfStr(file, entity);
+            file.seek(startAndEnd[1]);
+
+            file.setLength(startAndEnd[0]-1L);
+            create(entity);
+            for (T e:list) {
+                create(e);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public long getMaxId() {
+        try{
+            RandomAccessFile file = getDataFile();
+            file.seek((HEADER_CSV + "\r").length());
+            String line;
+            while ((line = file.readLine()) != null) {
+                if (Long.parseLong((line.split(";"))[0]) > maxId) maxId = Long.parseLong((line.split(";"))[0]);
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return maxId;
     }
 }
