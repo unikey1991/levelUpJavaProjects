@@ -27,8 +27,8 @@ public class Main {
         System.out.println(streets);
 
         //streetDAO.create(new Street(5L, "Artema"));
-        streetDAO.delete(new Street(5L, "Artema"));
-        //streetDAO.update(new Street(3L, "Glinki2356"));
+        //streetDAO.delete(new Street(5L, "Artema"));
+        streetDAO.update(new Street(3L, "Glink"));
 
 
     }

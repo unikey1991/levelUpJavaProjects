@@ -110,12 +110,17 @@ public abstract class AbstractCSVDAO<T extends Entity> extends AbstractFileDAO<T
     @Override
     public void update(T entity) {
         RandomAccessFile file = null;
-        ArrayList<T> list = read();
+        ArrayList<T> list = new ArrayList<>();
 
         try {
             file = getDataFile();
             long [] startAndEnd = getStartAndEndOfStr(file, entity);
             file.seek(startAndEnd[1]);
+
+            String line;
+            while ((line = file.readLine()) != null) {
+                list.add(parseEntity(line));
+            }
 
             file.setLength(startAndEnd[0]-1L);
             create(entity);
