@@ -91,6 +91,10 @@ public abstract class AbstractCSVDAO<T extends Entity> extends AbstractFileDAO<T
             ArrayList<T> list = new ArrayList<>();
             file = getDataFile();
             long [] startAndEnd = getStartAndEndOfStr(file, entity);
+            if (startAndEnd[0] == 0 && startAndEnd[1] == 0) {
+                System.out.println("This entity is not found in target file");
+                return;
+            }
             file.seek(startAndEnd[1]);
 
             String line;
