@@ -74,7 +74,10 @@ public abstract class AbstractCSVDAO<T extends Entity> extends AbstractFileDAO<T
             RandomAccessFile file = getDataFile();
             file.seek((HEADER_CSV + "\r").length());
             file.seek(file.length());
-            String write = ((++maxId) +";"+ viewEntity(entity).split(";")[1]);
+            long id;
+            if (entity.getId() < 0) id = ++maxId;
+            else id = entity.getId();
+            String write = ((id) +";"+ viewEntity(entity).split(";")[1]);
             file.write(write.getBytes());
         }catch (IOException e){
             e.printStackTrace();
@@ -82,13 +85,18 @@ public abstract class AbstractCSVDAO<T extends Entity> extends AbstractFileDAO<T
     }
 
     @Override
-    public void delete(T entity) { // FIXME: 28.02.2017
+    public void delete(T entity) {
         try {
             RandomAccessFile file = null;
-            ArrayList<T> list = read();
+            ArrayList<T> list = new ArrayList<>();
             file = getDataFile();
             long [] startAndEnd = getStartAndEndOfStr(file, entity);
             file.seek(startAndEnd[1]);
+
+            String line;
+            while ((line = file.readLine()) != null) {
+                list.add(parseEntity(line));
+            }
 
             file.setLength(startAndEnd[0]-1L);
             for (T e:list) {
