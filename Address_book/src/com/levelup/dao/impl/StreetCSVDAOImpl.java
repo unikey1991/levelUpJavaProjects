@@ -1,7 +1,7 @@
-package dao.impl;
+package com.levelup.dao.impl;
 
-import dao.AbstractCSVDAO;
-import entity.Street;
+import com.levelup.dao.AbstractCSVDAO;
+import com.levelup.entity.Street;
 
 import java.io.IOException;
 
@@ -9,7 +9,6 @@ import java.io.IOException;
  * Created by java on 28.02.2017.
  */
 public class StreetCSVDAOImpl extends AbstractCSVDAO<Street> {
-
 
     public StreetCSVDAOImpl(FileDataProviderImpl fileDataProvider, String fileName) {
         super(fileDataProvider, fileName, "id;street_name");
@@ -27,9 +26,7 @@ public class StreetCSVDAOImpl extends AbstractCSVDAO<Street> {
 
     @Override
     public String viewEntity(Street entity) {
-        return entity.getId() + ";"+ entity.getStreetName()+"\r";
+        return entity.getId() + ";" + entity.getStreetName() + "\r\n";
     }
-
-
 
 }

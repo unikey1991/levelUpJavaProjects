@@ -1,8 +1,7 @@
-package view;
+package com.levelup.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -19,18 +18,18 @@ public abstract class Dialog extends JDialog {
     public Dialog() {
         setModal(true);
         setLayout(null);
-        setBounds(300,400,250,240);
+        setBounds(300, 400, 250, 240);
         setResizable(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         add(panel);
-        panel.setBounds(0,0,250,240);
+        panel.setBounds(0, 0, 250, 240);
         panel.setLayout(null);
 
         this.listener = getButtonListener();
 
-        this.ok = createActionButton("ok", new Rectangle(30,160,80,30));
-        this.cancel = createActionButton("cancel", new Rectangle(130,160,80,30));
+        this.ok = createActionButton("ok", new Rectangle(30, 160, 80, 30));
+        this.cancel = createActionButton("cancel", new Rectangle(130, 160, 80, 30));
 
         panel.add(ok);
         panel.add(cancel);
@@ -57,7 +56,9 @@ public abstract class Dialog extends JDialog {
 
     private ActionListener getButtonListener() {
         return e -> {
-            if (e.getActionCommand().equals("ok"))isOkPressed = true;
+            if(e.getActionCommand().equals("ok")) {
+                isOkPressed = true;
+            }
             dispose();
         };
     }

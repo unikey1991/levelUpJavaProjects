@@ -1,12 +1,12 @@
-package dao;
+package com.levelup.dao;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Created by andrey on 27.02.17.
+ */
+public interface DAO<T> {
 
-public interface DAO<T>
-{
     void create(T t);
 
     ArrayList<T> read();
@@ -14,4 +14,6 @@ public interface DAO<T>
     void update(T t);
 
     void delete(T t);
+
+    T getOneById(long id);
 }

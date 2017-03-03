@@ -1,4 +1,4 @@
-package entity;
+package com.levelup.entity;
 
 /**
  * Created by java on 13.01.2017.
@@ -23,6 +23,4 @@ public class Street extends Entity {
     public void setStreetName(String streetName) {
         this.streetName = streetName;
     }
-
-
 }

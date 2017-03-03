@@ -1,4 +1,4 @@
-package entity;
+package com.levelup.entity;
 
 /**
  * Created by java on 13.01.2017.
@@ -11,11 +11,11 @@ public abstract class Entity {
 
     }
 
-    public  Entity(Long id){
+    public Entity(Long id) {
         this.id = id;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

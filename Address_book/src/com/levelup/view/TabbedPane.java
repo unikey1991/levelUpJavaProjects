@@ -1,13 +1,12 @@
-package view;
+package com.levelup.view;
 
-import entity.Citizen;
-import view.impl.CitizenTablePanel;
+import com.levelup.view.impl.CitizenTablePanel;
 
 import javax.swing.*;
 import java.util.List;
 
 /**
- * Created by unike on 12.01.2017.
+ * Created by Алексей on 11.01.2017.
  */
 public class TabbedPane extends JTabbedPane implements Action {
 
@@ -18,9 +17,9 @@ public class TabbedPane extends JTabbedPane implements Action {
     }
 
     @Override
-    public List<Citizen> read() {
+    public void read() {
         CitizenTablePanel panel = (CitizenTablePanel) getSelectedComponent();
-        return panel.read();
+        panel.read();
     }
 
     @Override
@@ -34,5 +33,4 @@ public class TabbedPane extends JTabbedPane implements Action {
         CitizenTablePanel panel = (CitizenTablePanel) getSelectedComponent();
         panel.delete();
     }
-
 }
