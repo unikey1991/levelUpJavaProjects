@@ -26,6 +26,7 @@ public class MyDataTableFrame extends JFrame {
         TabbedPane tabbedPane = new TabbedPane();
 
         DataProvider provider = new FileDataProviderImpl();
+        //DAO<Citizen> citizenDAO = new CitizenCSVDAOImpl(provider, "citizen.csv");
         DAO<Citizen> citizenDAO = new CitizenJSONDAOImpl(provider, "citizen.json");
 
         CitizenTablePanel citizenTablePanel = new CitizenTablePanel(citizenDAO);

@@ -11,12 +11,22 @@ public class CitizenJSONDAOImpl extends AbstractJSONDAO<Citizen> {
 
 
     public CitizenJSONDAOImpl(DataProvider fileDataProvider, String fileName) {
-        super(fileDataProvider, fileName, "{\"citizenList: [");
+        super(fileDataProvider, fileName, "{\"citizenList\": [");
     }
 
     @Override
     protected Citizen parseEntity(String str) {
-        return null;
+        str = str.trim().replaceAll("[\",\\s{}]|id|firstName|lastName|age|streetId", "");
+        String[] params = str.split(":");
+
+        long id = Long.parseLong(params[1]);
+        String fName = params[2];
+        String lName = params[3];
+        int age = Integer.parseInt(params[4]);
+        long streetId = Long.parseLong(params[5]);
+
+
+        return new Citizen(id, fName, lName, age, streetId);
     }
 
     @Override
@@ -26,7 +36,7 @@ public class CitizenJSONDAOImpl extends AbstractJSONDAO<Citizen> {
                 "\"firstName\": \"" + entity.getFistName() + "\", " +
                 "\"lastName\": \"" + entity.getLastName() + "\", " +
                 "\"age\": " + entity.getAge() + ", " +
-                "\"streetId\": " + entity.getStreetId() + ", " +
+                "\"streetId\": " + entity.getStreetId() +
                 "}";
     }
 }

@@ -16,15 +16,16 @@ public class CitizenCSVDAOImpl extends AbstractCSVDAO<Citizen> {
 
     @Override
     protected Citizen parseEntity(String str) {
-        String[] params = str.split(";");
+        String[] params = str.split(";");// 1;dmitriy;kuzmenko;24;69
 
-        long id = Long.parseLong(params[0]);
-        String fName = params[1];
-        String lName = params[2];
-        int age = Integer.parseInt(params[3]);
-        long streetId = Long.parseLong(params[4]);
+        long id = Long.parseLong(params[0]);//1
+        String fName = params[1];//dmitry
+        String lName = params[2];//kuzmenko
+        int age = Integer.parseInt(params[3]);//24
+        long streetId = Long.parseLong(params[4]);//69
 
-        return new Citizen(id, fName, lName, age, streetId);
+
+        return new Citizen(id, fName, lName, age, streetId);//
     }
 
     @Override

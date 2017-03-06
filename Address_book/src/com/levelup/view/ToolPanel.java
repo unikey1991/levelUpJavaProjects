@@ -48,7 +48,7 @@ public class ToolPanel extends JPanel {
     }
 
     private void addConnectionTypeList(JComboBox<String> connectionType) {
-        String[] resources = {"CSV", "H2", "XML"};
+        String[] resources = {"JSON", "CSV", "H2", "XML"};
         for (String type : resources) {
             connectionType.addItem(type);
         }

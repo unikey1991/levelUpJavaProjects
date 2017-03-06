@@ -33,5 +33,6 @@ public abstract class AbstractFileDAO<T> implements DAO<T> {
         return ++id;
     }
 
+
     protected abstract long initMaxId();
 }
