@@ -9,6 +9,8 @@ public class Book {
     final long id;
     @ToXML
     private String bookName;
+
+
     private int pageCount;
     public String autor;
 

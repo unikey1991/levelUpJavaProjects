@@ -10,12 +10,15 @@ public class Main {
         Class bookClass = Book.class;  //получения экземпляра класса
 
         XMLParser parser = new XMLParser();
-        String bookAsXML = parser.toXML(book);
-        System.out.println(bookAsXML);
+//        String bookAsXML = parser.toXML(book);
+//        System.out.println(bookAsXML);
 
         Autor autor = new Autor("John","Cena",38);
         String autorAsXML = parser.toXML(autor);
         System.out.println(autorAsXML);
+
+        Autor autorFromXML = (Autor) parser.parseXML(autorAsXML, Autor.class);
+        System.out.println(autorFromXML.toString());
 
 
 //        System.out.println("Book fields:");

@@ -17,4 +17,16 @@ public class Autor {
         this.lastName = lastName;
         this.age = age;
     }
+
+    public Autor() {
+    }
+
+    @Override
+    public String toString() {
+        return "Autor{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }

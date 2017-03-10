@@ -10,6 +10,9 @@ public class Citizen extends Entity {
     private int age;
     private Long streetId;
 
+    public Citizen() {
+    }
+
     public Citizen(String fistName, String lastName, int age, Long streetId) {
         this.fistName = fistName;
         this.lastName = lastName;
