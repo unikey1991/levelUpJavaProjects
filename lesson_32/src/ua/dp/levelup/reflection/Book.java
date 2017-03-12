@@ -21,6 +21,10 @@ public class Book {
         this.autor = autor;
     }
 
+    private Book() {
+        id= 0;
+    }
+
     public String getAutor() {
         return autor;
     }
