@@ -1,4 +1,8 @@
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Created by java on 17.03.2017.
@@ -6,23 +10,20 @@ import java.sql.*;
 
 public class Main {
 
-    public static void main(String[] args) throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException {
+  public static void main(String[] args) {
+    try {
+      Class.forName("com.mysql.cj.jdbc.Driver");
+      Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/forum", "root", "qwerty");
+      Statement statement = connection.createStatement();
+      ResultSet resultSet = statement.executeQuery("SELECT * FROM USERS");
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
+      while (resultSet.next()) {
+        System.out.println(resultSet.getLong("ID") + " " + resultSet.getString("USERNAME") + " " + resultSet.getString("EMAIL"));
+      }
 
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/forum?","root","qwerty");
-
-        Statement statement = connection.createStatement();
-
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM USER");
-
-        while (resultSet.next()) {
-            System.out.println(resultSet.getLong("id")
-                    + " " + resultSet.getString("user_name")
-                    + " " + resultSet.getString("email"));
-        }
-
-        connection.close();
-
+      connection.close();
+    } catch (SQLException | ClassNotFoundException e) {
+      e.printStackTrace();
     }
+  }
 }

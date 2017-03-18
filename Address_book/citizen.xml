@@ -1,0 +1,8 @@
+<CitizenList>
+<Citizen>
+	<fistName>john</fistName>
+	<lastName>cena</lastName>
+	<age>38</age>
+	<streetId>1</streetId>
+</Citizen>
+</CitizenList>
