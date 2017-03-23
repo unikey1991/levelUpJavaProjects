@@ -1,5 +1,4 @@
 import DAO.impl.CitizenDAOImpl;
-import entity.Citizen;
 
 import java.sql.*;
 import java.util.ArrayList;
