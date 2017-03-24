@@ -1,4 +1,5 @@
 import DAO.impl.CitizenDAOImpl;
+import entity.Citizen;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 public class Main {
     private static final String HOST = "unikey.hopto.org:3306/";
     private static final String USER = "unikey1991";
-    private static final String PASSWORD = "qwerty";
+    private static final String PASSWORD = "qwerty12345";
     private static final String DATABASE = "address_book";
     private static final String PARAMETERS = "?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
@@ -24,6 +25,11 @@ public class Main {
             CitizenDAOImpl citizenDAO = new CitizenDAOImpl(connection);
             ArrayList citizenList = citizenDAO.read();
             System.out.println("complete");
+            Citizen cit = new Citizen("Jacky","Chan",90L, 4L);
+            citizenDAO.create(cit);
+
+            cit.setFirstName("Psina");
+            citizenDAO.update(cit);
 
 
             connection.close();

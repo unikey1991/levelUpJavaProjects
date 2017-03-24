@@ -17,6 +17,13 @@ public class Citizen extends Entity{
         this.streetId = streetId;
     }
 
+    public Citizen(String firstName, String lastName, Long age, Long streetId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.streetId = streetId;
+    }
+
 
     public String getFirstName() {
         return firstName;
@@ -32,5 +39,21 @@ public class Citizen extends Entity{
 
     public Long getStreetId() {
         return streetId;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAge(Long age) {
+        this.age = age;
+    }
+
+    public void setStreetId(Long streetId) {
+        this.streetId = streetId;
     }
 }

@@ -21,25 +21,32 @@ public class CitizenDAOImpl<T extends Citizen> implements DAO<Citizen> {
     @Override
     public void create(Citizen t) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement
-                ("INSERT INTO CITIZEN (id, first_name, last_name, age, street_id) VALUES(?,?,?,?,?)");
-        preparedStatement.setLong(1, t.getId());
-        preparedStatement.setString(2, t.getFirstName());
-        preparedStatement.setString(3, t.getLastName());
-        preparedStatement.setLong(4, t.getAge());
-        preparedStatement.setLong(5, t.getStreetId());
+                ("INSERT INTO CITIZEN (first_name, last_name, age, street_id) VALUES(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+        preparedStatement.setString(1, t.getFirstName());
+        preparedStatement.setString(2, t.getLastName());
+        preparedStatement.setLong(3, t.getAge());
+        preparedStatement.setLong(4, t.getStreetId());
+
         preparedStatement.execute();
+
+        ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+
+        if (generatedKeys.next()) {
+            Long id = generatedKeys.getLong("GENERATED_KEY");
+            t.setId(id);
+        }
     }
 
     @Override
     public void update(Citizen t) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement
-                ("UPDATE CITIZEN SET (first_name, last_name, age, street_id) VALUES(?,?,?,?) WHERE id="+t.getId());
+                ("UPDATE CITIZEN SET first_name = ?, last_name= ?, age = ?, street_id = ? WHERE id=?");
         preparedStatement.setString(1, t.getFirstName());
         preparedStatement.setString(2, t.getLastName());
         preparedStatement.setLong(3, t.getAge());
         preparedStatement.setLong(4, t.getStreetId());
+        preparedStatement.setLong(5, t.getId());
         preparedStatement.execute();
-
     }
 
     @Override
