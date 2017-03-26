@@ -17,6 +17,7 @@ public class Main {
     public static void main(String[] args) {
 
 
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://"+ HOST +
@@ -25,11 +26,12 @@ public class Main {
             CitizenDAOImpl citizenDAO = new CitizenDAOImpl(connection);
             ArrayList citizenList = citizenDAO.read();
             System.out.println("complete");
-            Citizen cit = new Citizen("Jacky","Chan",90L, 4L);
-            citizenDAO.create(cit);
 
-            cit.setFirstName("Psina");
-            citizenDAO.update(cit);
+            Citizen citizen = citizenDAO.readOneById(10L);
+            System.out.println("");
+
+
+
 
 
             connection.close();

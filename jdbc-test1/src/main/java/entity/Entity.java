@@ -15,6 +15,7 @@ public abstract class Entity {
     }
 
     public Long getId() {
+        if (null == id) return -1L;
         return id;
     }
 

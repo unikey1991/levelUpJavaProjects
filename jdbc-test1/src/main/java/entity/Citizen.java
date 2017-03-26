@@ -56,4 +56,26 @@ public class Citizen extends Entity{
     public void setStreetId(Long streetId) {
         this.streetId = streetId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Citizen citizen = (Citizen) o;
+
+        if (!firstName.equals(citizen.firstName)) return false;
+        if (!lastName.equals(citizen.lastName)) return false;
+        if (!age.equals(citizen.age)) return false;
+        return streetId != null ? streetId.equals(citizen.streetId) : citizen.streetId == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + age.hashCode();
+        result = 31 * result + (streetId != null ? streetId.hashCode() : 0);
+        return result;
+    }
 }

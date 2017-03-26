@@ -16,7 +16,7 @@ public interface DAO<T> {
 
     ArrayList<T> read() throws SQLException;
 
-    T readOneById(long id) throws SQLException;
+    T readOneById(Long id) throws SQLException;
 
-    T readOneByEmail(String email);
+    T readOneByEmail(String email) throws SQLException;
 }
