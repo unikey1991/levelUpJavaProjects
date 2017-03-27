@@ -27,9 +27,7 @@ public class CitizenDAOImpl<T extends Citizen> implements DAO<Citizen> {
         preparedStatement.setString(2, t.getLastName());
         preparedStatement.setLong(3, t.getAge());
         preparedStatement.setLong(4, t.getStreetId());
-
         preparedStatement.execute();
-
         ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
 
         if (generatedKeys.next()) {
@@ -64,12 +62,7 @@ public class CitizenDAOImpl<T extends Citizen> implements DAO<Citizen> {
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM citizen");
         while (resultSet.next()) {
-            Long id = resultSet.getLong("id");
-            String firstName = resultSet.getString("first_name");
-            String lastName = resultSet.getString("last_name");
-            Long age = resultSet.getLong("age");
-            Long streetid = resultSet.getLong("street_id");
-            list.add(new Citizen(id, firstName, lastName, age, streetid));
+            list.add(parseCitizen(resultSet));
         }
         return list;
     }
@@ -77,7 +70,6 @@ public class CitizenDAOImpl<T extends Citizen> implements DAO<Citizen> {
     @Override
     public Citizen readOneById(Long id) throws SQLException {
         Citizen citizen = null;
-
         if (null == id) {
             System.out.println("Citizen with id " + id + " is not exist");
             return citizen;
@@ -87,40 +79,36 @@ public class CitizenDAOImpl<T extends Citizen> implements DAO<Citizen> {
         preparedStatement.setLong(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
-            String firstName = resultSet.getString("first_name");
-            String lastName = resultSet.getString("last_name");
-            Long age = resultSet.getLong("age");
-            Long streetid = resultSet.getLong("street_id");
-            citizen = new Citizen(id, firstName, lastName, age, streetid);
-        }
-        else System.out.println("Citizen with id " + id + " is not exist");
-
+            citizen = parseCitizen(resultSet);
+        } else System.out.println("Citizen with id " + id + " is not exist");
         return citizen;
-
     }
 
     @Override
     public Citizen readOneByEmail(String email) throws SQLException {
         Citizen citizen = null;
-        if (!email.contains("@")){
+        if (!email.contains("@")) {
             System.out.println("Wrong email format");
             return citizen;
         }
         PreparedStatement preparedStatement = connection.prepareStatement
-                ("SELECT * FROM citizen WHERE email = ? " );
+                ("SELECT * FROM citizen WHERE email = ? ");
         preparedStatement.setString(1, email);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
-            Long id = resultSet.getLong("id");
-            String firstName = resultSet.getString("first_name");
-            String lastName = resultSet.getString("last_name");
-            Long age = resultSet.getLong("age");
-            Long streetid = resultSet.getLong("street_id");
-            citizen = new Citizen(id, firstName, lastName, age, streetid);
-        }
-        else System.out.println("Citizen with email " + email + " is not exist");
+            citizen = parseCitizen(resultSet);
+        } else System.out.println("Citizen with email " + email + " is not exist");
 
         return citizen;
+    }
+
+    private Citizen parseCitizen(ResultSet resultSet) throws SQLException {
+        Long id = resultSet.getLong("id");
+        String firstName = resultSet.getString("first_name");
+        String lastName = resultSet.getString("last_name");
+        Long age = resultSet.getLong("age");
+        Long streetid = resultSet.getLong("street_id");
+        return new Citizen(id, firstName, lastName, age, streetid);
     }
 
 
