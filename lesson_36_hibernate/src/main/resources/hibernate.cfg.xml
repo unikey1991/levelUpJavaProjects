@@ -1,7 +1,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://unikey.hopto.org:3306/forum</property>
+        <property name="connection.url">jdbc:mysql://unikey.hopto.org:3306/hw_35_additional</property>
         <property name="connection.username">unikey1991</property>
         <property name="connection.password">qwerty12345</property>
         <property name="connection.pool_size">10</property>
@@ -9,6 +9,6 @@
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
         <property name="hibernate.connection.autocommit">true</property>
-        <mapping class="hiber.User" />
+        <mapping class="hiber.Employee" />
     </session-factory>
 </hibernate-configuration>
