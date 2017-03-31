@@ -30,7 +30,7 @@ public class Department {
     @Column (name = "date_create")
     private Date creationDate;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "stock")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "department")
     private List<Employee> employees;
 
     public Department(String title, Date creationDate) {
