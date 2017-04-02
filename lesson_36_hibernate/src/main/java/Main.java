@@ -1,5 +1,4 @@
-import hiber.Employee;
-import hiber.User;
+import hiber.*;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -26,12 +25,12 @@ public class Main {
         //Employee employee = new Employee();
 
         try (Session session = sessionFactory.openSession()){
-            Employee employee = new Employee("Andrey", "Ivanov", "Robertovich",50000);
+            //Employee employee = new Employee("Andrey", "Ivanov", "Robertovich",50000);
 
             Transaction transaction = session.getTransaction();
 
             transaction.begin();
-            session.save(employee);
+            //session.save(employee);
             transaction.commit();
 
             Query<Employee> query = session.createQuery("from Employee", Employee.class);
@@ -40,8 +39,18 @@ public class Main {
             for (Employee e: list){
                 System.out.println(e);
             }
-        } finally {
-            System.out.println("Good by");
+
+            Query<WorkingDays> query1 = session.createQuery("from WorkingDays ", WorkingDays.class);
+            List<WorkingDays> list1 = query1.list();
+
+            for (WorkingDays e: list1){
+                System.out.println(e);
+            }
+
+
+        } finally  {
+            sessionFactory.close();
+            System.out.println("Good bye");
         }
 
 

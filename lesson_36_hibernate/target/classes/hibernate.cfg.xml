@@ -6,9 +6,17 @@
         <property name="connection.password">qwerty12345</property>
         <property name="connection.pool_size">10</property>
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="show_sql">true</property>
+        <property name="show_sql">false</property>
         <property name="hbm2ddl.auto">update</property>
         <property name="hibernate.connection.autocommit">true</property>
         <mapping class="hiber.Employee" />
+        <mapping class="hiber.Department"/>
+        <mapping class="hiber.EmployeesCourses"/>
+        <mapping class="hiber.Course"/>
+        <mapping class="hiber.EmployeesTangibles"/>
+        <mapping class="hiber.Tangible"/>
+        <mapping class="hiber.Post"/>
+        <mapping class="hiber.SalariesPaid"/>
+        <mapping class="hiber.WorkingDays"/>
     </session-factory>
 </hibernate-configuration>

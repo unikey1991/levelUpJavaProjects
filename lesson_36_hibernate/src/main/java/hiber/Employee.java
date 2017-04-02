@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -23,7 +22,7 @@ import java.util.Date;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "name_first")
@@ -35,16 +34,21 @@ public class Employee {
     @Column(name = "name_second")
     private String secondName;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id")
+    private Post post;
+
     @Column
     private int salary;
 
-    @Column(name = "date_create")
     @Type(type = "timestamp")
-    private Date creationDate;
+    @Column(name = "date_create")
+    private Date creationDate = new Date();
 
-    @ManyToAny(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
+
 
 
 
@@ -55,6 +59,7 @@ public class Employee {
         this.secondName = secondName;
         this.salary = salary;
     }
+
 
 
 }

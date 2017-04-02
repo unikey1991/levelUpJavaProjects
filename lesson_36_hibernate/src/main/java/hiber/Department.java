@@ -17,13 +17,12 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 @Entity
 @Table(name = "departments")
 public class Department {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
     private String title;
@@ -36,5 +35,14 @@ public class Department {
     public Department(String title, Date creationDate) {
         this.title = title;
         this.creationDate = creationDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", creationDate=" + creationDate +
+                '}';
     }
 }
