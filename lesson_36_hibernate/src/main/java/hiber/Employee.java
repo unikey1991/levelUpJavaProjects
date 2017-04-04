@@ -18,7 +18,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "phoneNumber")
 public class Employee {
 
     @Id
@@ -34,7 +34,7 @@ public class Employee {
     @Column(name = "name_second")
     private String secondName;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
 
@@ -50,14 +50,19 @@ public class Employee {
     private Department department;
 
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "phone_number_id")
+    private PhoneNumber phoneNumber;
 
 
 
-    public Employee(String firstName, String lastName, String secondName, int salary) {
+    public Employee(String firstName, String lastName, String secondName, int salary, Department department, Post post) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.secondName = secondName;
         this.salary = salary;
+        this.department = department;
+        this.post = post;
     }
 
 

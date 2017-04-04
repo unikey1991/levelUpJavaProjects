@@ -17,6 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString(exclude = "employees")
 @Entity
 @Table(name = "departments")
 public class Department {
@@ -37,12 +38,4 @@ public class Department {
         this.creationDate = creationDate;
     }
 
-    @Override
-    public String toString() {
-        return "Department{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", creationDate=" + creationDate +
-                '}';
-    }
 }
