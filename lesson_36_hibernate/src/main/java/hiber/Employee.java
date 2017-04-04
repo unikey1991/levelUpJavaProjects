@@ -18,7 +18,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString(exclude = "phoneNumber")
+@ToString
 public class Employee {
 
     @Id

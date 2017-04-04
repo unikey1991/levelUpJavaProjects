@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "employee")
 @Entity
 @Table(name = "PHONE_NUMBERS")
 public class PhoneNumber {
