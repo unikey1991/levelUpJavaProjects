@@ -4,8 +4,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by java on 04.04.2017.
@@ -19,6 +24,7 @@ import javax.persistence.*;
 @Table(name = "PHONE_NUMBERS")
 public class PhoneNumber {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -26,8 +32,7 @@ public class PhoneNumber {
     @Column(length = 15)
     private String number;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_employee", nullable = false)
+    @OneToOne(mappedBy = "phoneNumber")
     private Employee employee;
 
     public PhoneNumber(String number, Employee employee) {

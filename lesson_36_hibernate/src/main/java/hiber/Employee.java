@@ -50,7 +50,7 @@ public class Employee {
     private Department department;
 
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "phone_number_id")
     private PhoneNumber phoneNumber;
 
