@@ -19,11 +19,29 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @ToString
+@SecondaryTable(name = "employee_details", pkJoinColumns = @PrimaryKeyJoinColumn(name = "EMPLOYEE_ID"))
 public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+
+    @Column(table = "employee_details")
+    @Enumerated (EnumType.STRING)
+    private Sex sex = Sex.PIDOR;
+
+    @Column(table = "employee_details")
+    private String city;
+
+    @Column(table = "employee_details")
+    private String zipCode;
+
+    @Column(table = "employee_details")
+    private String streetName;
+
+    @Embedded
+    private Car car;
 
     @Column(name = "name_first")
     private String firstName;
@@ -38,7 +56,7 @@ public class Employee {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @Column
+    @Column(table = "employees")
     private int salary;
 
     @Type(type = "timestamp")
