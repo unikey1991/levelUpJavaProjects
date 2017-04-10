@@ -9,9 +9,10 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "employee102")
+@Table(name = "boat")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Boat{
 

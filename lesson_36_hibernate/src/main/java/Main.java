@@ -86,6 +86,8 @@ public class Main {
 
 
             session.update(employee);*/
+
+            session.save(yacht);
             transaction.commit();
 
             /*Query<Employee> query = session.createQuery("from Employee", Employee.class);
@@ -105,6 +107,14 @@ public class Main {
             sessionFactory.close();
             System.out.println("Good bye");
         }
+
+
+
+
+
+
+
+
 
 
 

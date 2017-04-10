@@ -1,7 +1,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://unikey.hopto.org:3306/hw_35_additional</property>
+        <property name="connection.url">jdbc:mysql://unikey.hopto.org:3306/factory</property>
         <property name="connection.username">unikey1991</property>
         <property name="connection.password">qwerty12345</property>
         <property name="connection.pool_size">10</property>
@@ -18,6 +18,8 @@
         <mapping class="hiber.Post"/>
         <mapping class="hiber.SalariesPaid"/>
         <mapping class="hiber.WorkingDays"/>
+        <mapping class="hiber.Boat"/>
+        <mapping class="hiber.Yacht"/>
         <mapping class="hiber.PhoneNumber"/>
     </session-factory>
 </hibernate-configuration>
