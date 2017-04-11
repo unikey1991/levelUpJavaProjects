@@ -1,17 +1,11 @@
 import hiber.*;
-import hiber.Color;
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.hibernate.query.criteria.internal.CriteriaSubqueryImpl;
 
+import javax.persistence.EntityManager;
 import javax.persistence.criteria.*;
-import java.awt.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -28,7 +22,7 @@ public class Main {
         SessionFactory sessionFactory = getSessionFactory();
         //Employee employee = new Employee();
 
-        try (Session session = sessionFactory.openSession()){
+        try (Session session = sessionFactory.openSession()) {
             //Employee employee = new Employee("Andrey", "Ivanov", "Robertovich",50000);
 
 //            Transaction transaction = session.getTransaction();
@@ -53,12 +47,12 @@ public class Main {
 
 
             Query<Department> departmentQuery = session.createQuery("from Department where id = :id", Department.class);
-            departmentQuery.setParameter("id",1L);
+            departmentQuery.setParameter("id", 1L);
 
             Department department = departmentQuery.uniqueResult();
 
             Query<Post> postQuery = session.createQuery("from Post where id = :id", Post.class);
-            postQuery.setParameter("id",1L);
+            postQuery.setParameter("id", 1L);
 
             Post post = postQuery.uniqueResult();
 
@@ -74,7 +68,7 @@ public class Main {
 
             PhoneNumber phoneNumber = new PhoneNumber("380930000000", employee);
 */
-            Yacht yacht = new Yacht("2247", 5, 10, 15);
+            //Yacht yacht = new Yacht("2247", 5, 10, 15);
 
 
             Transaction transaction = session.getTransaction();
@@ -87,9 +81,6 @@ public class Main {
 
             session.update(employee);*/
 
-            session.save(yacht);
-            transaction.commit();
-
             /*Query<Employee> query = session.createQuery("from Employee", Employee.class);
             List<Employee> list = query.list();
 
@@ -97,28 +88,86 @@ public class Main {
                 System.out.println(e);
             }*/
 
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<Yacht> criteriaQuery = session.getCriteriaBuilder().createQuery(Yacht.class);
-            Root<Yacht> yachtRoot = criteriaQuery.from(Yacht.class);
-            Predicate predicate = criteriaBuilder.equal(yachtRoot.get("model"),"2247");
+           /* List<Yacht> list = Arrays.asList(
+                    new Yacht("3567", 12, 15, 25),
+                    new Yacht("4357", 12, 20, 25),
+                    new Yacht("4387", 17, 20, 25),
+                    new Yacht("4399", 17, 20, 25),
+                    new Yacht("5504", 20, 25, 30),
+                    new Yacht("2243", 4, 10, 25),
+                    new Yacht("5522", 17, 25, 30),
+                    new Yacht("5524", 17, 25, 30),
+                    new Yacht("5547", 17, 25, 30),
+                    new Yacht("1313", 2, 7, 15),
+                    new Yacht("7766", 22, 35, 35),
+                    new Yacht("2247", 5, 10, 15),
+                    new Yacht("1248", 14, 100, 5),
+                    new Yacht("2247", 55, 15, 25),
+                    new Yacht("4347", 15, 10, 25),
+                    new Yacht("4377", 12, 15, 35),
+                    new Yacht("5508", 10, 16, 45),
+                    new Yacht("2197", 11, 20, 25),
+                    new Yacht("2241", 99, 100, 115),
+                    new Yacht("2242", 17, 60, 115),
+                    new Yacht("2233", 18, 7, 145),
+                    new Yacht("2948", 22, 35, 25),
+                    new Yacht("1248", 14, 100, 5)
+            );
 
-            CriteriaQuery<Yacht> query = criteriaQuery.where(predicate);
-        } finally  {
+            for (Boat b:list) {
+                session.save(b);
+            }
+
+            transaction.commit();*/
+
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+
+            CriteriaQuery<Yacht> criteriaQuery = criteriaBuilder.createQuery(Yacht.class);
+            Root<Yacht> yachtRoot = criteriaQuery.from(Yacht.class);
+
+
+            //selectAllBoatsOrderBySpeed(criteriaBuilder,criteriaQuery,yachtRoot,sessionFactory);
+            //selectOneByMaxSpeed(criteriaBuilder,criteriaQuery,yachtRoot,sessionFactory);
+            selectOneByMin(criteriaBuilder, criteriaQuery, yachtRoot, sessionFactory);
+
+
+        } finally {
             sessionFactory.close();
             System.out.println("Good bye");
         }
+    }
+
+    private static void selectOneByMin(CriteriaBuilder criteriaBuilder, CriteriaQuery<Yacht> criteriaQuery, Root<Yacht> yachtRoot, SessionFactory sessionFactory) {
+        criteriaQuery.select(yachtRoot);
+        criteriaQuery.orderBy(criteriaBuilder.asc(yachtRoot.get("maxPassengers")));
+
+        EntityManager entityManager = sessionFactory.createEntityManager();
+        Yacht yacht = entityManager.createQuery(criteriaQuery).setMaxResults(1).getSingleResult();
+
+        System.out.println(yacht);
+    }
 
 
+    private static void selectOneByMaxSpeed(CriteriaBuilder criteriaBuilder, CriteriaQuery<Yacht> criteriaQuery, Root<Yacht> yachtRoot, SessionFactory sessionFactory) {
+
+        criteriaQuery.select(yachtRoot);
+        criteriaQuery.orderBy(criteriaBuilder.desc(yachtRoot.get("maxSpeed")));
+        EntityManager entityManager = sessionFactory.createEntityManager();
+        Yacht yach = entityManager.createQuery(criteriaQuery).setMaxResults(1).getSingleResult();
+        System.out.println(yach.toString());
+
+    }
 
 
+    private static void selectAllBoatsOrderBySpeed(CriteriaBuilder criteriaBuilder, CriteriaQuery<Yacht> criteriaQuery, Root<Yacht> yachtRoot, SessionFactory sessionFactory) {
+        criteriaQuery.select(yachtRoot);
+        criteriaQuery.orderBy(criteriaBuilder.asc(yachtRoot.get("maxSpeed")));
 
+        EntityManager entityManager = sessionFactory.createEntityManager();
+        List<Yacht> resultList = entityManager.createQuery(criteriaQuery).getResultList();
 
-
-
-
-
-
-
-
+        for (Yacht y : resultList) {
+            System.out.println(y);
+        }
     }
 }

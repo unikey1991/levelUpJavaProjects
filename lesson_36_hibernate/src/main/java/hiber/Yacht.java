@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 /**
  * Created by java on 07.04.2017.
@@ -12,7 +11,6 @@ import javax.persistence.Table;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,4 +27,25 @@ public class Yacht extends Boat{
         this.maxSpeed = maxSpeed;
         this.length = length;
     }
+
+    /*@Override
+    public String toString() {
+        return "Yacht{" +
+                "id: " + super.getId() +
+                ", model: " + " " + super.getModel() +
+                ", maxPassengers: " + " " + super.getMaxPassengers() +
+                "maxSpeed=" + maxSpeed +
+                ", length=" + length +
+                "} ";
+    }*/
+
+    /*@Override
+    public String toString() {
+        return "Yacht{" +
+                "id: " + getId() +
+                ", model: " + " " + getModel() +
+                ", maxPassengers: " + " " + getMaxPassengers() +
+                ", maxSpeed: " + " " + getMaxSpeed() +
+                ", length: " + " " + getLength() + "}";
+    }*/
 }
