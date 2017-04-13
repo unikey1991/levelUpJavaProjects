@@ -30,7 +30,11 @@ public class Citizen {
     @Column
     private int age;
 
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "street_id")
     private Street strt;
+
+
 }

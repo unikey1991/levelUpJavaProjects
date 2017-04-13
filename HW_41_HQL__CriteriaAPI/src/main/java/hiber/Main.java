@@ -2,16 +2,19 @@ package hiber;
 
 
 import hiber.hw35.Citizen;
-import org.hibernate.Criteria;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import java.sql.ResultSet;
+import javax.persistence.EntityManager;
+import javax.persistence.Parameter;
+import javax.persistence.Tuple;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
+
 import java.util.List;
+import java.util.Set;
 
 import static hiber.HibernateUtil.getSessionFactory;
 
@@ -23,57 +26,17 @@ public class Main {
     public static void main(String[] args) {
 
         SessionFactory sessionFactory = getSessionFactory();
-        try (Session session = sessionFactory.openSession()){
+        try (Session session = sessionFactory.openSession()) {
 
-            Query<Citizen> query = session.createQuery("from Citizen", Citizen.class);
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 
-            List<Citizen> list = query.list();
-            //1.	Вывести общее число жителей
-            System.out.println("Citizens count = "+list.size());
+            CriteriaQuery<Citizen> criteriaQuery = criteriaBuilder.createQuery(Citizen.class);
+            Root<Citizen> citizenRoot = criteriaQuery.from(Citizen.class);
 
-            //2.	Вывести средний возраст жителей
-            int age = 0;
-            for (Citizen c:list){
-                age += c.getAge();
-            }
-            System.out.println(age/list.size());
-
-            //3.	Вывести отсортированный по алфавиту список фамилий без повторений
-            Query<Citizen> query3 = session.createQuery("from Citizen group by lastName order by lastName", Citizen.class);
-            List<Citizen> list3 = query3.list();
-            for (Citizen c:list3){
-                System.out.println(c.toString());
-            }
-
-            //4.	Вывести список фамилий, с указанием количества повторений этих фамилий в общем списке
-            Query query4 = session.createQuery("from Citizen " +
-                    "group by lastName");
-
-            //5.	Вывести фамилии, которые содержат в середине букву «n»
-
-
-
-            System.out.println("5.\tВывести фамилии, которые содержат в середине букву «n»");
-            CriteriaBuilder builder5 = session.getCriteriaBuilder();
-            CriteriaQuery<Citizen> criteria5 = builder5.createQuery(Citizen.class);
-            Root<Citizen> root5 = criteria5.from(Citizen.class);
-            criteria5.select(root5);
-            criteria5.where(builder5.equal(root5.get("lastName"),"Мороз"));
-
-            List<Citizen> list5 = session.createQuery(criteria5).getResultList();
-
-            /*Query<Citizen> query5 = session.createQuery("from Citizen where lastName like '%n%'", );
-            List<Citizen> list5 = query5.list();*/
-            for (Citizen c:list5){
-                System.out.println(c.toString());
-            }
-
-
-
-            //select last_name, count(last_name) as count from address_book.citizen group by last_name
-
-
-
+            //getSumOfCitizens(criteriaBuilder, criteriaQuery, citizenRoot, sessionFactory);
+            //getAVGAgeOfCitizens(criteriaBuilder, criteriaQuery, citizenRoot, sessionFactory);
+            //selectAllCitizensByLastNameWhithoutRepeat(criteriaBuilder, criteriaQuery, citizenRoot, sessionFactory);
+            selectAllCitizensByLastNameWhithNumOfRepeat(criteriaBuilder, sessionFactory);
 
 
         } finally {
@@ -81,4 +44,52 @@ public class Main {
             System.out.println("Good by");
         }
     }
+
+    //1.	Вывести общее число жителей
+    private static void getSumOfCitizens(CriteriaBuilder criteriaBuilder, CriteriaQuery<Citizen> criteriaQuery, Root<Citizen> citizenRoot, SessionFactory sessionFactory) {
+        criteriaQuery.select(citizenRoot);
+        EntityManager entityManager = sessionFactory.createEntityManager();
+        int count = entityManager.createQuery(criteriaQuery).getResultList().size();
+        System.out.println(count);
+    }
+
+    //2.	Вывести средний возраст жителей
+    private static void getAVGAgeOfCitizens(CriteriaBuilder criteriaBuilder, CriteriaQuery<Citizen> criteriaQuery, Root<Citizen> citizenRoot, SessionFactory sessionFactory) {
+        Expression avg = criteriaBuilder.avg(citizenRoot.<Number>get("age"));
+        criteriaQuery.select(avg);
+        EntityManager entityManager = sessionFactory.createEntityManager();
+        System.out.println(entityManager.createQuery(criteriaQuery).getSingleResult());
+    }
+
+    //3.	Вывести отсортированный по алфавиту список фамилий без повторений
+    private static void selectAllCitizensByLastNameWhithoutRepeat(CriteriaBuilder criteriaBuilder, CriteriaQuery<Citizen> criteriaQuery, Root<Citizen> citizenRoot, SessionFactory sessionFactory) {
+        criteriaQuery.select(citizenRoot);
+        criteriaQuery.orderBy(criteriaBuilder.asc(citizenRoot.get("lastName")));
+        criteriaQuery.groupBy(citizenRoot.get("lastName"));
+
+        EntityManager entityManager = sessionFactory.createEntityManager();
+        List<Citizen> resultList = entityManager.createQuery(criteriaQuery).getResultList();
+
+        for (Citizen y : resultList) {
+            System.out.println(y);
+        }
+    }
+
+    //4.	Вывести список фамилий, с указанием количества повторений этих фамилий в общем списке
+    private static void selectAllCitizensByLastNameWhithNumOfRepeat(CriteriaBuilder criteriaBuilder, SessionFactory sessionFactory) {
+        CriteriaQuery<Citizen> query = criteriaBuilder.createQuery(Citizen.class);
+        Root<Citizen> u = query.from(Citizen.class);
+
+        query.multiselect(u.get("lastName"), criteriaBuilder.count(u.get("lastName"))).groupBy(u.get("lastName"));
+
+        EntityManager entityManager = sessionFactory.createEntityManager();
+        List<Citizen> list = entityManager.createQuery(query).getResultList();
+
+        for (Citizen c : list){
+            System.out.println(c.toString());
+        }
+    }
+
+
+
 }
