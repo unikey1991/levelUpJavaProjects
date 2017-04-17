@@ -13,11 +13,7 @@ public class CounterRunnable implements Runnable {
     public void run() {
         for (int i = initialValue; i < maxValue; i += step) {
             Main.print(Thread.currentThread().getName() + " " + i);
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+
         }
     }
 

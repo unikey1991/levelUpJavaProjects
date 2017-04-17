@@ -30,13 +30,13 @@ public class Main {
         }*/
 
 
-//        CounterThread thread1 = new CounterThread(1,1,17);
-//        CounterThread thread2 = new CounterThread(0,5,26);
-//
-//        thread1.setName("New counter thread");
-//
-//        thread1.start();
-//        thread2.start();
+        CounterThread thread1 = new CounterThread(1,1,17);
+        CounterThread thread2 = new CounterThread(0,5,26);
+
+        thread1.setName("New counter thread");
+
+        thread1.start();
+        thread2.start();
 
 
         /*ExecutorService executorService = Executors.newFixedThreadPool(2);
@@ -71,12 +71,12 @@ public class Main {
 //
 //        System.out.println(Thread.currentThread().getName() + " finished");
 
-        ExecutorService executorService = Executors.newFixedThreadPool(2);
-
-        executorService.execute(new CounterRunnable(1,2,13));
-        executorService.execute(new CounterRunnable(17,10,99));
-
-        executorService.shutdown();
+//        ExecutorService executorService = Executors.newFixedThreadPool(2);
+//
+//        executorService.execute(new CounterRunnable(1,2,13));
+//        executorService.execute(new CounterRunnable(17,10,99));
+//
+//        executorService.shutdown();
     }
 
 

@@ -83,7 +83,7 @@ public class Main {
         query.multiselect(u.get("lastName"), criteriaBuilder.count(u.get("lastName"))).groupBy(u.get("lastName"));
 
         EntityManager entityManager = sessionFactory.createEntityManager();
-        List<Citizen> list = entityManager.createQuery(query).getResultList();
+        List list = entityManager.createQuery(query).getResultList();
 
         for (Citizen c : list){
             System.out.println(c.toString());
