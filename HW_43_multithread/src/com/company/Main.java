@@ -1,23 +1,20 @@
 package com.company;
 
+import java.util.concurrent.*;
+
 public class Main {
 
-//    static int aaa = 17;
+    private static volatile int number = 17;
+
 
     public static void main(String[] args) throws InterruptedException {
 
 
-//        HelloWorldThread thread1 = new HelloWorldThread();
-//        HelloWorldThread thread2 = new HelloWorldThread();
-//        HelloWorldThread thread3 = new HelloWorldThread();
-//        HelloWorldThread thread4 = new HelloWorldThread();
-//        HelloWorldThread thread5 = new HelloWorldThread();
-//
-//        thread1.start();
-//        thread2.start();
-//        thread3.start();
-//        thread4.start();
-//        thread5.start();
+//        new HelloWorldThread().start();
+//        new HelloWorldThread().start();
+//        new HelloWorldThread().start();
+//        new HelloWorldThread().start();
+//        new HelloWorldThread().start();
 //
 //        ThreadPrinter printer1 = new ThreadPrinter(3, "wat");
 //        ThreadPrinter printer2 = new ThreadPrinter(2, "wergh");
@@ -28,9 +25,225 @@ public class Main {
 //
 //         startThreadAndJoin();
 
-        syncTesting(17);
+
+        /*new Test().start();
+        new Test().start();*/
 
 
+//////////////lesson
+/*Atomiv int test*/
+
+        /*Semaphore semaphore = new Semaphore(3);
+        long sleepTime = 500;
+
+
+        Client c1 = new Client(1);
+        Client c2 = new Client(2);
+        Client c3 = new Client(3);
+        Client c4 = new Client(4);
+
+
+
+        ExecutorService executorService = Executors.newCachedThreadPool();*/
+
+        /*executorService.execute(() -> c1.increaseBalance(50));
+        executorService.execute(() -> c2.increaseBalance(25));
+        executorService.execute(() -> c3.reduceBalance(25)); //75
+        executorService.execute(() -> c1.increaseBalance(25));
+        executorService.execute(() -> c1.reduceBalance(100)); //75
+        executorService.execute(() -> c2.increaseBalance(50));
+        executorService.execute(() -> c2.increaseBalance(100));
+        executorService.execute(() -> c2.reduceBalance(75)); //200
+        executorService.execute(() -> c4.increaseBalance(75));
+        executorService.execute(() -> c4.increaseBalance(75));
+        executorService.execute(() -> c4.reduceBalance(200)); //50*/
+
+        /* 4erez Semaphore */
+        /*executorService.execute(() -> {
+            try {
+                semaphore.acquire();
+
+                c1.increaseBalance(50);
+                Thread.sleep(sleepTime);
+                semaphore.release();
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        });
+        executorService.execute(() -> {
+            try {
+                semaphore.acquire();
+
+                c2.increaseBalance(25);
+                Thread.sleep(sleepTime);
+                semaphore.release();
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        });
+        executorService.execute(() -> {
+            try {
+                semaphore.acquire();
+
+                c3.reduceBalance(25);
+                Thread.sleep(sleepTime);
+                semaphore.release();
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }); //75
+        executorService.execute(() -> {
+            try {
+                semaphore.acquire();
+
+                c1.increaseBalance(25);
+                Thread.sleep(sleepTime);
+                semaphore.release();
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        });
+        executorService.execute(() -> {
+            try {
+                semaphore.acquire();
+
+                c1.reduceBalance(100);
+                Thread.sleep(sleepTime);
+                semaphore.release();
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }); //75
+        executorService.execute(() -> {
+            try {
+                semaphore.acquire();
+
+                c2.increaseBalance(50);
+                Thread.sleep(sleepTime);
+                semaphore.release();
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        });
+        executorService.execute(() -> {
+            try {
+                semaphore.acquire();
+
+                c2.increaseBalance(100);
+                Thread.sleep(sleepTime);
+                semaphore.release();
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        });
+        executorService.execute(() -> {
+            try {
+                semaphore.acquire();
+
+                c2.reduceBalance(75);
+                Thread.sleep(sleepTime);
+                semaphore.release();
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }); //200
+        executorService.execute(() -> {
+            try {
+                semaphore.acquire();
+
+                c4.increaseBalance(75);
+                Thread.sleep(sleepTime);
+                semaphore.release();
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        });
+        executorService.execute(() -> {
+            try {
+                semaphore.acquire();
+
+                c4.increaseBalance(75);
+                Thread.sleep(sleepTime);
+                semaphore.release();
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        });
+        executorService.execute(() -> {
+            try {
+                semaphore.acquire();
+
+                c4.reduceBalance(200);
+                Thread.sleep(sleepTime);
+                semaphore.release();
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }); //50
+
+        Thread.sleep(2000);
+
+
+        System.out.println("Client 1: "+ c1.getBalance());
+        System.out.println("Client 2: "+ c2.getBalance());
+        System.out.println("Client 3: "+ c3.getBalance());
+        System.out.println("Client 4: "+ c4.getBalance());
+
+        executorService.shutdown();*/
+
+        CountDownLatch latch = new CountDownLatch(5);
+        CyclicBarrier barrier = new CyclicBarrier(5);
+
+        new CountDownThread(latch, "Bob").start();
+        Thread.sleep(500);
+        new CountDownThread(latch, "Gil").start();
+        Thread.sleep(500);
+        new CountDownThread(latch, "Tom").start();
+        Thread.sleep(500);
+        new CountDownThread(latch, "Barbara").start();
+        Thread.sleep(500);
+        new CountDownThread(latch, "Anton").start();
+
+    }
+
+    public static void sendEmail(String sender) {
+        System.out.println("Email sent from: " + sender);
+    }
+
+    static class CountDownThread extends Thread {
+        private final CountDownLatch latch;
+        private final String sender;
+
+        CountDownThread(CountDownLatch latch, String sender) {
+            this.latch = latch;
+            this.sender = sender;
+
+            latch.countDown();
+        }
+
+        @Override
+        public void run() {
+            System.out.println("Waiting for last sender");
+            try {
+                latch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("Begin email processing for " + sender);
+            sendEmail(sender);
+        }
     }
 
     public static synchronized void print(String text) {
@@ -45,43 +258,12 @@ public class Main {
         System.out.println(Thread.currentThread().getName() + " finished");
     }
 
-    public static void syncTesting(int stratValue) {
-        final int[] aaa = {stratValue};
-        Thread thread1 = new Thread() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 1000; i++) {
-                    aaa[0]++;
-                    //System.out.println(Thread.currentThread().getName() + " " + aaa);
-                }
-                System.out.println(Thread.currentThread().getName() + " " + aaa[0] + " test");
+    public static synchronized void syncTesting() {
+        for (int i = 0; i < 1000; i++) {
+            Main.number += 1;
+        }
+        System.out.println(Main.number + " " + Thread.currentThread().getName());
 
-            }
-        };
-        Thread thread2 = new Thread() {
-            @Override
-            public void run() {
-                synchronized (thread1) {
-                    if (thread1.isAlive()) {
-                        try {
-                            thread1.wait();
-                            System.out.println(Thread.currentThread().getName() + " waiting...");
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    for (int i = 0; i < 1000; i++) {
-                        aaa[0]++;
-                        //System.out.println(Thread.currentThread().getName() + " " + aaa);
-                    }
-                    System.out.println(Thread.currentThread().getName() + " " + aaa[0] + " test");
-
-                }
-            }
-        };
-        thread1.start();
-        thread2.start();
     }
 
 }
