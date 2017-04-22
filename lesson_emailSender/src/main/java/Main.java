@@ -33,6 +33,6 @@ public class Main {
         consumer2.start();
         consumer3.start();
 
-        Thread.sleep(10000);
+        Thread.sleep(30000);
     }
 }

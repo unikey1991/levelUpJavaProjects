@@ -2,6 +2,7 @@ package email;
 
 import com.sun.xml.internal.ws.resources.SenderMessages;
 
+import java.util.Date;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
@@ -18,9 +19,11 @@ public class EmailConsumer {
     public void start() {
         new Thread(() -> {
             EmailMessage message = null;
-            while ((message = queue.poll()) != null){
-                Sender.INSTANCE.send(message.getClientEmail(),message.getMessageText(),message.getSubject());
+            while ((message = queue.poll()) != null) {
+                System.out.println(new Date() + ": " + Thread.currentThread().getName() + " Send message to: " + message.getClientEmail());
+                Sender.INSTANCE.send(message.getSubject(), message.getMessageText(), message.getClientEmail());
             }
-        });
+
+        }).start();
     }
 }

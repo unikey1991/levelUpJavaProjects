@@ -14,10 +14,10 @@ public enum Sender {
 
     INSTANCE;
 
-    private String username;
+    /*private String username;
     private String password;
     private Properties props;
-
+*/
     //singletone - это зло! не юзать!
 //    private volatile static Sender instance;
 //
@@ -36,7 +36,7 @@ public enum Sender {
 //    }
 
 
-    public Sender(String username, String password) {
+    /*public Sender(String username, String password) {
         this.username = username;
         this.password = password;
 
@@ -45,15 +45,25 @@ public enum Sender {
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
-    }
+    }*/
 
     public void send(String subject, String text, String toEmail){
+        final String password = "JavaLevelUp166";
+        String username = "levelup.java.16.6@gmail.com";
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
         Session session = Session.getInstance(props, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }
         });
+
+
 
         try {
             Message message = new MimeMessage(session);

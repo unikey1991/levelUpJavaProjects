@@ -20,12 +20,24 @@ public class EmailMessage {
         return clientEmail;
     }
 
+    public void setClientEmail(String clientEmail) {
+        this.clientEmail = clientEmail;
+    }
+
     public String getMessageText() {
         return messageText;
     }
 
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
+    }
+
     public String getSubject() {
         return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 }
 
