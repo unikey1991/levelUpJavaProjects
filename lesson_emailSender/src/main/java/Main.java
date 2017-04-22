@@ -17,7 +17,7 @@ public class Main {
 
 
 
-        //Sender.send("test","Dimon herok","dp190792kdg@gmail.com");
+//        Sender.INSTANCE.send("test","Dimon herok","dp190792kdg@gmail.com");
 
 
         ArrayBlockingQueue<EmailMessage> queue = new ArrayBlockingQueue<>(10);
