@@ -1,0 +1,8 @@
+user1@yopmail.com;test message;test message
+user2@yopmail.com;test message;test message
+user3@yopmail.com;test message;test message
+user4@yopmail.com;test message;test message
+user5@yopmail.com;test message;test message
+user6@yopmail.com;test message;test message
+user7@yopmail.com;test message;test message
+user8@yopmail.com;test message;test message

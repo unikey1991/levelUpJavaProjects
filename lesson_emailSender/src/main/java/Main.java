@@ -1,8 +1,7 @@
-import email.EmailConsumer;
-import email.EmailMessage;
-import email.EmailProducer;
-import email.Sender;
+import email.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
@@ -13,14 +12,14 @@ public class Main {
     //private static email.Sender Sender = new Sender("levelup.java.16.6@gmail.com", "JavaLevelUp166");
 
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
 
 
 
 //        Sender.INSTANCE.send("test","Dimon herok","dp190792kdg@gmail.com");
 
 
-        ArrayBlockingQueue<EmailMessage> queue = new ArrayBlockingQueue<>(10);
+        /*ArrayBlockingQueue<EmailMessage> queue = new ArrayBlockingQueue<>(10);
         EmailProducer producer = new EmailProducer(queue);
 
         EmailConsumer consumer1 = new EmailConsumer(queue);
@@ -33,6 +32,9 @@ public class Main {
         consumer2.start();
         consumer3.start();
 
-        Thread.sleep(30000);
+        Thread.sleep(30000);*/
+
+        EmailSenderFromFileList senderFromFileList = new EmailSenderFromFileList("list.txt");
+        senderFromFileList.startSender();
     }
 }
