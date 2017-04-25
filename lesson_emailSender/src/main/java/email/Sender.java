@@ -4,7 +4,10 @@ import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Date;
 import java.util.Properties;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by java on 21.04.2017.
@@ -47,7 +50,10 @@ public enum Sender {
         props.put("mail.smtp.port", "587");
     }*/
 
+    private volatile Lock lock = new ReentrantLock();
+
     public void send(String subject, String text, String toEmail){
+        lock.lock();
         final String password = "JavaLevelUp166";
         String username = "levelup.java.16.6@gmail.com";
         Properties props = new Properties();
@@ -78,12 +84,14 @@ public enum Sender {
 
             //otpravlaem soobwenie
             Transport.send(message);
-            System.out.println("Sent message successfully");
+            System.out.println(new Date() + "Sent message successfully");
 
-        } catch (AddressException e) {
-            e.printStackTrace();
-        } catch (MessagingException e) {
+
+            Thread.sleep(3000);
+        } catch (InterruptedException | MessagingException e) {
             e.printStackTrace();
         }
+
+        lock.unlock();
     }
 }
