@@ -1,7 +1,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://unikey.hopto.org:3306/factory</property>
+        <property name="connection.url">jdbc:mysql://unikey.hopto.org:3306/email_sender</property>
         <property name="connection.username">unikey1991</property>
         <property name="connection.password">qwerty12345</property>
         <property name="connection.pool_size">10</property>
@@ -9,17 +9,8 @@
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
         <property name="hibernate.connection.autocommit">true</property>
-        <mapping class="hiber.Employee" />
-        <mapping class="hiber.Department"/>
-        <mapping class="hiber.EmployeesCourses"/>
-        <mapping class="hiber.Course"/>
-        <mapping class="hiber.EmployeesTangibles"/>
-        <mapping class="hiber.Tangible"/>
-        <mapping class="hiber.Post"/>
-        <mapping class="hiber.SalariesPaid"/>
-        <mapping class="hiber.WorkingDays"/>
-        <mapping class="hiber.Boat"/>
-        <mapping class="hiber.Yacht"/>
-        <mapping class="hiber.PhoneNumber"/>
+        <mapping class="entity.User" />
+        <mapping class="entity.AccountType"/>
+        <mapping class="entity.Packet"/>
     </session-factory>
 </hibernate-configuration>

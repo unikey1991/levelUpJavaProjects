@@ -51,10 +51,11 @@ public class Main {
 
             Department department = departmentQuery.uniqueResult();
 
-            Query<Post> postQuery = session.createQuery("from Post where id = :id", Post.class);
-            postQuery.setParameter("id", 1L);
+            Query<Post> postQuery = session.createQuery("from Post where title = :title", Post.class);
+            postQuery.setParameter("title", "Начальник департамента");
 
             Post post = postQuery.uniqueResult();
+            System.out.println(post.toString());
 
             /*Employee employee = new Employee("Adolf","Ivanov","Robertovhich", 55000, department, post);
 
@@ -128,7 +129,7 @@ public class Main {
 
             //selectAllBoatsOrderBySpeed(criteriaBuilder,criteriaQuery,yachtRoot,sessionFactory);
             //selectOneByMaxSpeed(criteriaBuilder,criteriaQuery,yachtRoot,sessionFactory);
-            selectOneByMin(criteriaBuilder, criteriaQuery, yachtRoot, sessionFactory);
+            //selectOneByMin(criteriaBuilder, criteriaQuery, yachtRoot, sessionFactory);
 
 
         } finally {
