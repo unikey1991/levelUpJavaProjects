@@ -1,5 +1,7 @@
 package view;
 
+import view.impl.AdminPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -10,15 +12,15 @@ import java.awt.event.ActionListener;
 public class AdminToolPanel extends JPanel {
 
 
-    private final TabbedPanel tabbedPanel;
+    private final AdminPanel adminPanel;
 
     private static final int ACTION_BTN_W = 75;
     private static final int ACTION_BTN_H = 50;
     private static final int BTN_Y = 310;
     private static final int BTN_X_STEP = 100;
 
-    public AdminToolPanel(TabbedPanel tabbedPanel) {
-        this.tabbedPanel = tabbedPanel;
+    public AdminToolPanel(AdminPanel adminPanel) {
+        this.adminPanel = adminPanel;
         initLayout();
     }
 
@@ -51,19 +53,19 @@ public class AdminToolPanel extends JPanel {
         }
     }
     private ActionListener createListener() {
-        return e -> tabbedPanel.create();
+        return e -> adminPanel.create();
     }
 
     private ActionListener readListener() {
-        return e -> tabbedPanel.read();
+        return e -> adminPanel.read();
     }
 
     private ActionListener updateListener() {
-        return e -> tabbedPanel.update();
+        return e -> adminPanel.update();
     }
 
     private ActionListener deleteListener() {
-        return e -> tabbedPanel.delete();
+        return e -> adminPanel.delete();
     }
 
 

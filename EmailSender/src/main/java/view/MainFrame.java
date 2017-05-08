@@ -32,7 +32,7 @@ public class MainFrame extends JFrame {
         dialog = new CreateLoginDialog(userDAO);
         AdminPanel adminPanel = new AdminPanel(userDAO);
         adminPanel.read();
-        SenderPanel senderPanel = new SenderPanel(packetDAO);
+        SenderPanel senderPanel = new SenderPanel(packetDAO,userDAO);
         senderPanel.read();
 
 
@@ -44,26 +44,20 @@ public class MainFrame extends JFrame {
 
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-        while (true){
-            if (dialog.isLogged())break;
-            Thread.sleep(2000);
+        if (dialog.isLogged()) {
+            tabbedPanel.add(senderPanel);
+            senderPanel.add(new SenderToolPanel(userDAO, senderPanel), BorderLayout.PAGE_END);
+            revalidate();
+            repaint();
+            if (userDAO.mainUser.getAccountType() == AccountType.ADMIN) {
+                tabbedPanel.add(adminPanel);
+                adminPanel.add(new AdminToolPanel(adminPanel), BorderLayout.PAGE_END);
+            }
+
+
+            setVisible(true);
         }
-
-
-        tabbedPanel.add(senderPanel);
-        senderPanel.add(new SenderToolPanel(tabbedPanel, userDAO), BorderLayout.PAGE_END);
-        revalidate();
-        repaint();
-        if (userDAO.mainUser.getAccountType() == AccountType.ADMIN ){
-            tabbedPanel.add(adminPanel);
-            adminPanel.add(new AdminToolPanel(tabbedPanel), BorderLayout.PAGE_END);
-        }
-
-
-        setVisible(true);
     }
-
-
 
 
 }

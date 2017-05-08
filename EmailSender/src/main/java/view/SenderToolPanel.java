@@ -2,6 +2,7 @@ package view;
 
 import dao.impl.UserDAOImpl;
 import entity.AccountType;
+import view.impl.SenderPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,17 +13,17 @@ import java.awt.event.ActionListener;
  */
 public class SenderToolPanel extends JPanel {
 
-    private final TabbedPanel tabbedPanel;
     private final UserDAOImpl userDAO;
+    private final SenderPanel senderPanel;
 
     private static final int ACTION_BTN_W = 75;
     private static final int ACTION_BTN_H = 50;
     private static final int BTN_Y = 310;
     private static final int BTN_X_STEP = 100;
 
-    public SenderToolPanel(TabbedPanel tabbedPanel, UserDAOImpl userDAO) {
+    public SenderToolPanel(UserDAOImpl userDAO, SenderPanel senderPanel) {
         this.userDAO = userDAO;
-        this.tabbedPanel = tabbedPanel;
+        this.senderPanel = senderPanel;
         initLayout();
     }
 
@@ -66,18 +67,18 @@ public class SenderToolPanel extends JPanel {
     }
 
     private ActionListener sendMessageListener() {
-        return e -> tabbedPanel.sendMesage();
+        return e -> senderPanel.sendMesage();
     }
 
     private ActionListener loadPacketListener() {
-        return e -> tabbedPanel.loadPacket();
+        return e -> senderPanel.loadPacket();
     }
 
     private ActionListener packetSendListener() {
-        return e -> tabbedPanel.packetSend();
+        return e -> senderPanel.packetSend();
     }
 
-    private ActionListener deletePacket() {return  e -> tabbedPanel.delete();}
+    private ActionListener deletePacket() {return  e -> senderPanel.delete();}
 
-    private ActionListener setAssign() {return  e -> tabbedPanel.update();}
+    private ActionListener setAssign() {return  e -> senderPanel.update();}
 }

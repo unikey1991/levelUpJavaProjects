@@ -1,6 +1,7 @@
 package view.impl;
 
 import dao.impl.PacketDAOImpl;
+import dao.impl.UserDAOImpl;
 import entity.Packet;
 import view.*;
 
@@ -15,13 +16,17 @@ public class SenderPanel extends JPanel implements view.Action{
     private final JTable table;
     private final PacketTableModel packetTableModel;
     //private final CreateUserDialog dialog = new CreateUserDialog(); //todo
-    private PacketDAOImpl packetDAO;
+    private final PacketDAOImpl packetDAO;
+    private final UserDAOImpl userDAO;
+    private final CreateLoadPacketDialog dialog;
 
 
-    public SenderPanel(PacketDAOImpl packetDAO) {
+    public SenderPanel(PacketDAOImpl packetDAO, UserDAOImpl userDAO) {
+        this.userDAO = userDAO;
         this.packetTableModel = new PacketTableModel();
         this.table = new JTable(packetTableModel);
         this.packetDAO = packetDAO;
+        this.dialog = new CreateLoadPacketDialog(userDAO, packetDAO);
         setName("Sender panel");
         init();
     }
@@ -66,7 +71,13 @@ public class SenderPanel extends JPanel implements view.Action{
 
     @Override
     public void loadPacket() {
-
+        dialog.setVisible(true);
+        if (dialog.isOkPressed()){
+            Packet packet = dialog.getEntity();
+            packetTableModel.getPacketList().add(packet);
+            packetDAO.create(packet);
+            table.updateUI();
+        }
     }
 
     @Override
