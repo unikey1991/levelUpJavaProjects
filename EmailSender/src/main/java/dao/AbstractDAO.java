@@ -1,9 +1,11 @@
 package dao;
 
+import email.EmailSenderFromFileList;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static hiber.HibernateUtil.getSessionFactory;
@@ -16,6 +18,8 @@ public abstract class AbstractDAO<T> {
     SessionFactory sessionFactory = getSessionFactory();
     public Session session = sessionFactory.openSession();
     public Transaction transaction = session.getTransaction();
+
+
 
 
     public abstract void create(T t);

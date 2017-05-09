@@ -2,11 +2,14 @@ package view.impl;
 
 import dao.impl.PacketDAOImpl;
 import dao.impl.UserDAOImpl;
+import email.EmailMessage;
 import entity.Packet;
 import view.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Created by unike on 06.05.2017.
@@ -19,6 +22,8 @@ public class SenderPanel extends JPanel implements view.Action{
     private final PacketDAOImpl packetDAO;
     private final UserDAOImpl userDAO;
     private final CreateLoadPacketDialog dialog;
+    private final CreateEmailSendDialog sendDialog;
+    private final java.util.List<EmailMessage> messageList;
 
 
     public SenderPanel(PacketDAOImpl packetDAO, UserDAOImpl userDAO) {
@@ -27,6 +32,8 @@ public class SenderPanel extends JPanel implements view.Action{
         this.table = new JTable(packetTableModel);
         this.packetDAO = packetDAO;
         this.dialog = new CreateLoadPacketDialog(userDAO, packetDAO);
+        this.sendDialog = new CreateEmailSendDialog(userDAO, packetDAO);
+        this.messageList = new ArrayList<>();
         setName("Sender panel");
         init();
     }
@@ -66,7 +73,12 @@ public class SenderPanel extends JPanel implements view.Action{
 
     @Override
     public void sendMesage() {
-
+        sendDialog.setVisible(true);
+        if (sendDialog.isOkPressed()){
+            EmailMessage emailMessage = sendDialog.getEntity();
+            messageList.add(emailMessage);
+            packetDAO.producer.sendMessage(messageList);
+        }
     }
 
     @Override
@@ -77,11 +89,14 @@ public class SenderPanel extends JPanel implements view.Action{
             packetTableModel.getPacketList().add(packet);
             packetDAO.create(packet);
             table.updateUI();
+            System.out.println("packet loaded");
         }
     }
 
     @Override
-    public void packetSend() {
-
+    public void packetSend() throws InterruptedException, IOException {
+        Packet packet = packetTableModel.getSelectedRowData(table.getSelectedRow());
+        packetDAO.currentPacket=packet.getFile();
+        packetDAO.senderFromFileList.startSender(packetDAO.currentPacket);
     }
 }

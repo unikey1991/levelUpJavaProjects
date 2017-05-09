@@ -7,6 +7,7 @@ import view.impl.SenderPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * Created by unike on 06.05.2017.
@@ -75,7 +76,15 @@ public class SenderToolPanel extends JPanel {
     }
 
     private ActionListener packetSendListener() {
-        return e -> senderPanel.packetSend();
+        return e -> {
+            try {
+                senderPanel.packetSend();
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        };
     }
 
     private ActionListener deletePacket() {return  e -> senderPanel.delete();}

@@ -58,8 +58,8 @@ public class CreateLoadPacketDialog extends UserDialog{
         JLabel path = new JLabel("Enter full path:");
         JLabel name = new JLabel("Enter name:");
 
-        path.setBounds(30, 0, 65, 25);
-        name.setBounds(30, 35, 65, 25);
+        path.setBounds(30, 0, 100, 25);
+        name.setBounds(30, 35, 100, 25);
 
         panel.add(path);
         panel.add(name);
@@ -69,8 +69,8 @@ public class CreateLoadPacketDialog extends UserDialog{
         path = new TextField();
         packetName = new TextField();
 
-        path.setBounds(110, 0, 100, 25);
-        packetName.setBounds(110, 35, 100, 25);
+        path.setBounds(135, 0, 100, 25);
+        packetName.setBounds(135, 35, 100, 25);
 
         panel.add(path);
         panel.add(packetName);

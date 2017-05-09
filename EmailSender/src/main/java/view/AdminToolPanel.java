@@ -4,6 +4,7 @@ import view.impl.AdminPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -53,7 +54,9 @@ public class AdminToolPanel extends JPanel {
         }
     }
     private ActionListener createListener() {
-        return e -> adminPanel.create();
+        return (ActionEvent e) -> {
+            adminPanel.create();
+        };
     }
 
     private ActionListener readListener() {

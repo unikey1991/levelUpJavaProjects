@@ -56,6 +56,9 @@ public abstract class UserDialog extends JDialog{
 
     private ActionListener getButtonListener() {
         return e -> {
+            if(e.getActionCommand().equals("Send")) {
+                isOkPressed = true;
+            }
             if(e.getActionCommand().equals("ok")) {
                 isOkPressed = true;
             }

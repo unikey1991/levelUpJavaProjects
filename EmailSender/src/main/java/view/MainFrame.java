@@ -2,6 +2,7 @@ package view;
 
 import dao.impl.PacketDAOImpl;
 import dao.impl.UserDAOImpl;
+import email.EmailSenderFromFileList;
 import entity.AccountType;
 import view.impl.AdminPanel;
 import view.impl.CreateLoginDialog;
@@ -9,6 +10,7 @@ import view.impl.SenderPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 /**
  * Created by unike on 03.05.2017.
@@ -18,11 +20,11 @@ public class MainFrame extends JFrame {
     private CreateLoginDialog dialog;
 
 
-    public MainFrame() throws HeadlessException, InterruptedException {
+    public MainFrame() throws HeadlessException, InterruptedException, IOException {
         init();
     }
 
-    private void init() throws InterruptedException {
+    private void init() throws InterruptedException, IOException {
 
 
         Container container = getContentPane();
