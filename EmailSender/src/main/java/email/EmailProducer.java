@@ -21,23 +21,6 @@ public class EmailProducer extends Thread {
         queue.offer(m);
     }
 
-    /*@Override
-    public void run() {
-        List<EmailMessage> messageList = Arrays.asList(
-                new EmailMessage("user1@yopmail.com", "test message", "test message"),
-                new EmailMessage("user2@yopmail.com", "test message", "test message"),
-                new EmailMessage("user3@yopmail.com", "test message", "test message"),
-                new EmailMessage("user4@yopmail.com", "test message", "test message"),
-                new EmailMessage("user5@yopmail.com", "test message", "test message"),
-                new EmailMessage("user6@yopmail.com", "test message", "test message"),
-                new EmailMessage("user7@yopmail.com", "test message", "test message"),
-                new EmailMessage("user8@yopmail.com", "test message", "test message")
-        );
-
-        for (EmailMessage m : messageList) {
-            queue.offer(m);
-        }
-    }*/
 
 
 

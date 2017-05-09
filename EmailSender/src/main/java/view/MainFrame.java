@@ -33,15 +33,15 @@ public class MainFrame extends JFrame {
         PacketDAOImpl packetDAO = new PacketDAOImpl();
         dialog = new CreateLoginDialog(userDAO);
         AdminPanel adminPanel = new AdminPanel(userDAO);
-        adminPanel.read();
+
         SenderPanel senderPanel = new SenderPanel(packetDAO,userDAO);
-        senderPanel.read();
+
 
 
         //tabbedPanel.add(loginPanel);
         container.add(tabbedPanel, BorderLayout.CENTER);
 
-        setBounds(0, 0, 800, 600);
+        setBounds(0, 0, 600, 600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         dialog.setLocationRelativeTo(null);
@@ -59,6 +59,8 @@ public class MainFrame extends JFrame {
 
             setVisible(true);
         }
+        adminPanel.read();
+        senderPanel.read();
     }
 
 

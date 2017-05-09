@@ -34,6 +34,7 @@ public class CreateEmailSendDialog extends UserDialog {
     }
 
     private void initComponents() {
+        setLocationRelativeTo(null);
         initLabels();
         initTextFields();
     }
@@ -51,15 +52,6 @@ public class CreateEmailSendDialog extends UserDialog {
         text.setText("");
     }
 
-    /*private Packet email() { //todo Email
-        File file = new File(path.getText());
-        if (null == file) {
-            System.out.println("File not found");
-            return null;
-        }
-        Packet packet = new Packet(packetName.getText(),new Date(), userDAO.mainUser, userDAO.mainUser, file);
-        return packet;
-    }*/
 
     private void initLabels() {
         JLabel email = new JLabel("Enter email:");

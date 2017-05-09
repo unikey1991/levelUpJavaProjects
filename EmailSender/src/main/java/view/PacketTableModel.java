@@ -27,6 +27,10 @@ public class PacketTableModel extends AbstractTableModel {
         this.packetList = packetList;
     }
 
+    public void addPacketToList (Packet packet){
+        packetList.add(packet);
+    }
+
     @Override
     public String getColumnName(int column) {
         return columns[column];

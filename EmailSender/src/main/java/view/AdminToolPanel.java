@@ -20,6 +20,8 @@ public class AdminToolPanel extends JPanel {
     private static final int BTN_Y = 310;
     private static final int BTN_X_STEP = 100;
 
+
+
     public AdminToolPanel(AdminPanel adminPanel) {
         this.adminPanel = adminPanel;
         initLayout();

@@ -24,6 +24,7 @@ public class CreateUserDialog extends UserDialog {
 
     @Override
     public User getEntity() {
+        setLocationRelativeTo(null);
         User citizen = createUser();
         clearFields();
         return citizen;

@@ -3,11 +3,13 @@ package view.impl;
 import dao.impl.PacketDAOImpl;
 import dao.impl.UserDAOImpl;
 import email.EmailMessage;
+import entity.AccountType;
 import entity.Packet;
 import view.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -26,12 +28,13 @@ public class SenderPanel extends JPanel implements view.Action{
     private final java.util.List<EmailMessage> messageList;
 
 
+
     public SenderPanel(PacketDAOImpl packetDAO, UserDAOImpl userDAO) {
         this.userDAO = userDAO;
         this.packetTableModel = new PacketTableModel();
         this.table = new JTable(packetTableModel);
         this.packetDAO = packetDAO;
-        this.dialog = new CreateLoadPacketDialog(userDAO, packetDAO);
+        this.dialog = new CreateLoadPacketDialog(userDAO, packetDAO,packetTableModel,table);
         this.sendDialog = new CreateEmailSendDialog(userDAO, packetDAO);
         this.messageList = new ArrayList<>();
         setName("Sender panel");
@@ -53,7 +56,19 @@ public class SenderPanel extends JPanel implements view.Action{
 
     @Override
     public void read() {
-        packetTableModel.setPacketList(packetDAO.read());
+        if (userDAO.mainUser.getAccountType() == AccountType.ADMIN) {
+            packetTableModel.setPacketList(packetDAO.read());
+        }
+        else {
+            ArrayList<Packet> packetArrayList = packetDAO.read();
+            for (Packet p : packetArrayList) {
+                if (p.getAssignedTo().getId() ==  userDAO.mainUser.getId()) {
+                    System.out.println(p.getAssignedTo());
+                    System.out.println(userDAO.mainUser);
+                    packetTableModel.addPacketToList(p);
+                }
+            }
+        }
         table.updateUI();
     }
 
@@ -84,13 +99,6 @@ public class SenderPanel extends JPanel implements view.Action{
     @Override
     public void loadPacket() {
         dialog.setVisible(true);
-        if (dialog.isOkPressed()){
-            Packet packet = dialog.getEntity();
-            packetTableModel.getPacketList().add(packet);
-            packetDAO.create(packet);
-            table.updateUI();
-            System.out.println("packet loaded");
-        }
     }
 
     @Override
