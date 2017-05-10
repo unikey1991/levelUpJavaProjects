@@ -61,6 +61,7 @@ public class MainFrame extends JFrame {
         }
         adminPanel.read();
         senderPanel.read();
+        senderPanel.checkMessageCounter();
     }
 
 

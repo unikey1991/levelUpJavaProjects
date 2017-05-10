@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by unike on 03.05.2017.
@@ -41,6 +42,12 @@ public class User {
     @Column(table = "user_details")
     @Enumerated (EnumType.STRING)
     private AccountType accountType;
+
+    @Column(table = "user_details", name = "quantity_of_messages_left")
+    private Long quantityOfMessagesLeftToSendInMounth;
+
+    @Column(table = "user_details")
+    private Date dateOfStartMessgesCounter;
 
     public User(String email, String password, String name, String lastName, AccountType accountType) {
         this.email = email;

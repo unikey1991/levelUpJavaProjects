@@ -1,5 +1,7 @@
 package email;
 
+import lombok.Getter;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,6 +13,8 @@ import java.util.concurrent.ArrayBlockingQueue;
 /**
  * Created by unike on 23.04.2017.
  */
+
+@Getter
 public class EmailSenderFromFileList {
 
 
@@ -26,7 +30,9 @@ public class EmailSenderFromFileList {
         return new EmailMessage(str[0], str[2], str[1]);
     }
 
-    private void readFromFile(RandomAccessFile file) throws IOException {
+    public void readFromFile(File currentFile) throws IOException {
+        messages.clear();
+        RandomAccessFile file = new RandomAccessFile(currentFile, "r");
         file.seek(0);
         String str;
         while ((str = file.readLine()) != null) {
@@ -34,9 +40,7 @@ public class EmailSenderFromFileList {
         }
     }
 
-    public void startSender(File currentFile) throws InterruptedException, IOException {
-        RandomAccessFile file = new RandomAccessFile(currentFile, "r");
-        readFromFile(file);
+    public void startSender() throws InterruptedException, IOException {
         ArrayBlockingQueue<EmailMessage> queue = new ArrayBlockingQueue<>(messages.size());
         new Thread(() -> {
             for (EmailMessage message : messages) {
