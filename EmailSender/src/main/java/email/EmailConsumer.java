@@ -1,6 +1,5 @@
 package email;
 
-import com.sun.xml.internal.ws.resources.SenderMessages;
 
 import java.util.Date;
 import java.util.concurrent.ArrayBlockingQueue;

@@ -17,7 +17,7 @@ import java.util.Date;
 public class CreateEmailSendDialog extends UserDialog {
     private TextField email;
     private TextField theme;
-    private TextField text;
+    private TextArea text;
     private final UserDAOImpl userDAO;
     private final PacketDAOImpl packetDAO;
 
@@ -70,7 +70,7 @@ public class CreateEmailSendDialog extends UserDialog {
     private void initTextFields() {
         email = new TextField();
         theme = new TextField();
-        text = new TextField();
+        text = new TextArea();
 
         email.setBounds(150, 0, 200, 25);
         theme.setBounds(150, 35, 200, 25);

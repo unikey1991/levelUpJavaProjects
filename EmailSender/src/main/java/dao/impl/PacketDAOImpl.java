@@ -6,8 +6,8 @@ import email.EmailMessage;
 import email.EmailProducer;
 import email.EmailSenderFromFileList;
 import entity.Packet;
+import org.hibernate.query.Query;
 
-import javax.persistence.Query;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

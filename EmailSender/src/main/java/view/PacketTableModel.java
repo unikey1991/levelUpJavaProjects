@@ -2,7 +2,6 @@ package view;
 
 import entity.Packet;
 import lombok.Getter;
-import sun.swing.BakedArrayList;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;

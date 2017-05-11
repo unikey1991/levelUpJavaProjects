@@ -3,6 +3,7 @@ package hiber;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+
 /**
  * Created by unike on 03.05.2017.
  */
@@ -14,7 +15,7 @@ public class HibernateUtil {
         try {
 //creates the session factory from hibernate.cfg.xml
             sessionFactory = new
-                    Configuration().configure().buildSessionFactory();
+                    Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         } catch (Exception e) {
             e.printStackTrace();
         }

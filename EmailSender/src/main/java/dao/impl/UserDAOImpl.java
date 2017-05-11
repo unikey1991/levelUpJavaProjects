@@ -2,14 +2,10 @@ package dao.impl;
 
 import dao.AbstractDAO;
 import entity.User;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
-import javax.persistence.Query;
 import java.util.ArrayList;
 
-import static hiber.HibernateUtil.getSessionFactory;
 
 /**
  * Created by unike on 03.05.2017.
