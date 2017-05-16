@@ -11,10 +11,10 @@
     <title>Home</title>
 </head>
 <body>
-<form action="login" method="get">
+<form action="<%=request.getServletContext().getContextPath()%>/login" method="get">
     <input type="submit" value="Войти">
 </form>
-<form action="register" method="get">
+<form action="<%=request.getServletContext().getContextPath()%>/register" method="get">
     <input type="submit" value="Регистрация">
 </form>
 </body>
