@@ -29,7 +29,7 @@
     </thead>
 
     <tbody>
-    <c:forEach var="sr" items="${searchResulList}">
+    <c:forEach var="sr" items="${searchResultList}">
         <tr>
             <td>
                 <c:out value="${sr.login}"/>
@@ -57,6 +57,8 @@
             <td>
                 <form action="search" method="post">
                     <input type="submit" value="Изменить">
+                    <input type="hidden" name="updateId" value="${sr.id}">
+
                 </form>
             </td>
         </tr>

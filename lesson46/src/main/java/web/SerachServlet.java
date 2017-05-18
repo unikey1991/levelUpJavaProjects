@@ -38,20 +38,39 @@ public class SerachServlet extends HttpServlet {
 
 
         if (req.getParameter("deleteId") != null){
-            userDAO.deleteById(Long.parseLong(req.getParameter("deleteId")));
+            long id = Long.parseLong(req.getParameter("deleteId"));
+            User user = userDAO.getUserById(id);
+            userDAO.delete(user);
+        }
+        if (req.getParameter("updateId") != null){
+
+            long id = Long.parseLong(req.getParameter("updateId"));
+            User user = userDAO.getUserById(id);
+            req.setAttribute("login", user.getLogin());
+            req.setAttribute("name", user.getName());
+            req.setAttribute("lastName", user.getLastName());
+            req.setAttribute("phone", user.getPhone());
+            req.setAttribute("email", user.getEmail());
+            req.setAttribute("userId", user.getId());
+            req.getRequestDispatcher("userUpdate.jsp").forward(req,resp);
+
+
+        }
+
+        if (req.getParameter("update") != null){
+            long id = Long.parseLong(req.getParameter("userId"));
+            User user = userDAO.getUserById(id);
+            user.setLogin(req.getParameter("login"));
+            user.setName(req.getParameter("name"));
+            user.setLastName(req.getParameter("lastName"));
+            user.setPhone(req.getParameter("phone"));
+            user.setEmail(req.getParameter("email"));
+            userDAO.update(user);
         }
 
 
-        req.setAttribute("searchResulList", userList);
+        req.setAttribute("searchResultList", userList);
         req.getRequestDispatcher("search.jsp").forward(req,resp);
-
-
-
-        if (req.getParameter("delete").equals("*")){
-            userDAO.deleteById(Long.parseLong(req.getParameter("sr.id")));
-        }
-
-
     }
 
 

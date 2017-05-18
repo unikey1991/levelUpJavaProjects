@@ -30,12 +30,22 @@ public class UserDAO {
         }
     }
 
-    public void deleteById(long id){
+    public User getUserById(long id){
         Transaction transaction = null;
         try (Session session = HibernateUtil.openSession()) {
             Query<User> userQuery = session.createQuery("from User where id =:id", User.class);
             userQuery.setParameter("id", id);
-            User user = userQuery.getSingleResult();
+            return userQuery.getSingleResult();
+        } catch (HibernateException e) {
+            System.out.println(e.getMessage());
+            System.out.println("error deleteById");
+        }
+        return null;
+    }
+
+    public void delete(User user){
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.openSession()) {
             transaction = session.getTransaction();
             transaction.begin();
             session.delete(user);
@@ -44,7 +54,22 @@ public class UserDAO {
 
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
-            System.out.println("error addUser");
+            System.out.println("error deleteById");
+        }
+    }
+
+    public void update(User user){
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.openSession()) {
+            transaction = session.getTransaction();
+            transaction.begin();
+            session.update(user);
+            transaction.commit();
+            System.out.println("\n\n User updated \n");
+
+        } catch (HibernateException e) {
+            System.out.println(e.getMessage());
+            System.out.println("error updateById");
         }
     }
 
@@ -56,7 +81,7 @@ public class UserDAO {
             return userQuery.getResultList();
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
-            System.out.println("error getUser");
+            System.out.println("error getUsersListByLoginAndPhone");
         }
         return null;
     }
@@ -71,7 +96,7 @@ public class UserDAO {
             if (null != user) return user;
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
-            System.out.println("error getUser");
+            System.out.println("error getUserByLoginAndPassword");
         }
         return null;
     }

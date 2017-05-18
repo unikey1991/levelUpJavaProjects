@@ -12,13 +12,13 @@
 </head>
 <body>
 <form action="register" method="post">
-    <span>Login:</span><input name="login" type="text">
-    <span>Password:</span><input name="password" type="password">
-    <span>Name:</span><input name="name" type="text">
-    <span>Last name:</span><input name="lastName" type="text">
-    <span>Phone:</span><input name="phone" type="number">
+    <span>Логин:</span><input name="login" type="text">
+    <span>Пароль:</span><input name="password" type="password">
+    <span>Имя:</span><input name="name" type="text">
+    <span>Фамилия:</span><input name="lastName" type="text">
+    <span>Телефон в формате 380...:</span><input type="tel" name="phone" pattern="38[0-9]{10}">
     <span>Email:</span><input name="lastName" type="email">
-    <input type="submit" value="post">
+    <input type="submit" value="Зарегистрироваться">
 </form>
 
 </body>
