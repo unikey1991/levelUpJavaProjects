@@ -25,5 +25,7 @@ public class HomeServlet extends HttpServlet {
         resp.sendRedirect("/login");
 
         resp.sendRedirect("/register");
+
+        resp.sendRedirect("/search");
     }
 }

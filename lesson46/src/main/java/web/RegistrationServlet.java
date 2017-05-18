@@ -32,6 +32,9 @@ public class RegistrationServlet extends HttpServlet {
         String password = req.getParameter("password");
         String name = req.getParameter("name");
         String lastName = req.getParameter("lastName");
+        String phone = req.getParameter("phone");
+        String email = req.getParameter("email");
+
 
 
         UserDAO userDAO = new UserDAO();
@@ -40,7 +43,7 @@ public class RegistrationServlet extends HttpServlet {
         } else {
             req.setAttribute("name", name);
             req.setAttribute("lastName", lastName);
-            User user = new User(login, password, name, lastName);
+            User user = new User(login, password, name, lastName, phone,email);
             System.out.println(user.toString());
 
             userDAO.addUser(user);

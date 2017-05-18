@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.util.List;
+
 /**
  * Created by unike on 15.05.2017.
  */
@@ -26,6 +28,37 @@ public class UserDAO {
             System.out.println(e.getMessage());
             System.out.println("error addUser");
         }
+    }
+
+    public void deleteById(long id){
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.openSession()) {
+            Query<User> userQuery = session.createQuery("from User where id =:id", User.class);
+            userQuery.setParameter("id", id);
+            User user = userQuery.getSingleResult();
+            transaction = session.getTransaction();
+            transaction.begin();
+            session.delete(user);
+            transaction.commit();
+            System.out.println("\n\n User deleted \n");
+
+        } catch (HibernateException e) {
+            System.out.println(e.getMessage());
+            System.out.println("error addUser");
+        }
+    }
+
+    public List<User> getUsersListByLoginAndPhone (String login, String phone){
+        try (Session session = HibernateUtil.openSession()) {
+            Query<User> userQuery = session.createQuery("from User where login like :login and phone like :phone", User.class);
+            userQuery.setParameter("login", "%"+login+"%");
+            userQuery.setParameter("phone", "%"+phone+"%");
+            return userQuery.getResultList();
+        } catch (HibernateException e) {
+            System.out.println(e.getMessage());
+            System.out.println("error getUser");
+        }
+        return null;
     }
 
     public User getUserByLoginAndPassword(String login, String password) {

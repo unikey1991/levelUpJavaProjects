@@ -17,5 +17,8 @@
 <form action="<%=request.getServletContext().getContextPath()%>/register" method="get">
     <input type="submit" value="Регистрация">
 </form>
+<form action="<%=request.getServletContext().getContextPath()%>/search.jsp" method="get">
+    <input type="submit" value="Поиск пользователей">
+</form>
 </body>
 </html>

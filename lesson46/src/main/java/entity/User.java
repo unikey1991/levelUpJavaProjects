@@ -31,11 +31,19 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    public User(String login, String password, String name, String lastName) {
+    @Column
+    private String phone;
+
+    @Column
+    private String email;
+
+    public User(String login, String password, String name, String lastName, String phone, String email) {
         this.login = login;
         this.password = password;
         this.name = name;
         this.lastName = lastName;
+        this.phone = phone;
+        this.email = email;
     }
 
     public User() {
