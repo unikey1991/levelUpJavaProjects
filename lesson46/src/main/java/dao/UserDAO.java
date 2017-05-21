@@ -100,4 +100,15 @@ public class UserDAO {
         }
         return null;
     }
+
+    public List<User> read() {
+        try (Session session = HibernateUtil.openSession()) {
+            Query<User> userQuery = session.createQuery("from User", User.class);
+            return userQuery.getResultList();
+        } catch (HibernateException e) {
+            System.out.println(e.getMessage());
+            System.out.println("error read");
+        }
+        return null;
+    }
 }

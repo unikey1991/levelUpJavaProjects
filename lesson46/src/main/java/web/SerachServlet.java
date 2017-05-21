@@ -1,5 +1,6 @@
 package web;
 
+import com.google.gson.Gson;
 import dao.UserDAO;
 import entity.User;
 
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +22,7 @@ import java.util.List;
 public class SerachServlet extends HttpServlet {
 
 
-    @Override
+    /*@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //UserDAO userDAO = new UserDAO();
 
@@ -28,16 +31,26 @@ public class SerachServlet extends HttpServlet {
 
     }
 
-    @Override
+    @Override*/
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserDAO userDAO = new UserDAO();
 
-        String login = req.getParameter("login");
-        String phone = req.getParameter("phone");
-        List<User> userList = userDAO.getUsersListByLoginAndPhone(login, phone);
+        String queryLogin = req.getParameter("login");
+        String queryPhone = req.getParameter("phone");
+//        List<User> userList = userDAO.getUsersListByLoginAndPhone(login, phone);
 
 
-        if (req.getParameter("deleteId") != null){
+        List<User> userList = userDAO.read();
+
+        resp.setContentType("application/json");
+
+        PrintWriter out = resp.getWriter();
+        Gson gson = new Gson();
+
+        gson.toJson(filterListByQuery(userList, queryLogin, queryPhone), out);
+
+
+       /* if (req.getParameter("deleteId") != null){
             long id = Long.parseLong(req.getParameter("deleteId"));
             User user = userDAO.getUserById(id);
             userDAO.delete(user);
@@ -70,9 +83,18 @@ public class SerachServlet extends HttpServlet {
 
 
         req.setAttribute("searchResultList", userList);
-        req.getRequestDispatcher("search.jsp").forward(req,resp);
+        req.getRequestDispatcher("search.jsp").forward(req,resp);*/
     }
 
+    private List<User> filterListByQuery(List<User> userList, String queryLogin, String queryPhone) {
+        List<User> result = new ArrayList<>();
+        for (User u : userList){
+            if (u.getLogin().contains(queryLogin) && u.getPhone().contains(queryPhone)) {
+                result.add(u);
+            }
+        }
+        return result;
+    }
 
 
 }
