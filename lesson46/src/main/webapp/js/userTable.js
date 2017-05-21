@@ -39,8 +39,8 @@ function search() {
     fetch('/search', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body: 'queryLogin=' + queryLogin
-        //body: 'queryPhone=' + queryPhone
+        body: 'queryLogin=' + queryLogin,
+        body: 'queryPhone=' + queryPhone
     })
         .then(function (response) {
             return response.json();

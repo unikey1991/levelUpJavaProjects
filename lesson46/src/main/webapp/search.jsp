@@ -32,70 +32,66 @@
     <tr>
         <td>Id</td>
         <td>Login</td>
+        <td>Name</td>
+        <td>Last Name</td>
+        <td>Phone</td>
         <td>Email</td>
-        <td>First name</td>
-        <td>Last name</td>
-        <td>Age</td>
-        <td>Address</td>
     </tr>
     </thead>
     <tbody id="user-table">
     </tbody>
 </table>
 
-<script src="${pageContext.servletContext.contextPath}/js/userTable.js"></script>
 
-<%--<script type="text/javascript"--%>
-        <%--src="${pageContext.servletContext.contextPath}/js/userTable.js">--%>
-<%--</script>--%>
+<script type="text/javascript">/**
+ * Created by unike on 21.05.2017.
+ */
+function fillTable(userList) {
+    var userTable = document.getElementById("user-table");
 
-<%--<table>--%>
-    <%--<thead>--%>
-    <%--<tr>--%>
-        <%--<td>Login</td>--%>
-        <%--<td>Name</td>--%>
-        <%--<td>Last Name</td>--%>
-        <%--<td>Phone</td>--%>
-        <%--<td>Email</td>--%>
-    <%--</tr>--%>
-    <%--</thead>--%>
+    clearTable(userTable);
 
-    <%--<tbody>--%>
-    <%--<c:forEach var="sr" items="${searchResultList}">--%>
-        <%--<tr>--%>
-            <%--<td>--%>
-                <%--<c:out value="${sr.login}"/>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<c:out value="${sr.name}"/>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<c:out value="${sr.lastName}"/>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<c:out value="${sr.phone}"/>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<c:out value="${sr.email}"/>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<form action="search" method="post">--%>
+    userList.forEach(function (user) {
+        var row = userTable.insertRow();
 
-                    <%--<input type="submit" value="Удалить">--%>
-                    <%--<input type="hidden" name="deleteId" value="${sr.id}">--%>
+        var id = row.insertCell(0);
+        var login = row.insertCell(1);
+        var name = row.insertCell(2);
+        var lastName = row.insertCell(3);
+        var phone = row.insertCell(4);
+        var email = row.insertCell(5);
 
-                <%--</form>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<form action="search" method="post">--%>
-                    <%--<input type="submit" value="Изменить">--%>
-                    <%--<input type="hidden" name="updateId" value="${sr.id}">--%>
+        id.innerHTML = user.id;
+        login.innerHTML = user.login;
+        name.innerHTML = user.name;
+        lastName.innerHTML = user.lastName;
+        phone.innerHTML = user.phone;
+        email.innerHTML = user.email;
+    });
+}
 
-                <%--</form>--%>
-            <%--</td>--%>
-        <%--</tr>--%>
-    <%--</c:forEach>--%>
-    <%--</tbody>--%>
-<%--</table>--%>
+function clearTable(table) {
+    table.innerHTML = '';
+}
+
+
+function search() {
+
+    var query = document.getElementById("user-login").value;
+    query = " "+query +","+ document.getElementById("user-phone").value+" ";
+    fetch('/search', {
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body: 'query=' + query
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (userList) {
+            fillTable(userList);
+        })
+        .catch(alert);
+}</script>
+
 </body>
 </html>
