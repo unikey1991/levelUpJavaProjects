@@ -7,20 +7,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<script type="text/javascript"--%>
-<%--src="${request.contextPath}/js/userTable.js">--%>
-<%--</script>--%>
+
 
 <html>
 <head>
     <title>Search</title>
 </head>
 <body>
-<%--<form action="search" method="post">--%>
-<%--<span>Логин:</span><input name="login" type="text">--%>
-<%--<span>Телефон:</span><input name="phone" type="text">--%>
-<%--<input type="submit" value="Найти">--%>
-<%--</form>--%>
+
 
 <div>
     <input type="text" id="user-login"/><span>
@@ -52,6 +46,7 @@ function fillTable(userList) {
     var userTable = document.getElementById("user-table");
 
     clearTable(userTable);
+    var i = 0;
 
     userList.forEach(function (user) {
         var row = userTable.insertRow();
@@ -65,9 +60,6 @@ function fillTable(userList) {
         var del = row.insertCell(6);
         var upd = row.insertCell(7);
 
-        var button = '<button id="button2">Update</button>';
-
-
 
         id.innerHTML = user.id;
         login.innerHTML = user.login;
@@ -75,30 +67,30 @@ function fillTable(userList) {
         lastName.innerHTML = user.lastName;
         phone.innerHTML = user.phone;
         email.innerHTML = user.email;
-        del.innerHTML = del.innerHTML + '<button id="button1">delete</button>';
-        upd.innerHTML = upd.innerHTML + button;
+        del.innerHTML = del.innerHTML + '<button id="btn_del" >Delete</button>';
+        upd.innerHTML = upd.innerHTML + '<button id="btn_upd" >Update</button>';
 
 
+        var but_del = document.getElementById("btn_del");
+        but_del.id = i;
+        but_del.onclick = function () {
+            if (confirm("Вы подтверждаете удаление пользователя ID: "+user.id+" ?")) {
+                document.location.href = "/delete?" + user.id;
+                alert("Пользователь ID: "+user.id+" удален")
+            } else {
+                return false;
+            }
+        };
+
+        var but_upd = document.getElementById("btn_upd");
+        but_upd.id = i;
+        but_upd.onclick = function () {
+            document.location.href = "/updateUser?" + user.id;
+        };
+        i++;
     });
 }
 
-<%--<button data-id="77" id="btn" onclick="sendRequest(this)">Click</button>--%>
-
-<%--<script type="text/javascript">--%>
-<%--function sendRequest(data) {--%>
-<%--console.log(data.dataset);--%>
-<%--}--%>
-<%--</script>--%>
-
-
-function del(userId) {
-
-}
-
-function upd(button) {
-
-    document.location.href = "/updateUser?user_id=" + button.id;
-}
 
 function clearTable(table) {
     table.innerHTML = '';

@@ -12,9 +12,8 @@
 </head>
 <body>
 
-<form action="search" method="post">
+<form action="updateUser" method="post">
     <input type="hidden" name="userId" value="${userId}">
-<span>Логин:</span><input name="login" type="text" value="${login}">
 <span>Имя:</span><input name="name" type="text" value="${name}">
 <span>Фамилия:</span><input name="lastName" type="text" value="${lastName}">
 <span>Телефон в формате 38...:</span><input name="phone" type="tel" pattern="38[0-9]{10}" value="${phone}">
@@ -22,6 +21,7 @@
 <input type="submit" value="Применить">
     <input type="hidden" name="update" value="1">
 </form>
+<script></script>
 
 </body>
 </html>

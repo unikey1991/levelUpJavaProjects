@@ -22,6 +22,7 @@ import java.util.List;
 public class SerachServlet extends HttpServlet {
 
 
+
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserDAO userDAO = new UserDAO();
 
