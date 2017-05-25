@@ -8,7 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<script type="text/javascript"--%>
-        <%--src="${request.contextPath}/js/userTable.js">--%>
+<%--src="${request.contextPath}/js/userTable.js">--%>
 <%--</script>--%>
 
 <html>
@@ -17,9 +17,9 @@
 </head>
 <body>
 <%--<form action="search" method="post">--%>
-    <%--<span>Логин:</span><input name="login" type="text">--%>
-    <%--<span>Телефон:</span><input name="phone" type="text">--%>
-    <%--<input type="submit" value="Найти">--%>
+<%--<span>Логин:</span><input name="login" type="text">--%>
+<%--<span>Телефон:</span><input name="phone" type="text">--%>
+<%--<input type="submit" value="Найти">--%>
 <%--</form>--%>
 
 <div>
@@ -36,6 +36,8 @@
         <td>Last Name</td>
         <td>Phone</td>
         <td>Email</td>
+        <td></td>
+        <td></td>
     </tr>
     </thead>
     <tbody id="user-table">
@@ -60,6 +62,12 @@ function fillTable(userList) {
         var lastName = row.insertCell(3);
         var phone = row.insertCell(4);
         var email = row.insertCell(5);
+        var del = row.insertCell(6);
+        var upd = row.insertCell(7);
+
+        var button = '<button id="button2">Update</button>';
+
+
 
         id.innerHTML = user.id;
         login.innerHTML = user.login;
@@ -67,7 +75,29 @@ function fillTable(userList) {
         lastName.innerHTML = user.lastName;
         phone.innerHTML = user.phone;
         email.innerHTML = user.email;
+        del.innerHTML = del.innerHTML + '<button id="button1">delete</button>';
+        upd.innerHTML = upd.innerHTML + button;
+
+
     });
+}
+
+<%--<button data-id="77" id="btn" onclick="sendRequest(this)">Click</button>--%>
+
+<%--<script type="text/javascript">--%>
+<%--function sendRequest(data) {--%>
+<%--console.log(data.dataset);--%>
+<%--}--%>
+<%--</script>--%>
+
+
+function del(userId) {
+
+}
+
+function upd(button) {
+
+    document.location.href = "/updateUser?user_id=" + button.id;
 }
 
 function clearTable(table) {
@@ -78,10 +108,10 @@ function clearTable(table) {
 function search() {
 
     var query = document.getElementById("user-login").value;
-    query = " "+query +","+ document.getElementById("user-phone").value+" ";
+    query = " " + query + "," + document.getElementById("user-phone").value + " ";
     fetch('/search', {
         method: 'POST',
-        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: 'query=' + query
     })
         .then(function (response) {
