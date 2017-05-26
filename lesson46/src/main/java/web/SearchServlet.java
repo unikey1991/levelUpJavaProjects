@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 @WebServlet("/search")
-public class SerachServlet extends HttpServlet {
+public class SearchServlet extends HttpServlet {
 
 
 

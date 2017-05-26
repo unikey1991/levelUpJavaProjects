@@ -17,7 +17,7 @@ import java.util.List;
 @WebServlet("/updateUser")
 public class UpdateUserServlet extends HttpServlet{
 
-    @Override
+    /*@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserDAO userDAO = new UserDAO();
 
@@ -36,7 +36,7 @@ public class UpdateUserServlet extends HttpServlet{
         req.setAttribute("email", user.getEmail());
         req.setAttribute("userId", user.getId());
         req.getRequestDispatcher("userUpdate.jsp").forward(req, resp);
-    }
+    }*/
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -66,6 +66,6 @@ public class UpdateUserServlet extends HttpServlet{
         user.setEmail(email);
         userDAO.update(user);
 
-        resp.sendRedirect("/");
+        resp.sendRedirect("/search.jsp");
     }
 }

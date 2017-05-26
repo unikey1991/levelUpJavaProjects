@@ -15,14 +15,24 @@
 </head>
 <body>
 
-
+<div id="edit-form" hidden>
+<div >
+    <input id="user_id" type="hidden" name="userId" value="${userId}">
+    <span>Имя:</span><input id="inp_name" name="name" type="text" value="${name}"><br/>
+    <span>Фамилия:</span><input id="inp_l_name" name="lastName" type="text" value="${lastName}"><br/>
+    <span>Телефон в формате 38...:</span><input id="phone" name="phone" type="tel" pattern="38[0-9]{10}" value="${phone}"><br/>
+    <span>Email:</span><input id="email" name="email" type="email" value="${email}"><br/>
+    <button onclick="updateUser()">Update</button>
+    <input type="hidden" name="update" value="1">
+</div>
+</div>
 <div>
     <input type="text" id="user-login"/><span>
     <input type="text" id="user-phone"/><span>
     <button onclick="search()">Search</button></span></span>
 </div>
-<table>
-    <thead>
+<table class="table">
+    <thead class="thead-inverse">
     <tr>
         <td>Id</td>
         <td>Login</td>
@@ -85,12 +95,35 @@ function fillTable(userList) {
         var but_upd = document.getElementById("btn_upd");
         but_upd.id = i;
         but_upd.onclick = function () {
-            document.location.href = "/updateUser?" + user.id;
+//            document.location.href = "/updateUser?" + user.id;
+            var form = document.getElementById('edit-form');
+            form.removeAttribute('hidden');
+            document.getElementById('user_id').value = user.id;
+            document.getElementById('inp_name').value = user.name;
+            document.getElementById('inp_l_name').value = user.lastName;
+            document.getElementById('phone').value = user.phone;
+            document.getElementById('email').value = user.email;
         };
         i++;
     });
 }
 
+
+
+function updateUser(){
+
+//    document.location.href = "/search.jsp";
+//    search();
+    var form = new FormData(document.getElementById("edit-form"));
+    fetch('/updateUser',{
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: form
+    }).then(function(){
+        search();
+    })
+
+}
 
 function clearTable(table) {
     table.innerHTML = '';

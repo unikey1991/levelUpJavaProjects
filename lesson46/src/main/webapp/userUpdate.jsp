@@ -14,10 +14,10 @@
 
 <form action="updateUser" method="post">
     <input type="hidden" name="userId" value="${userId}">
-<span>Имя:</span><input name="name" type="text" value="${name}">
-<span>Фамилия:</span><input name="lastName" type="text" value="${lastName}">
-<span>Телефон в формате 38...:</span><input name="phone" type="tel" pattern="38[0-9]{10}" value="${phone}">
-<span>Email:</span><input name="email" type="email" value="${email}">
+<span>Имя:</span><input name="name" type="text" value="${name}"><br/>
+<span>Фамилия:</span><input name="lastName" type="text" value="${lastName}"><br/>
+<span>Телефон в формате 38...:</span><input name="phone" type="tel" pattern="38[0-9]{10}" value="${phone}"><br/>
+<span>Email:</span><input name="email" type="email" value="${email}"><br/>
 <input type="submit" value="Применить">
     <input type="hidden" name="update" value="1">
 </form>
