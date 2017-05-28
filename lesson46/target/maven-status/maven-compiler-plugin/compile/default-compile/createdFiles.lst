@@ -1,0 +1,13 @@
+lesson49\RegistrationServlet.class
+web\UpdateUserServlet.class
+lesson47\TargetDataListServlet.class
+entity\User.class
+web\WelcomeServlet.class
+web\RegistrationServlet.class
+hiber\HibernateUtil.class
+web\HomeServlet.class
+web\SearchServlet.class
+web\DeleteServlet.class
+dao\UserDAO.class
+lesson47\dto\TargetData.class
+web\LoginServlet.class
