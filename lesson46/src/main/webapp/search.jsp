@@ -15,8 +15,7 @@
 </head>
 <body>
 
-<div id="edit-form" hidden>
-<div >
+<form id="edit-form" hidden>
     <input id="user_id" type="hidden" name="userId" value="${userId}">
     <span>Имя:</span><input id="inp_name" name="name" type="text" value="${name}"><br/>
     <span>Фамилия:</span><input id="inp_l_name" name="lastName" type="text" value="${lastName}"><br/>
@@ -24,8 +23,7 @@
     <span>Email:</span><input id="email" name="email" type="email" value="${email}"><br/>
     <button onclick="updateUser()">Update</button>
     <input type="hidden" name="update" value="1">
-</div>
-</div>
+</form>
 <div>
     <input type="text" id="user-login"/><span>
     <input type="text" id="user-phone"/><span>
@@ -117,10 +115,11 @@ function updateUser(){
     var form = new FormData(document.getElementById("edit-form"));
     fetch('/updateUser',{
         method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        headers: {
+            'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+            'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+        },
         body: form
-    }).then(function(){
-        search();
     })
 
 }

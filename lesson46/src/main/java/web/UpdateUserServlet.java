@@ -45,9 +45,9 @@ public class UpdateUserServlet extends HttpServlet{
 
         List<User> userList = userDAO.read();
         User user = null;
-        System.out.println(req.getParameter("userId"));
+        System.out.println(req.getParameter("id"));
         for (User u : userList){
-            if (u.getId() == Long.parseLong(req.getParameter("userId"))){
+            if (u.getId() == Long.parseLong(req.getParameter("id"))){
                 user = u;
             }
         }

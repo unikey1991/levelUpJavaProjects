@@ -26,6 +26,9 @@ public class SearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserDAO userDAO = new UserDAO();
 
+
+        resp.setHeader("Access-Control-Allow-Origin","*");
+
         String query = req.getParameter("query");
         String[] split = query.split(",");
         String queryLogin = split[0].trim();
