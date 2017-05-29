@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -41,13 +43,14 @@ public class UpdateUserServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        resp.setHeader("Access-Control-Allow-Origin", "*");
         UserDAO userDAO = new UserDAO();
-
         List<User> userList = userDAO.read();
         User user = null;
-        System.out.println(req.getParameter("id"));
+
+
         for (User u : userList){
-            if (u.getId() == Long.parseLong(req.getParameter("id"))){
+            if (u.getId() == Long.parseLong(req.getParameter("userId"))){
                 user = u;
             }
         }
@@ -64,6 +67,7 @@ public class UpdateUserServlet extends HttpServlet{
         user.setLastName(lastName);
         user.setPhone(phone);
         user.setEmail(email);
+        //System.out.println(user.toString());
         userDAO.update(user);
 
         resp.sendRedirect("/search.jsp");

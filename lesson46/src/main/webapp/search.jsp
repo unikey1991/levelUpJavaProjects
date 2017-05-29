@@ -15,15 +15,21 @@
 </head>
 <body>
 
-<form id="edit-form" hidden>
+<div id="edit-form" hidden>
     <input id="user_id" type="hidden" name="userId" value="${userId}">
     <span>Имя:</span><input id="inp_name" name="name" type="text" value="${name}"><br/>
     <span>Фамилия:</span><input id="inp_l_name" name="lastName" type="text" value="${lastName}"><br/>
     <span>Телефон в формате 38...:</span><input id="phone" name="phone" type="tel" pattern="38[0-9]{10}" value="${phone}"><br/>
     <span>Email:</span><input id="email" name="email" type="email" value="${email}"><br/>
+    <span>Разрешить доступ</span>
+    <p><input id="accessTrue" name="access" type="radio" value="true"> true</p>
+    <p><input name="access" type="radio" value="false"> false</p>
+    <span>Роль</span>
+    <p><input id="admin" name="role" type="radio" value="true"> Admin</p>
+    <p><input name="role" type="radio" value="false"> User</p>
     <button onclick="updateUser()">Update</button>
     <input type="hidden" name="update" value="1">
-</form>
+</div>
 <div>
     <input type="text" id="user-login"/><span>
     <input type="text" id="user-phone"/><span>
@@ -32,12 +38,15 @@
 <table class="table">
     <thead class="thead-inverse">
     <tr>
-        <td>Id</td>
-        <td>Login</td>
-        <td>Name</td>
-        <td>Last Name</td>
-        <td>Phone</td>
+        <td>ИД</td>
+        <td>Логин</td>
+        <td>Имя</td>
+        <td>Фамилия</td>
+        <td>Телефон</td>
         <td>Email</td>
+        <td>Доступ</td>
+        <td>Роль</td>
+
         <td></td>
         <td></td>
     </tr>
@@ -65,8 +74,10 @@ function fillTable(userList) {
         var lastName = row.insertCell(3);
         var phone = row.insertCell(4);
         var email = row.insertCell(5);
-        var del = row.insertCell(6);
-        var upd = row.insertCell(7);
+        var access = row.insertCell(6);
+        var role = row.insertCell(7);
+        var del = row.insertCell(8);
+        var upd = row.insertCell(9);
 
 
         id.innerHTML = user.id;
@@ -75,6 +86,10 @@ function fillTable(userList) {
         lastName.innerHTML = user.lastName;
         phone.innerHTML = user.phone;
         email.innerHTML = user.email;
+        //
+        access.innerHTML = user.allowAccess.value;
+        role.innerHTML = user.role.value;
+        //
         del.innerHTML = del.innerHTML + '<button id="btn_del" >Delete</button>';
         upd.innerHTML = upd.innerHTML + '<button id="btn_upd" >Update</button>';
 
@@ -112,15 +127,24 @@ function updateUser(){
 
 //    document.location.href = "/search.jsp";
 //    search();
-    var form = new FormData(document.getElementById("edit-form"));
+    //var form = new FormData(document.getElementById("edit-form"));
+    //var form = document.getElementById("user_id").value;
+
+    var REQid = document.getElementById("user_id").value;
+    var REQname = document.getElementById("inp_name").value;
+    var REQlastName = document.getElementById("inp_l_name").value;
+    var REQphone = document.getElementById("phone").value;
+    var REQemail = document.getElementById("email").value;
+    var request = "userId=" + REQid +"&name=" + REQname+"&lastName=" +
+        REQlastName+ "&phone="+REQphone+"&email="+REQemail;
     fetch('/updateUser',{
         method: 'POST',
         headers: {
             'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
             'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
         },
-        body: form
-    })
+        body: request
+    }).catch(alert);
 
 }
 

@@ -17,7 +17,7 @@
     <span>Имя:</span><input name="name" type="text">
     <span>Фамилия:</span><input name="lastName" type="text">
     <span>Телефон в формате 380...:</span><input type="tel" name="phone" pattern="38[0-9]{10}">
-    <span>Email:</span><input name="lastName" type="email">
+    <span>Email:</span><input name="email" type="email">
     <input type="submit" value="Зарегистрироваться">
 </form>
 

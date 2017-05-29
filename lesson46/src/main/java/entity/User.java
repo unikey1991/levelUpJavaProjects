@@ -37,13 +37,26 @@ public class User {
     @Column
     private String email;
 
-    public User(String login, String password, String name, String lastName, String phone, String email) {
+    @Column
+    private boolean allowAccess;
+
+    @Column
+    @Enumerated (EnumType.STRING)
+    private Role role;
+
+    @Column
+    private String verificationKey;
+
+    public User(String login, String password, String name, String lastName, String phone, String email, String verificationKey, Role role) {
         this.login = login;
         this.password = password;
         this.name = name;
         this.lastName = lastName;
         this.phone = phone;
         this.email = email;
+        this.allowAccess = false;
+        this.verificationKey = verificationKey;
+        this.role = role;
     }
 
     public User() {

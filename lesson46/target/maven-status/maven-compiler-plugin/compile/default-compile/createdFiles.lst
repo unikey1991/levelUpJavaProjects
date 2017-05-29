@@ -1,9 +1,14 @@
+web\VerificationServlet.class
+email\EmailSenderFromFileList.class
 lesson49\RegistrationServlet.class
+email\EmailConsumer.class
 web\UpdateUserServlet.class
+email\EmailMessage.class
 lesson47\TargetDataListServlet.class
 entity\User.class
 web\WelcomeServlet.class
 web\RegistrationServlet.class
+email\Sender.class
 hiber\HibernateUtil.class
 web\HomeServlet.class
 web\SearchServlet.class
@@ -11,3 +16,6 @@ web\DeleteServlet.class
 dao\UserDAO.class
 lesson47\dto\TargetData.class
 web\LoginServlet.class
+email\EmailProducer.class
+entity\Role.class
+email\Sender$1.class
