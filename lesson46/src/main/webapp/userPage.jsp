@@ -15,6 +15,12 @@
 <span>Name:${name}</span><br>
 <span>Last name:${lastName}</span>
 
+<script language = 'javascript'>
+    var delay = 5000;
+    setTimeout("document.location.href='/'", delay);
+</script>
+<p>Логин успешный. Через 5 секунд Вы будете перенаправлены на домашнюю страницу.
+</p>
 
 </body>
 </html>
