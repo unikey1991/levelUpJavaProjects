@@ -10,18 +10,19 @@
     <button onclick="search()">Find</button></span>
 </div>
 
-<table class="table">
-    <thead class="thead-inverse">
+
+
+<table class="table table-bordered">
     <tr>
-        <td>Имя</td>
-        <td>Эпизоды</td>
-        <td>Вид</td>
-        <td>Язык</td>
-        <td>Другие представители этого вида</td>
+      <th>Имя</th>
+      <th>Эпизоды</th>
+      <th>Планета</th>
+      <th>Другие представители этой планеты</th>
     </tr>
-    </thead>
-    <tbody id="user-table">
-    </tbody>
+  </thead>
+  <tbody id="user-table">
+
+  </tbody>
 </table>
 
 <script type="text/javascript">
@@ -36,77 +37,86 @@ function search(){
 		return;
 	}
 
+var user;
 
 fetch("http://swapi.co/api/people/"+REQid)
-	// .then(response => response.json())
 	.then(function (response) {
             return response.json();
-        })
-	.then(function (userList) {
-            fillTable(userList);
-        })
-	.catch(error => console.error(error));
-	// .then(resp => {
- //    console.log(resp)
-	// return fetch(resp.homeworld);
-	// })
-	
-	// .then(r => r.json())
-	// .then(data => {
-	// 	console.log(data)
+    })
+	.then(resp => {
+    	console.log(resp);
+    	user = resp;
+		return resp;
+	})
+	.then(r => {
+		user.filmsList = "";
+		r.films.forEach(function (url){
+				fetch(url)
+				.then(function (response) {
+            	return response.json();
+        	})
+        	.then(resp => {
+        		console.log(resp.title);
+        		user.filmsList = user.filmsList + resp.title;
+        		user.filmsList = user.filmsList + ", ";
+        	});
+		})
 
-	// 	let homeworld = data.name;
+		return user;
+	})
+	.then(r => {
+		fetch(user.homeworld)
+		.then(function (response) {
+            	return response.json();
+        	})
+        	.then(resp => {
+			user.planet = resp;
+			user.planet.giteli = "";
 
-	// 	let residents = data.residents.map(residentUrl => fetch(residentUrl)
-	// 		.then(resp => resp.json())
-	// 		.catch(e => console.error(e))
-	// 		);
-
-	// 	return {planetName: homeworld, residents: Promise.all(residents)};
-	// })
-	// .then(data => {
-
-	// 	let persons = data.residents
-	// 	.then(resp => {
-	// 		console.log(resp)
-	// 		return resp;
-	// 	})
-	// 	.then(arr => arr.find(person => person.name === "C-3PO"))
-	// 	.then(robot => console.log(robot))
-	// 	// .then(arr => arr
-	// 	// 	.map(person => person.name)
-	// 	// 	.join()
-	// 	// 	)
-	// 	// .then(persons => console.log(data.planetName + ": ", persons));
+			resp.residents.forEach(function (url){
+				fetch(url)
+				.then(function (response) {
+            	return response.json();
+        	})
+        	.then(resp => {
+        		user.planet.giteli = user.planet.giteli + resp.name;
+        		user.planet.giteli = user.planet.giteli + ", ";
+        	});
+			})
+		});
+		return user;
+	})
+	.then(r => {
+		alert("Данные загружаются, ожидайте обновление таблицы");
+			setTimeout(function a(){
+			console.log(user);
+			fillTable(r);
+		}, 5000);
 		
-	// })
-	// .catch(error => console.error(error));
+	})
+	.catch(error => console.error(error)); 
 
 
 }
 
 
-function fillTable(userList) {
+function fillTable(resp) {
     var userTable = document.getElementById("user-table");
 
     // clearTable(userTable);
 
-    userList.forEach(function (user) {
         var row = userTable.insertRow();
 
-        var name = row.insertCell(1);
-        var epizods = row.insertCell(2);
-        var vid = row.insertCell(3);
-        // var yazik = row.insertCell(4);
-        // var drugiePrestaviteli = row.insertCell(5);
+        var name = row.insertCell(0);
+        var epizods = row.insertCell(1);
+        var planet = row.insertCell(2);
+        var drugiePrestaviteli = row.insertCell(3);
 
 
-        name.innerHTML = user.name;
-        epizods.innerHTML = user.films;
-        vid.innerHTML = user.gender;
-        // yazik.innerHTML = user.phone;
-        // drugiePrestaviteli.innerHTML = user.email;
-    });
+        name.innerHTML = resp.name;
+        epizods.innerHTML = resp.filmsList;
+        planet.innerHTML = resp.planet.name;
+        drugiePrestaviteli.innerHTML = resp.planet.giteli;
 }
 
 
