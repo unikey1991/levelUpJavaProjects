@@ -3,14 +3,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <bean id="greetingBean" class="ua.dp.levelup.Greeting">
-        <property name="message" value="Hello World!!!" />
-    </bean>
-
-    <!--<bean id="colorBean" class="ua.dp.levelup.Color">-->
-        <!--<util:constant static-field="ua.dp.levelup.Color.RED" />-->
-    <!--</bean>-->
-
     <bean id="color1" class="ua.dp.levelup.Color" factory-method="valueOf">
         <constructor-arg value="WHITE"/>
     </bean>
@@ -26,5 +18,25 @@
         <constructor-arg name="maxSpeed" value="190"/>
         <constructor-arg name="model" value="Vaz 21013"/>
     </bean>
+
+    <!--//////////////////////////////////////-->
+
+
+    <bean id="PC1" class="ua.dp.levelup.Pc">
+        <property name="hddCapacity" value="256"/>
+        <property name="owner" ref="user1"/>
+        <property name="ram" value="4000"/>
+    </bean>
+
+    <bean id="user1" class="ua.dp.levelup.User">
+        <property name="name" value="John"/>
+        <property name="lastName" value="Psina"/>
+    </bean>
+
+    <bean id="userService1" class="ua.dp.levelup.UserService">
+        <!--<constructor-arg value="Hello chipushilo"/>-->
+    </bean>
+
+    <bean class="ua.dp.levelup.ProfilingBeanPostProcessor" id="profilingBeanPostProcessor"/>
 
 </beans>

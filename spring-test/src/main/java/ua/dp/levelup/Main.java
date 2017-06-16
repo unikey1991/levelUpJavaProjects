@@ -12,21 +12,32 @@ public class Main {
     public static void main(String[] args) {
 
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
-        Greeting greetingBean = context.getBean(Greeting.class);
-        greetingBean.sayHello();
-
-        Car car1 = (Car) context.getBean("car1");
-        Car car2 = (Car) context.getBean("car2");
-        System.out.println(car1.toString());
-        System.out.println(car2.toString());
-
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
         Gson gson = new Gson();
 
-        System.out.println("json: "+ gson.toJson(car1));
-        System.out.println("json: "+ gson.toJson(car2));
+        /////////////////////////
+        /*Car car1 = (Car) context.getBean("car1");
+        Car car2 = (Car) context.getBean("car2");
+
+        System.out.println("json: " + gson.toJson(car1));
+        System.out.println("json: " + gson.toJson(car2));*/
+
+        ///////////////////////////
+        /*Pc pc1 = (Pc) context.getBean("PC1");
+        User user1 = (User) context.getBean("user1");
+
+        System.out.println(gson.toJson(pc1));
+        System.out.println(gson.toJson(user1));*/
+
+        //////////////////
+
+        context.close();
+
+        ////////////
 
 
+        UserService userService = (UserService) context.getBean("userService1");
+        userService.doMagic();
 
 
     }
