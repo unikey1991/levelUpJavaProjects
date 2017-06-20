@@ -1,9 +1,13 @@
 package ua.dp.levelup;
 
+import org.springframework.context.annotation.Scope;
+
 /**
  * Created by unike on 15.06.2017.
  */
 
+
+@Scope("prototype")
 public class Car {
 
     private double maxSpeed;

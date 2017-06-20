@@ -33,10 +33,29 @@
         <property name="lastName" value="Psina"/>
     </bean>
 
-    <bean id="userService1" class="ua.dp.levelup.UserService">
+    <bean id="userService1" class="ua.dp.levelup.service.impl.UserServiceImpl">
         <!--<constructor-arg value="Hello chipushilo"/>-->
     </bean>
 
-    <bean class="ua.dp.levelup.ProfilingBeanPostProcessor" id="profilingBeanPostProcessor"/>
+    <bean id="testScope1" class="ua.dp.levelup.TestScope" scope="prototype"/>
+
+    <!--////////////////////////-->
+
+    <bean class="ua.dp.levelup.Message" scope="singleton" id="singleton-message">
+        <property name="message" value="Hello! That's singleton message bean"/>
+    </bean>
+    <bean class="ua.dp.levelup.Message" scope="prototype" id="prototype-message">
+        <property name="message" value="Hello! That's prototype message bean"/>
+    </bean>
+
+
+    <!--////////////////-->
+
+    <bean id="userService" class="ua.dp.levelup.service.impl.UserServiceImpl">
+        <property name="userDAO" ref="userDao"/>
+    </bean>
+
+    <bean id="userDao" class="ua.dp.levelup.dao.impl.UserDAOImpl" init-method="init"/>
+
 
 </beans>
