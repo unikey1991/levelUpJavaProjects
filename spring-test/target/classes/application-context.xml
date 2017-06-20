@@ -1,0 +1,61 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="color1" class="ua.dp.levelup.Color" factory-method="valueOf">
+        <constructor-arg value="WHITE"/>
+    </bean>
+
+    <bean id="car1" class="ua.dp.levelup.Car">
+        <property name="maxSpeed" value="180"/>
+        <property name="model" value="Tesla"/>
+        <property name="color" ref="color1" />
+    </bean>
+
+    <bean id="car2" class="ua.dp.levelup.Car">
+        <constructor-arg name="color" value="BLACK"/>
+        <constructor-arg name="maxSpeed" value="190"/>
+        <constructor-arg name="model" value="Vaz 21013"/>
+    </bean>
+
+    <!--//////////////////////////////////////-->
+
+
+    <bean id="PC1" class="ua.dp.levelup.Pc">
+        <property name="hddCapacity" value="256"/>
+        <property name="owner" ref="user1"/>
+        <property name="ram" value="4000"/>
+    </bean>
+
+    <bean id="user1" class="ua.dp.levelup.User">
+        <property name="name" value="John"/>
+        <property name="lastName" value="Psina"/>
+    </bean>
+
+    <bean id="userService1" class="ua.dp.levelup.service.impl.UserServiceImpl">
+        <!--<constructor-arg value="Hello chipushilo"/>-->
+    </bean>
+
+    <bean id="testScope1" class="ua.dp.levelup.TestScope" scope="prototype"/>
+
+    <!--////////////////////////-->
+
+    <bean class="ua.dp.levelup.Message" scope="singleton" id="singleton-message">
+        <property name="message" value="Hello! That's singleton message bean"/>
+    </bean>
+    <bean class="ua.dp.levelup.Message" scope="prototype" id="prototype-message">
+        <property name="message" value="Hello! That's prototype message bean"/>
+    </bean>
+
+
+    <!--////////////////-->
+
+    <bean id="userService" class="ua.dp.levelup.service.impl.UserServiceImpl">
+        <property name="userDAO" ref="userDao"/>
+    </bean>
+
+    <bean id="userDao" class="ua.dp.levelup.dao.impl.UserDAOImpl" init-method="init"/>
+
+
+</beans>
