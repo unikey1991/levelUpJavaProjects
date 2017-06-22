@@ -57,5 +57,17 @@
 
     <bean id="userDao" class="ua.dp.levelup.dao.impl.UserDAOImpl" init-method="init"/>
 
+    <!--////////////////-->
+
+    <bean id="filmDAO" class="ua.dp.levelup.dao.impl.FilmDaoImpl" init-method="init"/>
+    <bean id="movieSessionDAO" class="ua.dp.levelup.dao.impl.MovieSessionDaoImpl" init-method="init"/>
+    <bean id="orderDAO" class="ua.dp.levelup.dao.impl.OrederDaoImpl" />
+
+    <bean id="cinemaService" class="ua.dp.levelup.service.impl.CinemaServiceImpl">
+        <property name="filmDao" ref="filmDAO"/>
+        <property name="movieSessionDao" ref="movieSessionDAO"/>
+        <property name="orderDao" ref="orderDAO"/>
+    </bean>
+
 
 </beans>

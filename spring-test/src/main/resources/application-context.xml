@@ -1,9 +1,15 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/jdbc
+	http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
-    <bean id="color1" class="ua.dp.levelup.Color" factory-method="valueOf">
+    <!--<bean id="color1" class="ua.dp.levelup.Color" factory-method="valueOf">
         <constructor-arg value="WHITE"/>
     </bean>
 
@@ -19,7 +25,7 @@
         <constructor-arg name="model" value="Vaz 21013"/>
     </bean>
 
-    <!--//////////////////////////////////////-->
+    &lt;!&ndash;//////////////////////////////////////&ndash;&gt;
 
 
     <bean id="PC1" class="ua.dp.levelup.Pc">
@@ -34,12 +40,12 @@
     </bean>
 
     <bean id="userService1" class="ua.dp.levelup.service.impl.UserServiceImpl">
-        <!--<constructor-arg value="Hello chipushilo"/>-->
+        &lt;!&ndash;<constructor-arg value="Hello chipushilo"/>&ndash;&gt;
     </bean>
 
     <bean id="testScope1" class="ua.dp.levelup.TestScope" scope="prototype"/>
 
-    <!--////////////////////////-->
+    &lt;!&ndash;////////////////////////&ndash;&gt;
 
     <bean class="ua.dp.levelup.Message" scope="singleton" id="singleton-message">
         <property name="message" value="Hello! That's singleton message bean"/>
@@ -49,13 +55,25 @@
     </bean>
 
 
-    <!--////////////////-->
+    &lt;!&ndash;////////////////&ndash;&gt;
 
     <bean id="userService" class="ua.dp.levelup.service.impl.UserServiceImpl">
         <property name="userDAO" ref="userDao"/>
     </bean>
 
-    <bean id="userDao" class="ua.dp.levelup.dao.impl.UserDAOImpl" init-method="init"/>
+    <bean id="userDao" class="ua.dp.levelup.dao.impl.UserDAOImpl" init-method="init"/>-->
+
+    <!--////////////////-->
+
+    <bean id="filmDAO" class="ua.dp.levelup.dao.impl.FilmDaoImpl" init-method="init"/>
+    <bean id="movieSessionDAO" class="ua.dp.levelup.dao.impl.MovieSessionDaoImpl" init-method="init"/>
+    <bean id="orderDAO" class="ua.dp.levelup.dao.impl.OrederDaoImpl" />
+
+    <bean id="cinemaService" class="ua.dp.levelup.service.impl.CinemaServiceImpl">
+        <property name="filmDao" ref="filmDAO"/>
+        <property name="movieSessionDao" ref="movieSessionDAO"/>
+        <property name="orderDao" ref="orderDAO"/>
+    </bean>
 
 
 </beans>
