@@ -1,5 +1,6 @@
 package ua.dp.levelup.dao.impl;
 
+import org.springframework.transaction.annotation.Transactional;
 import ua.dp.levelup.cinema.Film;
 import ua.dp.levelup.dao.FilmDao;
 
@@ -19,9 +20,9 @@ public class FilmDaoImpl implements FilmDao {
 
     public void init() {
         List<Film> films = Arrays.asList(
-                new Film(1L, "Dimon i ego velikan", "Doktor Dimon izgonin vse soki iz pacientki"),
-                new Film(2L, "Lord of the rings", ""),
-                new Film(3L, "Mechanic", "")
+                new Film("Dimon i ego velikan", "Doktor Dimon izgonin vse soki iz pacientki"),
+                new Film("Lord of the rings", ""),
+                new Film("Mechanic", "")
         );
 
         for (Film f: films){

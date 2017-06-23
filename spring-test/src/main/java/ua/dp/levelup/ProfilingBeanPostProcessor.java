@@ -16,57 +16,36 @@ public class ProfilingBeanPostProcessor implements BeanPostProcessor {
 
     private Map<String, Class> beans = new HashMap<>();
 
-    public Object postProcessBeforeInitialization(final Object bean, String beanName) throws BeansException {
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         Class<?> beanClass = bean.getClass();
         for (Method m : beanClass.getDeclaredMethods()) {
             if(m.isAnnotationPresent(Profiling.class)) {
                 System.out.println("postProcessBeforeInitialization");
-
-                return Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(), new InvocationHandler() {
-                    @Override
-                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                        if(method.isAnnotationPresent(Profiling.class)) {
-                            System.out.println("Start profiling");
-                            long start = System.nanoTime();
-
-                            Object result = method.invoke(bean, args);
-
-                            System.out.println("End profiling with time: " + (System.nanoTime() - start));
-                            return result;
-                        }
-                        return method.invoke(bean, args);
-                    }
-                });
-
-//                beans.put(beanName, beanClass);
-//                return bean;
+                beans.put(beanName, beanClass);
+                return bean;
             }
         }
-
         return bean;
     }
 
-    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-//        if(beans.containsKey(beanName)) {
-//            System.out.println("postProcessAfterInitialization");
-//            Class beanClass = beans.get(beanName);
-//            return Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(), new InvocationHandler() {
-//                @Override
-//                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-//                    if(method.isAnnotationPresent(Profiling.class)) {
-//                        System.out.println("Start profiling");
-//                        long start = System.nanoTime();
-//
-//                        Object result = method.invoke(args);
-//
-//                        System.out.println("End profiling with time: " + (System.nanoTime() - start));
-//                        return result;
-//                    }
-//
-//                    return method.invoke(args);
-//                }
-//            });
-//        }
+    public Object postProcessAfterInitialization(final Object bean, String beanName) throws BeansException {
+        if(beans.containsKey(beanName)) {
+            System.out.println("postProcessAfterInitialization");
+            final Class beanClass = beans.get(beanName);
+            return Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(), new InvocationHandler() {
+                @Override
+                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                    if (beanClass.getDeclaredMethod(method.getName(), method.getParameterTypes()).isAnnotationPresent(Profiling.class)) {
+                        System.out.println("Start profiling for method " + method.getName());
+                        long start = System.nanoTime();
+                        Object result = method.invoke(bean, args);
+                        System.out.println("End profiling for method " + method.getName() + " with time: " + (System.nanoTime() - start));
+                        return result;
+                    }
+                    return method.invoke(bean, args);
+                }
+            });
+        }
         System.out.println("postProcessAfterInitialization");
         return bean;
     }

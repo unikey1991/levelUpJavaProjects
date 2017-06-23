@@ -3,8 +3,10 @@ package ua.dp.levelup;
 import com.google.gson.Gson;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import ua.dp.levelup.cinema.Film;
 import ua.dp.levelup.cinema.MovieSession;
+import ua.dp.levelup.dao.FilmDao;
 import ua.dp.levelup.dao.UserDAO;
 import ua.dp.levelup.service.CinemaService;
 import ua.dp.levelup.service.UserService;
@@ -21,7 +23,6 @@ public class Main {
         Gson gson = new Gson();
 
 
-/*
         TestScope testScope1 = (TestScope) context.getBean("testScope1");
         testScope1.setText("her");
         testScope1.print();
@@ -55,7 +56,7 @@ public class Main {
         bean5.print();
 
         System.out.println(bean6 + ": ");
-        bean6.print();*/
+        bean6.print();
 
         /////////////////
 
@@ -75,8 +76,11 @@ public class Main {
 
         Film film = cinemaService.getFilmById(movieSession.getFilmId());
 
-        System.out.println(film.toString());
+//        System.out.println(film.toString());
+
+        Film film1 = new Film("Hren' vozvrashaetsa", "Film ujasov");
 
 
+        cinemaService.createFilm(film1);
     }
 }
