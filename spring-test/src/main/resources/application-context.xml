@@ -9,7 +9,10 @@
 	http://www.springframework.org/schema/jdbc
 	http://www.springframework.org/schema/jdbc/spring-jdbc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:property-placeholder location="classpath*:db-config.properties"/>
+    <context:annotation-config/>
+    <context:component-scan base-package="ua.dp.levelup"/>
+
+    <context:property-placeholder location="classpath*:db-config.properties,dev.properties"/>
     <!--<bean id="color1" class="ua.dp.levelup.Color" factory-method="valueOf">
         <constructor-arg value="WHITE"/>
     </bean>
@@ -66,17 +69,15 @@
 
     <!--////////////////-->
 
-    <bean id="filmDAO" class="ua.dp.levelup.dao.impl.FilmMysqlDaoImpl">
+   <!-- <bean id="filmDAO" class="ua.dp.levelup.dao.impl.FilmMysqlDaoImpl">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
     <bean id="movieSessionDAO" class="ua.dp.levelup.dao.impl.MovieSessionDaoImpl" init-method="init"/>
     <bean id="orderDAO" class="ua.dp.levelup.dao.impl.OrederDaoImpl"/>
 
-    <bean id="cinemaService" class="ua.dp.levelup.service.impl.CinemaServiceImpl">
+    <bean id="filmService" class="ua.dp.levelup.service.impl.FilmServiceImpl">
         <property name="filmDao" ref="filmDAO"/>
-        <property name="movieSessionDao" ref="movieSessionDAO"/>
-        <property name="orderDao" ref="orderDAO"/>
-    </bean>
+    </bean>-->
 
     <!--//////////////////-->
 

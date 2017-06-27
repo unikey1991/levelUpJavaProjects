@@ -1,13 +1,13 @@
-package ua.dp.levelup.dao;
+package ua.dp.levelup.service;
 
 import ua.dp.levelup.cinema.Film;
 
 import java.util.List;
 
 /**
- * Created by unike on 22.06.2017.
+ * Created by java on 27.06.2017.
  */
-public interface FilmDao {
+public interface FilmService {
 
     List<Film> getAllFilms();
 
@@ -19,5 +19,4 @@ public interface FilmDao {
     void deleteFilm(Film film);
 
     void updateFilm(Film film);
-
 }

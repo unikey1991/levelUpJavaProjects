@@ -1,9 +1,6 @@
 package ua.dp.levelup.cinema;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,9 +10,10 @@ import javax.persistence.*;
 
 @ToString
 @Getter
+@Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "FILMS_1")
+@Table(name = "FILMS")
 public class Film {
 
     @Id

@@ -9,8 +9,11 @@
 	http://www.springframework.org/schema/jdbc
 	http://www.springframework.org/schema/jdbc/spring-jdbc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:property-placeholder location="classpath*:db-config.properties"/>
-    <bean id="color1" class="ua.dp.levelup.Color" factory-method="valueOf">
+    <context:annotation-config/>
+    <context:component-scan base-package="ua.dp.levelup"/>
+
+    <context:property-placeholder location="classpath*:db-config.properties,dev.properties"/>
+    <!--<bean id="color1" class="ua.dp.levelup.Color" factory-method="valueOf">
         <constructor-arg value="WHITE"/>
     </bean>
 
@@ -26,7 +29,7 @@
         <constructor-arg name="model" value="Vaz 21013"/>
     </bean>
 
-    <!--//////////////////////////////////////-->
+    &lt;!&ndash;//////////////////////////////////////&ndash;&gt;
 
 
     <bean id="PC1" class="ua.dp.levelup.Pc">
@@ -41,12 +44,12 @@
     </bean>
 
     <bean id="userService1" class="ua.dp.levelup.service.impl.UserServiceImpl">
-        <!--<constructor-arg value="Hello chipushilo"/>-->
+        &lt;!&ndash;<constructor-arg value="Hello chipushilo"/>&ndash;&gt;
     </bean>
 
     <bean id="testScope1" class="ua.dp.levelup.TestScope" scope="prototype"/>
 
-    <!--////////////////////////-->
+    &lt;!&ndash;////////////////////////&ndash;&gt;
 
     <bean class="ua.dp.levelup.Message" scope="singleton" id="singleton-message">
         <property name="message" value="Hello! That's singleton message bean"/>
@@ -56,27 +59,25 @@
     </bean>
 
 
-    <!--////////////////-->
+    &lt;!&ndash;////////////////&ndash;&gt;
 
     <bean id="userService" class="ua.dp.levelup.service.impl.UserServiceImpl">
         <property name="userDAO" ref="userDao"/>
     </bean>
 
-    <bean id="userDao" class="ua.dp.levelup.dao.impl.UserDAOImpl" init-method="init"/>
+    <bean id="userDao" class="ua.dp.levelup.dao.impl.UserDAOImpl" init-method="init"/>-->
 
     <!--////////////////-->
 
-    <bean id="filmDAO" class="ua.dp.levelup.dao.impl.FilmMysqlDaoImpl">
+   <!-- <bean id="filmDAO" class="ua.dp.levelup.dao.impl.FilmMysqlDaoImpl">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
     <bean id="movieSessionDAO" class="ua.dp.levelup.dao.impl.MovieSessionDaoImpl" init-method="init"/>
     <bean id="orderDAO" class="ua.dp.levelup.dao.impl.OrederDaoImpl"/>
 
-    <bean id="cinemaService" class="ua.dp.levelup.service.impl.CinemaServiceImpl">
+    <bean id="filmService" class="ua.dp.levelup.service.impl.FilmServiceImpl">
         <property name="filmDao" ref="filmDAO"/>
-        <property name="movieSessionDao" ref="movieSessionDAO"/>
-        <property name="orderDao" ref="orderDAO"/>
-    </bean>
+    </bean>-->
 
     <!--//////////////////-->
 

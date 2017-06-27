@@ -12,6 +12,8 @@ import java.util.Map;
 /**
  * Created by unike on 22.06.2017.
  */
+
+
 public class FilmDaoImpl implements FilmDao {
 
     private Map<Long, Film> filmById = new HashMap<>();
@@ -42,10 +44,6 @@ public class FilmDaoImpl implements FilmDao {
         return filmById.get(id);
     }
 
-    @Override
-    public Film getFilmByName(String filmName) {
-        return filmById.get(idByFilmName.get(filmName));
-    }
 
     @Override
     public void createFilm(Film film) {
