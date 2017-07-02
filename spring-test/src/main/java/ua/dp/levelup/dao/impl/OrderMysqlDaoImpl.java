@@ -1,11 +1,14 @@
 package ua.dp.levelup.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.dp.levelup.cinema.Order;
+import ua.dp.levelup.cinema.Ticket;
 import ua.dp.levelup.dao.OrderDao;
+import ua.dp.levelup.service.TicketService;
 
 import java.util.List;
 
@@ -16,6 +19,8 @@ import java.util.List;
 @Repository
 @Transactional
 public class OrderMysqlDaoImpl implements OrderDao {
+
+
 
     @Autowired
     private HibernateTemplate template;

@@ -3,7 +3,9 @@ package ua.dp.levelup.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.dp.levelup.cinema.Order;
+import ua.dp.levelup.cinema.Ticket;
 import ua.dp.levelup.dao.OrderDao;
+import ua.dp.levelup.dao.TicketDao;
 import ua.dp.levelup.service.OrderService;
 
 import java.util.List;
@@ -17,6 +19,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     OrderDao orderDao;
+
+    @Autowired
+    TicketDao ticketDao;
 
 
     @Override
@@ -32,6 +37,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void createOrder(Order order) {
         orderDao.createOrder(order);
+        List<Ticket> tickets = order.getTickets();
+        for (Ticket t: tickets){
+            t.setOrder(order);
+            ticketDao.updateTicket(t);
+        }
     }
 
     @Override

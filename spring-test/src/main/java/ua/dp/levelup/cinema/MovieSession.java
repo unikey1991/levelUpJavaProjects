@@ -20,10 +20,11 @@ public class MovieSession {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column
-    private long filmId;
+
     @Column
     private Date date;
+
+
     @Column
     private int cinemaRoom;
     @Column
@@ -31,11 +32,15 @@ public class MovieSession {
     @Column
     private int comfortPrice;
 
-    public MovieSession(long filmId, Date date, int cinemaRoom, int standartPrice, int comfortPrice) {
-        this.filmId = filmId;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn (name = "film_id")
+    private Film filmId;
+
+    public MovieSession(Date date, int cinemaRoom, int standartPrice, int comfortPrice, Film filmId) {
         this.date = date;
         this.cinemaRoom = cinemaRoom;
         this.standartPrice = standartPrice;
         this.comfortPrice = comfortPrice;
+        this.filmId = filmId;
     }
 }
