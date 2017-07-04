@@ -13,7 +13,6 @@ import ua.dp.levelup.service.TicketService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +25,7 @@ public class Main {
     public static void main(String[] args) {
 
 
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("WEB-INF/application-context.xml");
         Gson gson = new Gson();
 
 
