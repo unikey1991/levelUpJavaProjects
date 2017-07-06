@@ -12,7 +12,7 @@ import java.util.List;
  * Created by java on 27.06.2017.
  */
 
-@Service
+@Service("filmService")
 public class FilmServiceImpl implements FilmService {
 
     @Autowired

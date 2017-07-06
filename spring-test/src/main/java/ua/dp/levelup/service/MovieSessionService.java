@@ -7,6 +7,8 @@ import java.util.List;
 /**
  * Created by java on 27.06.2017.
  */
+
+
 public interface MovieSessionService {
 
     List<MovieSession> getAllMovieSessions();

@@ -6,11 +6,10 @@
 
 
     <context:component-scan base-package="ua.dp.levelup.web"/>
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="InternalResolver">
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="internalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-
-
 
 </beans>

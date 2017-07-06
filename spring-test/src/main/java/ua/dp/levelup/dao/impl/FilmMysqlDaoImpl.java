@@ -13,7 +13,7 @@ import java.util.List;
  * Created by java on 23.06.2017.
  */
 @Transactional
-@Repository
+@Repository("filmDao")
 public class FilmMysqlDaoImpl implements FilmDao {
 
     @Autowired

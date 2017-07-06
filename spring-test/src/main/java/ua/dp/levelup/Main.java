@@ -1,6 +1,5 @@
 package ua.dp.levelup;
 
-import com.google.gson.Gson;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.dp.levelup.cinema.Film;
 import ua.dp.levelup.cinema.MovieSession;
@@ -26,7 +25,7 @@ public class Main {
 
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("WEB-INF/application-context.xml");
-        Gson gson = new Gson();
+        //Gson gson = new Gson();
 
 
 

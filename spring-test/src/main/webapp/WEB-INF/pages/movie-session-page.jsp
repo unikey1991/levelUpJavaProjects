@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: java
@@ -13,6 +14,36 @@
 <body>
 
 <h1>Movie list:</h1>
+<table>
+    <thead>
+    <tr>
+        <td>Id</td>
+        <td>date</td>
+        <td>cinemaRoom</td>
+        <td>standartPrice</td>
+        <td>comfortPrice</td>
+    </tr>
+    </thead>
+
+    <tbody>
+    <c:forEach var="ms" items="${allMovieSessions}">
+        <tr>
+            <td>
+                <c:out value="${ms.id}"/>
+            </td>
+            <td>
+                <c:out value="${ms.date}"/>
+            </td><td>
+                <c:out value="${ms.cinemaRoom}"/>
+            </td><td>
+                <c:out value="${ms.standartPrice}"/>
+            </td><td>
+                <c:out value="${ms.comfortPrice}"/>
+            </td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
 
 
 </body>

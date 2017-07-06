@@ -24,12 +24,12 @@ public class WebApplication implements WebApplicationInitializer {
         servletContext.addListener(new ContextLoaderListener(context));
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("DispatcherServlet", new DispatcherServlet(context));
         dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/*");
+        dispatcher.addMapping("/");
     }
 
     public WebApplicationContext getContext() {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.setConfigLocation("ua.dp.levelupWEB-INF/applicationContext.xml");
+        context.setConfigLocation("ua.dp.levelup");
         return context;
     }
 }

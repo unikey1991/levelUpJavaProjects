@@ -13,7 +13,7 @@ import java.util.List;
  * Created by java on 27.06.2017.
  */
 
-@Repository
+@Repository("movieSessionDao")
 @Transactional
 public class MovieSessionMysqlDaoImpl implements MovieSessionDao {
 
