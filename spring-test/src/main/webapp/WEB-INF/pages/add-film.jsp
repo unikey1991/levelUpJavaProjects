@@ -16,6 +16,7 @@
     <span>filmName:</span><input name="filmName" type="text">
     <span>filmDescription:</span><input name="filmDescription" type="text">
     <input type="submit" value="add">
+    <button onclick="history.back()">Cancel</button>
 </form>
 
 </body>
