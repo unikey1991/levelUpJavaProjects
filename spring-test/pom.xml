@@ -43,7 +43,7 @@
                     <server>TomcatServer</server>
                     <path>/spring-test</path>
                 </configuration>
-                <executions>
+                <!--<executions>
                     <execution>
                         <id>clean-undeploy</id>
                         <phase>clean</phase>
@@ -58,7 +58,7 @@
                             <goal>deploy</goal>
                         </goals>
                     </execution>
-                </executions>
+                </executions>-->
             </plugin>
 
         </plugins>
@@ -147,6 +147,9 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.39</version>
         </dependency>
+
+
+
 
     </dependencies>
 
