@@ -2,20 +2,19 @@ package ua.dp.levelup.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import ua.dp.levelup.cinema.Film;
+import ua.dp.levelup.cinema.Hall;
 import ua.dp.levelup.cinema.MovieSession;
+import ua.dp.levelup.service.HallService;
 import ua.dp.levelup.service.MovieSessionService;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 /**
@@ -28,6 +27,13 @@ public class MovieSessionController {
 
 
     private MovieSessionService movieSessionService;
+    private HallService hallService;
+
+    @Autowired(required = true)
+    @Qualifier(value = "hallService")
+    public void setHallService(HallService hallService) {
+        this.hallService = hallService;
+    }
 
     @Autowired(required = true)
     @Qualifier(value = "movieSessionService")
@@ -66,7 +72,7 @@ public class MovieSessionController {
     }
 
     @RequestMapping(value = "/getHall", method = RequestMethod.POST)
-    public @ResponseBody int[][] getHallJson(){
+    public @ResponseBody int[][] getHallJson() throws IOException {
         int[][] seatsAndRanges = new int[12][19];
         for (int i = 0; i<seatsAndRanges.length; i++){
             for (int j = 0; j<seatsAndRanges[i].length; j++){
@@ -74,6 +80,11 @@ public class MovieSessionController {
                 seatsAndRanges[i][j] = random.nextInt(10);
             }
         }
+
+
+        Hall hall = new Hall(seatsAndRanges);
+//
+        hallService.createHall(hall);
         return seatsAndRanges;
     }
 

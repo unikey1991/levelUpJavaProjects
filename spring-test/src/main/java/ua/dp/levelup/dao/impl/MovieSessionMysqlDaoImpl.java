@@ -7,7 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.dp.levelup.cinema.MovieSession;
 import ua.dp.levelup.dao.MovieSessionDao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by java on 27.06.2017.
@@ -19,6 +21,9 @@ public class MovieSessionMysqlDaoImpl implements MovieSessionDao {
 
     @Autowired
     private HibernateTemplate template;
+
+    private Map<Long, MovieSession> movieSessionMap = new HashMap<>();
+
 
 //    @Value(value = "${my.value}")
 //    private String value;

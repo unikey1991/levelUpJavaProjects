@@ -21,4 +21,6 @@ public interface MovieSessionService {
 
     void updateMovieSession(MovieSession movieSession);
 
+    List<MovieSession> getAllMovieSessionsForToday();
+
 }

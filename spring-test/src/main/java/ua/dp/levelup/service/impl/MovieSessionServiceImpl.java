@@ -1,6 +1,7 @@
 package ua.dp.levelup.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import ua.dp.levelup.cinema.MovieSession;
 import ua.dp.levelup.dao.MovieSessionDao;
@@ -46,5 +47,15 @@ public class MovieSessionServiceImpl implements MovieSessionService {
     @Override
     public void updateMovieSession(MovieSession movieSession) {
         movieSessionDao.updateMovieSession(movieSession);
+    }
+
+    @Override
+    public List<MovieSession> getAllMovieSessionsForToday() {
+        return null;
+    }
+
+    @Scheduled(cron = "0 45 * * ? *")
+    private void updateMovieSessionsForToday(){
+        System.out.println("updateMovieSessionForToday() scheduled");
     }
 }
