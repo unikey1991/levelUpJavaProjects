@@ -23,7 +23,7 @@
 </table>
 <div>
 
-    <input type="text" id="hall-id"/><span>
+    <input type="text" id="Введите ИД сеанса"/><span>
     <button onclick="getArray()">Load</button>
 </div>
 
@@ -61,11 +61,11 @@
     function getArray() {
 
 
-        var query = document.getElementById("hall-id").value;
+        var hallId = document.getElementById("hall-id").value;
         fetch('/movie/getHall', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            body: 'query=' + query
+            body: 'hallId=' + hallId
         })
             .then(function (response) {
                 return response.json();
