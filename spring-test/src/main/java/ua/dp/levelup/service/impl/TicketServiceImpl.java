@@ -12,7 +12,7 @@ import java.util.List;
  * Created by unike on 02.07.2017.
  */
 
-@Service
+@Service("ticketService")
 public class TicketServiceImpl implements TicketService {
 
     @Autowired
@@ -31,6 +31,11 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<Ticket> getAllOrders() {
-        return ticketDao.getAllOrders();
+        return ticketDao.getAllTickets();
+    }
+
+    @Override
+    public List<Ticket> getTicketsOfMovieSession(Long sessionId) {
+        return ticketDao.getTicketsOfMovieSession(sessionId);
     }
 }

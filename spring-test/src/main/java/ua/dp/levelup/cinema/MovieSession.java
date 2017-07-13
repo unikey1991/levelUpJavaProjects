@@ -32,11 +32,13 @@ public class MovieSession {
     @Column
     private int comfortPrice;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JoinColumn (name = "film_id")
-    private Film filmId;
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+//    @JoinColumn (name = "film_id")
 
-    public MovieSession(Date date, int cinemaRoom, int standartPrice, int comfortPrice, Film filmId) {
+    @Column
+    private Long filmId;
+
+    public MovieSession(Date date, int cinemaRoom, int standartPrice, int comfortPrice, Long filmId) {
         this.date = date;
         this.cinemaRoom = cinemaRoom;
         this.standartPrice = standartPrice;

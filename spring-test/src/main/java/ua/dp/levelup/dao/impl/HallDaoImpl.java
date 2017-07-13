@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.dp.levelup.cinema.Hall;
 import ua.dp.levelup.dao.HallDao;
 
+import java.util.List;
+
 /**
  * Created by unike on 10.07.2017.
  */
@@ -37,5 +39,10 @@ public class HallDaoImpl implements HallDao {
     @Override
     public void getHallById(Long id) {
         hibernateTemplate.get(Hall.class, id);
+    }
+
+    @Override
+    public List<Hall> getAllHalls() {
+        return hibernateTemplate.loadAll(Hall.class);
     }
 }

@@ -54,8 +54,8 @@ public class MovieSessionServiceImpl implements MovieSessionService {
         return null;
     }
 
-    @Scheduled(cron = "0 45 * * ? *")
-    private void updateMovieSessionsForToday(){
-        System.out.println("updateMovieSessionForToday() scheduled");
-    }
+//    @Scheduled(cron = "0 45 * * ? *")
+//    private void updateMovieSessionsForToday(){
+//        System.out.println("updateMovieSessionForToday() scheduled");
+//    }
 }

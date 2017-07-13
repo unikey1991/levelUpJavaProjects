@@ -14,7 +14,7 @@ import java.util.List;
  * Created by java on 27.06.2017.
  */
 
-@Service
+@Service("orderService")
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
@@ -36,12 +36,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void createOrder(Order order) {
-        orderDao.createOrder(order);
-        List<Ticket> tickets = order.getTickets();
-        for (Ticket t: tickets){
-            t.setOrder(order);
-            ticketDao.updateTicket(t);
-        }
+//        orderDao.createOrder(order);
+//        List<Ticket> tickets = order.getTickets();
+//        for (Ticket t: tickets){
+//            t.setOrder(order);
+//            ticketDao.updateTicket(t);
+//        }
     }
 
     @Override

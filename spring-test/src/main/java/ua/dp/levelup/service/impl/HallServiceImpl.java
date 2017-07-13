@@ -6,6 +6,8 @@ import ua.dp.levelup.cinema.Hall;
 import ua.dp.levelup.dao.HallDao;
 import ua.dp.levelup.service.HallService;
 
+import java.util.List;
+
 /**
  * Created by unike on 10.07.2017.
  */
@@ -37,4 +39,11 @@ public class HallServiceImpl implements HallService {
     public void getHallById(Long id) {
         hallDao.getHallById(id);
     }
+
+    @Override
+    public List<Hall> getAllHalls() {
+        return hallDao.getAllHalls();
+    }
+
+
 }

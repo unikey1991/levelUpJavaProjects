@@ -12,23 +12,31 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@ToString
 @Table(name = "TICKETS")
 public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ticketId;
-    private double price;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    private MovieSession movieSession;
-    @ManyToOne
-    private Order order;
+    private Long movieSessionId;
+//    @ManyToOne
+//    private Order order;
 
-    public Ticket(double price, MovieSession movieSession) {
-        this.price = price;
-        this.movieSession = movieSession;
+    @Column
+    private int lineNumber;
+
+    @Column
+    private int seatNumber;
+
+    @Column
+    private int hallId;
+
+    public Ticket(Long movieSessionId, int lineNumber, int seatNumber) {
+        this.movieSessionId = movieSessionId;
+        this.lineNumber = lineNumber;
+        this.seatNumber = seatNumber;
     }
 }

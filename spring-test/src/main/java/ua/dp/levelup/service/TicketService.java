@@ -12,6 +12,7 @@ public interface TicketService {
     void createTicket(Ticket ticket);
     void updateTicket(Ticket ticket);
     List<Ticket> getAllOrders();
+    List<Ticket> getTicketsOfMovieSession(Long sessionId);
 
 
 }

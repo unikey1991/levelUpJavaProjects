@@ -30,29 +30,29 @@ public class Order {
     @Column
     private int totalPrice;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
-    private List<Ticket> tickets = new ArrayList<>();
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
+//    private List<Ticket> tickets = new ArrayList<>();
 
     public Order(long clientId, List<Ticket> tickets) {
         this.clientId = clientId;
-        this.tickets = tickets;
+//        this.tickets = tickets;
 
-        calculateSumm();
+        //calculateSumm();
     }
 
-    private void calculateSumm() {
-        for (Ticket t: tickets){
-            totalPrice += t.getPrice();
-            biletsCount++;
-        }
-    }
+//    private void calculateSumm() {
+//        for (Ticket t: tickets){
+//            totalPrice += t.getPrice();
+//            biletsCount++;
+//        }
+//    }
 
-    public void addTicket(Ticket t){
-        tickets.add(t);
-    }
+//    public void addTicket(Ticket t){
+//        tickets.add(t);
+//    }
 
-    public List<Ticket> getTickets(){
-        return tickets;
-    }
+//    public List<Ticket> getTickets(){
+//        return tickets;
+//    }
 
 }

@@ -22,6 +22,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+/*
 
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("WEB-INF/application-context.xml");
@@ -37,7 +38,8 @@ public class Main {
         OrderService orderService = context.getBean(OrderService.class);
         TicketService ticketService = context.getBean(TicketService.class);
 
-        /*Film film1 = new Film("Hren' vozvrashaetsa", "Film ujasov");
+        */
+/*Film film1 = new Film("Hren' vozvrashaetsa", "Film ujasov");
         Film film2 = new Film("Hren' 2", "Film ujasov");
         Film film3 = new Film("Hren' 3", "Film ujasov");
         Film film4 = new Film("Hren' 4", "Film ujasov");
@@ -47,7 +49,8 @@ public class Main {
         filmService.createFilm(film2);
         filmService.createFilm(film3);
         filmService.createFilm(film4);
-        filmService.createFilm(film5);*/
+        filmService.createFilm(film5);*//*
+
 
 
 
@@ -57,7 +60,8 @@ public class Main {
 
 
 
-        /*MovieSession movieSession1 = new MovieSession(date,1,50,100,film1);
+        */
+/*MovieSession movieSession1 = new MovieSession(date,1,50,100,film1);
         MovieSession movieSession2 = new MovieSession(date,2,50,100,film2);
         MovieSession movieSession3 = new MovieSession(date,3,50,100,film3);
         MovieSession movieSession4 = new MovieSession(date,4,50,100,film4);
@@ -96,7 +100,8 @@ public class Main {
 
         orderService.createOrder(order1);
         orderService.createOrder(order2);
-        orderService.createOrder(order3);*/
+        orderService.createOrder(order3);*//*
+
 
         List<Film> allFilms = filmService.getAllFilms();
         List<MovieSession> allMovieSessions = movieSessionService.getAllMovieSessions();
@@ -110,6 +115,7 @@ public class Main {
             e.printStackTrace();
         }
 
+*/
 
 
     }

@@ -16,7 +16,7 @@ import java.util.List;
  * Created by java on 27.06.2017.
  */
 
-@Repository
+@Repository("orderSessionDao")
 @Transactional
 public class OrderMysqlDaoImpl implements OrderDao {
 

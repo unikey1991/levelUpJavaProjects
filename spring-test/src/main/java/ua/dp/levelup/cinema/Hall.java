@@ -33,35 +33,14 @@ public class Hall {
     private long id;
 
     @Column
-    private File seatsAndRanges;
+    private int seatsNumberInHall;
 
-
-
-
-    public Hall(int[][] seatsAndRanges) {
-        File file = new File("seatsAndRanges.json");
-        try {
-            RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw");
-            Gson gson = new Gson();
-            String s = gson.toJson(Arrays.asList(seatsAndRanges));
-            System.out.println(s);
-            randomAccessFile.write(s.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        this.seatsAndRanges = file;
-    }
-
-    public String getSeatsAndRangesAsJson() throws IOException {
-        RandomAccessFile randomAccessFile = new RandomAccessFile(seatsAndRanges,"RW");
-        return randomAccessFile.readLine();
-    }
-
-    /*@Column
-    private int[] Seats;
     @Column
-    private int[] Ranges;*/
+    private int rowsNumberInHall;
 
 
+    public Hall(int seatsNumberInHall, int rowsNumberInHall) {
+        this.seatsNumberInHall = seatsNumberInHall;
+        this.rowsNumberInHall = rowsNumberInHall;
+    }
 }

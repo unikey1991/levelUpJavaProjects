@@ -1,5 +1,6 @@
 package ua.dp.levelup.dao;
 
+import ua.dp.levelup.cinema.MovieSession;
 import ua.dp.levelup.cinema.Ticket;
 
 import java.util.List;
@@ -13,6 +14,8 @@ public interface TicketDao {
 
     void updateTicket(Ticket ticket);
 
-    List<Ticket> getAllOrders();
+    List<Ticket> getAllTickets();
+
+    List<Ticket> getTicketsOfMovieSession(Long sessionId);
 
 }

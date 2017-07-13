@@ -15,9 +15,13 @@ import java.util.List;
 @Service("filmService")
 public class FilmServiceImpl implements FilmService {
 
-    @Autowired
-    FilmDao filmDao;
 
+    private FilmDao filmDao;
+
+    @Autowired
+    public void setFilmDao(FilmDao filmDao) {
+        this.filmDao = filmDao;
+    }
 
     @Override
     public List<Film> getAllFilms() {

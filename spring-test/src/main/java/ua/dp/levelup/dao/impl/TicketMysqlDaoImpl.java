@@ -1,6 +1,9 @@
 package ua.dp.levelup.dao.impl;
 
 
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -8,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.dp.levelup.cinema.Ticket;
 import ua.dp.levelup.dao.TicketDao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +19,7 @@ import java.util.List;
  */
 
 @Transactional
-@Repository
+@Repository("ticketDao")
 public class TicketMysqlDaoImpl implements TicketDao {
 
     @Autowired
@@ -32,7 +36,23 @@ public class TicketMysqlDaoImpl implements TicketDao {
     }
 
     @Override
-    public List<Ticket> getAllOrders() {
+    public List<Ticket> getAllTickets() {
         return template.loadAll(Ticket.class);
     }
+
+    @Override
+    public List<Ticket> getTicketsOfMovieSession(Long sessionId) {
+
+        List<Ticket> allTickets = getAllTickets();
+        List<Ticket> ticketsOfMovieSession = new ArrayList<>();
+
+        for (Ticket t: allTickets){
+            if (t.getMovieSessionId() == sessionId){
+                ticketsOfMovieSession.add(t);
+            }
+        }
+        return ticketsOfMovieSession;
+    }
+
+
 }

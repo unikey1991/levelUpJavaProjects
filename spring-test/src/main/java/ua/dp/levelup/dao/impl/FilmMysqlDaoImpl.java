@@ -16,9 +16,12 @@ import java.util.List;
 @Repository("filmDao")
 public class FilmMysqlDaoImpl implements FilmDao {
 
-    @Autowired
     private HibernateTemplate hibernateTemplate;
 
+    @Autowired
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
+    }
 
     @Override
     public List<Film> getAllFilms() {

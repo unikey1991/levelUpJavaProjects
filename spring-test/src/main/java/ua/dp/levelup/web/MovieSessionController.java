@@ -1,5 +1,8 @@
 package ua.dp.levelup.web;
 
+import com.google.gson.Gson;
+import com.sun.org.apache.xpath.internal.operations.Or;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -10,13 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import ua.dp.levelup.cinema.Film;
-import ua.dp.levelup.cinema.MovieSession;
-import ua.dp.levelup.service.MovieSessionService;
+import ua.dp.levelup.cinema.*;
+import ua.dp.levelup.service.*;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by java on 04.07.2017.
@@ -28,6 +28,34 @@ public class MovieSessionController {
 
 
     private MovieSessionService movieSessionService;
+    private TicketService ticketService;
+    private FilmService filmService;
+    private HallService hallService;
+    private OrderService orderService;
+
+    @Autowired(required = true)
+    @Qualifier(value = "ticketService")
+    public void setTicketService(TicketService ticketService) {
+        this.ticketService = ticketService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "filmService")
+    public void setFilmService(FilmService filmService) {
+        this.filmService = filmService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "hallService")
+    public void setHallService(HallService hallService) {
+        this.hallService = hallService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "orderService")
+    public void setOrderService(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @Autowired(required = true)
     @Qualifier(value = "movieSessionService")
@@ -59,22 +87,34 @@ public class MovieSessionController {
     @RequestMapping("/hall")
     public ModelAndView test(){
 
+        /////////
+        /*Film filmById = filmService.getFilmById(1L);
+        MovieSession movieSession = new MovieSession(new Date(),1,50,120,filmById.getId());
+        movieSessionService.createMovieSession(movieSession);
 
+        List<MovieSession> allMovieSessions = movieSessionService.getAllMovieSessions();
+        MovieSession movieSession1 = allMovieSessions.get(0);
+
+        Ticket ticket = new Ticket(movieSession1.getId(),2,5);
+        ticketService.createTicket(ticket);*/
+        ////////
+
+        List<Hall> allHalls = hallService.getAllHalls();
         ModelAndView modelAndView = new ModelAndView("hall-map");
-//        modelAndView.addObject("seatsAndRanges",seatsAndRanges);
+        modelAndView.addObject("allHalls",new Gson().toJson(allHalls));
+
+
         return modelAndView;
     }
 
     @RequestMapping(value = "/getHall", method = RequestMethod.POST)
-    public @ResponseBody int[][] getHallJson(){
-        int[][] seatsAndRanges = new int[12][19];
-        for (int i = 0; i<seatsAndRanges.length; i++){
-            for (int j = 0; j<seatsAndRanges[i].length; j++){
-                Random random = new Random();
-                seatsAndRanges[i][j] = random.nextInt(10);
-            }
-        }
-        return seatsAndRanges;
+    @ResponseBody
+    public List<Ticket> getHallJson(@RequestParam String hallId){
+
+        Long id = Long.parseLong(hallId);
+        System.out.println(id);
+
+        return ticketService.getTicketsOfMovieSession(id);
     }
 
 
